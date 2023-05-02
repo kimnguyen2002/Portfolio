@@ -21,7 +21,7 @@
 			text-align: center;
 			text-decoration: none;
 			display: inline-block;
-			font-size: 16px;
+			font-size: 18px;
 			margin: 4px 2px;
 			transition-duration: 0.4s;
 			cursor: pointer;
@@ -38,6 +38,42 @@
 			color: white;
 		  }
 		</style>
+		<style>
+			.tooltip {
+			  position: relative;
+			  display: inline-block;
+			  border-bottom: none;
+			}
+			
+			.tooltip .tooltiptext {
+			  visibility: hidden;
+			  width: 120px;
+			  background-color: black;
+			  color: #fff;
+			  text-align: center;
+			  border-radius: 6px;
+			  padding: 5px 0;
+			
+			  /* Position the tooltip */
+			  position: absolute;
+			  z-index: 1;
+			}
+			
+			.tooltip:hover .tooltiptext {
+			  visibility: visible;
+			}
+			</style>
+			<style>
+				img {
+					transition:transform 0.25s ease;
+				}
+				
+				img:hover {
+					-webkit-transform:scale(1.15); /* or some other value */
+					transform:scale(1.15);
+				}
+
+				</style>
 	</head>
 	<body class="is-preload">
 
@@ -74,40 +110,58 @@
 								<header>
 									<h2>Certificate</h2>
 								</header>
-								<p>There are certificates that I have gained from learning and activities.</p>
-								<p>Please note: Clicking on picture leading to Drive for full view of that one.</p>
+								<p>There are certificates that I have gained from learning and activities. It will be updated every few months.</p>
+								<p>Please note: Clicking on picture leading to Google Drive for a full view of that one.</p>
 								<section>
 									<div class="row">
 										<div class="col-6">
+											<div class="tooltip">
                                             <a href="https://drive.google.com/file/d/1SbXJTDa6MUqC3ZRMW8hdfuEyZdBhfn_v/view?usp=sharing" target="_blank" class="image fit">
                                                 <img src="https://lh3.googleusercontent.com/ARtd9qblEr5NuHnaBVk_H8vU3TUBljM2pq1-RVv4FL1pXlR9McTWN4KwQx50WLCi8mBgb76nci1-R6cn7BzmAsaUaNb5_YSfoBoWCVy8goo6Zt4puKcKvNKe2HIIUgy7x-XLwyoBXiE=w2400"/>
-                                              </a>
+                                                <span class="tooltiptext">Click to View</span>
+											</a>
+											</div>
 										</div>
 										<div class="col-6">
+											<div class="tooltip">
 											<a href="https://drive.google.com/file/d/17x_gN-XHKJiXlgGqiB6Y5ePsipGbcLN2/view?usp=share_link" target="_blank" class="image fit">
                                                 <img src="https://lh3.googleusercontent.com/FoxpBhqaXO-lLHf44fMYEJ5fVDt3vJoZ_MxJcBPOxl6evhh2jOZbnQbMoLegrCadlaaJ5gzNmZ5Dcc7V2JBCJiuk9NX1S3bvV5bPk39njYXmsQxd4U8qqWzl8yCubPCkHOCTUAscaxw=w2400"/>
-                                              </a>
+												<span class="tooltiptext">Click to View</span>
+											</a>
+											</div>
 										</div>
 										<div class="col-6">
+											<div class="tooltip">
 											<a href="https://drive.google.com/file/d/1og1VjFuL9YdyZdaWclvaUQUKlVoMY7og/view?usp=share_link"  target="_blank" class="image fit">
 												<img src="https://lh3.googleusercontent.com/6yzWriBI7bEeuJyYZz4PXvWbq4lOjsltoniGwjy2aUCwu-7rI4EI8yrRqbf9VOGrxUkiEjabqH-LX_OhEU9wDTuy5mmF4WiXVeytJT8kjJYKU3L9KjsVBj72IhjMvuQk6ji8uT2cQH4=w2400">
+												<span class="tooltiptext">Click to View</span>
 											</a>
+											</div>
 										</div>
 										<div class="col-6">
+											<div class="tooltip">
 											<a href="https://drive.google.com/file/d/1omrMbs_YfoVuKYVCvloSeQUG4UvNrlVq/view?usp=sharing" target="_blank" class="image fit">
 												<img src="https://lh3.googleusercontent.com/pw/AMWts8CuDfOilTXOVMrs76X510pSj5uV7mXPh6UQ7wfn7V-p_TC__xRn5THOfq0qtkyHfs3zWOafX4Djlnf0ukX3Z_d2v7DN8Qh2xP0HcQHF_9Y5xofu4G0I=w2400">
+												<span class="tooltiptext">Click to View</span>
 											</a>
+											</div>
 										</div>
 
 										<div class="col-6">
+											<div class="tooltip">
 											<a href="https://drive.google.com/file/d/1UzPjow1MpV4_av8gD-Iu1kmcwGAGS8nc/view?usp=share_link" target="_blank" class="image fit">
 												<img src="https://lh3.googleusercontent.com/6xr94a_b35_lkWXrXspzk3_Cs_gtfzE_vd8XM67CypB5GKmxjvJP-g_lJHE2mB7Y0M-dtAy-qTZjfUcVQp2Ok2wu1sqFOIkarnZynA5hjNFuP9FHm54sAXVkpUVz06muWXYb0aS60sA=w2400">
+												<span class="tooltiptext">Click to View</span>
 											</a>
+											</div>
 										</div>
 										<div class="col-6">
+											<div class="tooltip">
 											<a href="https://drive.google.com/file/d/1sj1moehAgI5OwqVnG5D1HMLp6oZiCWBo/view?usp=share_link" target="_blank" class="image fit">
 												<img src="https://lh3.googleusercontent.com/uNmS3eEhuNCy8YSNcq3CMwNtIdbyrIG90wvrufpXa1tF8RCKwE7hW8vIFi9LMw9EKvhV-4JgCpGYS2QP6T_im06IAx_7oZLQ6BElnBjnAQtLehNlkzikJz9CtPJrzzZhSzi36rAlbk0=w2400">
+												<span class="tooltiptext">Click to View</span>
 											</a>
+											</div>
 										</div>
 									</div>
 								</section>
@@ -118,29 +172,26 @@
 							<header>
 								<h2>Project</h2>
 							</header>
-								<h4>Short Analysis of Soul Specialty Coffee (Vietnamese)</h4>
+										
+								<!-- The Modal -->
+							<div id="myModal" class="modal">
+							<div class="modal-content">
+								<h4> Simple Python Games</h4>
+								<p> Below is the link that connected to the web for two simple Python games that I have worked with my group in Programming Design class at my university.</p>
+								<a href="https://kimnguyen2002.github.io/Group12/" target ="_blank" class="button">Click to View</a>
+							
+								<h4> Top 5 Fast - Food Chains in USA (Python)</h4>
+								<p> I extracted data from csv file with top 50 Fast - Foods Chains and classified only top 5 Fast - Food Chains, based on US Systemwide Sales and Average Sales per Unit.
+									The button bellow will link you to Google Colab for a full view.</p>
+								<a href="https://colab.research.google.com/drive/1r80OAtMWzDv38GB8VSBgHfDFkwNA3sbE" target ="_blank" class="button">Click to View</a>
+								
+								<h4>Short Analysis of Soul Specialty Coffee (Vietnamese Research)</h4>
 								<p>
 									This is just the short analysis to find a niche market for a coffeeshop that my friend is working.
 									They are basic datas but sufficient information based on coffee market.
 								</p>
-									
-								<!-- The Modal -->
-							<div id="myModal" class="modal">
-							<div class="modal-content">
-
-							  <div class="mySlides">
-								  <iframe src="https://drive.google.com/file/d/1xS3F4Gl_U88nRlB19F3EB5_YV4ozFO2y/preview#toolbar=0" width="800" height="400" allow="autoplay"></iframe>
-
-							  </div>
-							  	<h4> Python's Projects</h4>
-								<p> Below is the link that connected to the web for two simple Python games that I have worked with my group in Programming Design at my university.</p>
-								<a href="https://kimnguyen2002.github.io/Group12/" target ="_blank" class="button">Click Here</a>
-								
-								<br/><h4> Top 5 Fast - Food Chains in USA</h4>
-								<p> I extracted data from csv file with top 50 Fast - Foods to only top 5 Fast - Food Chains due to US Systemwide Sales and Average Sales per Unit.
-									This button bellow will link you to Google Colab for a full view</p>
-								<a href="https://colab.research.google.com/drive/1r80OAtMWzDv38GB8VSBgHfDFkwNA3sbE" target ="_blank" class="button">Click Here</a>
-
+								<a href="https://drive.google.com/file/d/1xS3F4Gl_U88nRlB19F3EB5_YV4ozFO2y/view?usp=sharing" target ="_blank" class="button">Click to View</a>
+							</div>
 								  <!-- JavaScript code -->
 							  <script>
 								  function openModal() {
