@@ -73,7 +73,22 @@
 					transform:scale(1.15);
 				}
 
-				</style>
+			</style>
+			<style>
+			.ludwig {
+				position: relative;
+				padding-left: 1em;
+				border-left: 0.2em solid lighten(hsl(200, 40, 10), 40%);
+				font-family: 'Roboto', serif;
+				font-size: 22px;
+				line-height: 1.5;
+				font-weight: 100;
+			}
+			.ludwig:before,
+			.ludwig:after {
+				content: '\201C';
+			}
+			</style>
 	</head>
 	<body class="is-preload">
 
@@ -83,8 +98,8 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<a href="#" class="icon solid fa-user-circle"><span>Home</span></a>
-						<a href="#certificate" class="icon solid fa-certificate"><span>Certificate</span></a>
-						<a href="#work" class="icon solid fa-code"><span>Project</span></a>
+						<a href="#certificate" class="icon solid fa-certificate"><span>Certificates</span></a>
+						<a href="#work" class="icon solid fa-code"><span>Projects</span></a>
 						<!-- <a href="#contact" class="icon solid fa-envelope"><span>Contact</span></a> -->
 						<a href="https://www.facebook.com/thienkim9112002/" class="icon brands fa-facebook" target="blank"><span>Facebook</span></a>
 					</nav>
@@ -95,9 +110,15 @@
 						<!-- Me -->
 							<article id="home" class="panel intro">
 								<header>
-									<h1>Kim Nguyen</h1>
-									<h5>Data Science</h5>
-									<h7>My name is Kim, I'm a self-taught Web Development and Data Science. Although I have not got any hands-on experience in a professional working environment, I believe the knowledge and skills I have gaine coupled with my willingness to learn and determination to develop will help me succeed.</h7>
+									<h2>Nguyen Huynh Thien Kim</h2>
+									<br/>
+									<h7><b>I'm a self-taught Web Developer and Data Scientist. 
+
+										Working with Big Data, Cloud Computing and
+										Machine Learning have been long-term goals of mine.
+
+										My main priority is always to create solutions that drive real values and make a significant impact on every step.									
+									</b></h7>
 								</header>
 								<a href="#certificate" class="jumplink pic">
 									<span class="arrow icon solid fa-chevron-right"><span>See my certificate</span></span>
@@ -108,12 +129,31 @@
 							<!-- Certificate -->
 							<article id="certificate" class="panel">
 								<header>
-									<h2>Certificate</h2>
+									<h2>Certificates</h2>
 								</header>
-								<p>There are certificates that I have gained from learning and activities. It will be updated every few months.</p>
-								<p>Please note: Clicking on picture leading to Google Drive for a full view of that one.</p>
+								<p><b>There are certificates that I have gained from learning activities. It will be updated every few months.</b></p>
+								<p><b><u>Please note</u>: Clicking on picture leading to Google Drive for a full view of that one.</b></p>
+								<blockquote class="ludwig">
+									Knowledge isn't free. You have to pay attention.
+								  </blockquote>
 								<section>
 									<div class="row">
+										<div class="col-6">
+											<div class="tooltip">
+                                            <a href="https://drive.google.com/file/d/1EZj894ha26x0xTR6gXz8NswfqpY46Fuq/view?usp=sharing" target="_blank" class="image fit">
+                                                <img src="https://lh3.googleusercontent.com/dcgQIwQlZJUxp-F1erqUJVA82GpfFHscQae64rfilSETXljbtAe2t3PZDrKRpa6e9O0IYzKKhiHmOUS0-raMrrHgsRD7g3CRZNpGJzQobvN30vAs0xWszKesg7LIyWjL0TCtzxuW7yA=w2400"/>
+                                                <span class="tooltiptext">Google Data Analytics</span>
+											</a>
+											</div>
+										</div>
+										<div class="col-6">
+											<div class="tooltip">
+                                            <a href="https://drive.google.com/file/d/1v0wLeZaXJ-pWeTarFmkhu7zdimShuFQk/view?usp=sharing" target="_blank" class="image fit">
+                                                <img src="https://lh3.googleusercontent.com/y1fxKHQuEhJ7zpdCSd-rSpvqiZBNEI5KnyD7zQRKblon9Gm0k4O_B7kZjCxNcPJVQ6ZWOvonBLj6_aR-9i1XgV_EhyM8cfSiYvN7JC00rPaBVhGFH71EoNRiezNkf1xE04qxpOd0aog=w2400"/>
+                                                <span class="tooltiptext">Data Analysis with R Programming </span>
+											</a>
+											</div>
+										</div>
 										<div class="col-6">
 											<div class="tooltip">
                                             <a href="https://drive.google.com/file/d/1SbXJTDa6MUqC3ZRMW8hdfuEyZdBhfn_v/view?usp=sharing" target="_blank" class="image fit">
@@ -170,26 +210,45 @@
 						<!-- Work -->
 						<article id="work" class="panel">
 							<header>
-								<h2>Project</h2>
+								<h2>Projects</h2>
 							</header>
 										
 								<!-- The Modal -->
 							<div id="myModal" class="modal">
 							<div class="modal-content">
-								<h4> Simple Python Games</h4>
-								<p> Below is the link that connected to the web for two simple Python games that I have worked with my group in Programming Design class at my university.</p>
+								<h3>Simple Python Games</h3>
+								<br/>
+								<p><b>Simple Slot Machine and Casino Player were built on Python with OOP model.
+									They were created using function application and composition, with values being passed from one function to another. 
+									This approach also prevents state modification, reducing the risk of deadlocks when parallelizing the code.
+								</b></p>
 								<a href="https://kimnguyen2002.github.io/Group12/" target ="_blank" class="button">Click to View</a>
-							
+							</div>
+							<br/>
+							<div class="modal-content">
 								<h4> Top 5 Fast - Food Chains in USA (Python)</h4>
-								<p> I extracted data from csv file with top 50 Fast - Foods Chains and cleaned dataset to sort out the top 5 Fast - Food Chains, based on US Systemwide Sales and Average Sales per Unit.
-									The button bellow will link you to Google Colab for a full view.</p>
-								<a href="https://colab.research.google.com/drive/14KpAgf-QrVv9zCRLq305vxo89zWo2HnM#scrollTo=TdyJKduKATVQ" target ="_blank" class="button">Click to View</a>
-								
+								<br/>
+								<p><b>With the aim of identifying the leading Fast-Food Chains in the United States from overall 50 chains, 
+									I focused on analyzing each chain's US Systemwide Sales and Average Sales per Unit. 
+									
+									By carefully classifying and examining the extracted data, 
+									I was able to isolate the top 5 Fast-Food Chains that stood out based on these performance metrics by using Matplotlib in Python.
+									</b></p>
+								<a href="https://colab.research.google.com/drive/1r80OAtMWzDv38GB8VSBgHfDFkwNA3sbE" target ="_blank" class="button">Click to View</a>
+							</div>
+							<br/>
+							<div class="modal-content">
 								<h4>Short Analysis of Soul Specialty Coffee (Vietnamese Research)</h4>
-								<p>
-									This is just the short analysis to find a niche market for a coffeeshop that my friend is working.
-									These are basic data but given sufficient information based on coffee market.
-								</p>
+								<br/>
+								<p><b>In conducting a short analysis of Soul Specialty Coffee, a Vietnamese coffeeshop, 
+									I set out to identify a specific niche market. 
+									
+									While the data I used was relatively basic, 
+									it provided sufficient insight into the current state of the coffee market in Vietnam and helped to identify potential opportunities for growth and development. 
+									It was possible to develop a comprehensive strategy for targeting and engaging with a specific subset of the coffee market, 
+									ultimately enabling Soul Specialty Coffee to stand out and succeed in a crowded and competitive field.
+									
+								</b></p>
 								<a href="https://drive.google.com/file/d/1xS3F4Gl_U88nRlB19F3EB5_YV4ozFO2y/view?usp=sharing" target ="_blank" class="button">Click to View</a>
 							</div>
 								  <!-- JavaScript code -->
