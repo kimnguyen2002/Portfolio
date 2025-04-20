@@ -2,1037 +2,2276 @@
 <!--
 	Kim Nguyen
 	Portfolio | @kimnguyen2002
-	Only for personal use
 -->
 <html>
 	<head>
 		<title>Kim Nguyen</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
-		.button {
-			background-color: #008CBA;
-			border: none;
-			border-radius: 15px;
-			color: white;
-			padding: 16px 32px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 22px;
-			margin: 4px 2px;
-			transition-duration: 0.4s;
-			cursor: pointer;
-		  }
-		  
-		  .button {
-			background-color: white; 
-			color: black; 
-			border: 2px solid #008CBA;
-		  }
-		  
-		  .button:hover {
-			background-color: #008CBA;
-			color: white;
-		  }
-		</style>
-		<style>
-			.tooltip {
-			  position: relative;
-			  display: inline-block;
-			  border-bottom: none;
+			:root {
+				--bg-color: #0a0a0a;
+				--text-color: #f5f5f5;
+				--accent-color: #008CBA;
+				--secondary-color: #333;
+				--highlight-color: #1a1a1a;
+				--transition: all 0.3s ease;
 			}
 			
-			.tooltip .tooltiptext {
-			  visibility: hidden;
-			  width: 250px;
-			  background-color: black;
-			  color: #fff;
-			  text-align: center;
-			  border-radius: 6px;
-			  padding: 5px 0;
-			
-			  /* Position the tooltip */
-			  position: absolute;
-			  z-index: 1;
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: 'Inter', 'Source Sans Pro', sans-serif;
 			}
 			
-			.tooltip:hover .tooltiptext {
-			  visibility: visible;
+			body {
+				background-color: var(--bg-color);
+				color: var(--text-color);
+				line-height: 1.6;
+				overflow-x: hidden;
+				font-weight: 300;
 			}
-			</style>
-			<style>
-				img {
-					transition:transform 0.25s ease;
+			
+			h1, h2, h3, h4, h5, h6 {
+				font-weight: 400;
+				margin-bottom: 1rem;
+			}
+			
+			a {
+				color: var(--text-color);
+				text-decoration: none;
+				transition: var(--transition);
+			}
+			
+			a:hover {
+				color: var(--accent-color);
+			}
+			
+			.container {
+				width: 100%;
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 2rem;
+			}
+			
+			/* Navigation */
+			#nav {
+				position: fixed;
+				top: 30px;
+				right: 30px;
+				z-index: 1000;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 15px;
+				mix-blend-mode: difference;
+			}
+			
+			#nav a {
+				color: var(--text-color);
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition: var(--transition);
+				position: relative;
+				font-size: 1.2rem;
+			}
+			
+			#nav a:hover {
+				background-color: rgba(255,255,255,0.1);
+				transform: scale(1.1);
+			}
+			
+			#nav a.active {
+				background-color: var(--accent-color);
+			}
+			
+			#nav a span {
+				position: absolute;
+				right: 50px;
+				background: var(--accent-color);
+				padding: 5px 10px;
+				border-radius: 4px;
+				opacity: 0;
+				transition: var(--transition);
+				pointer-events: none;
+				white-space: nowrap;
+			}
+			
+			#nav a:hover span {
+				opacity: 1;
+				right: 60px;
+			}
+			
+			/* Sections */
+			.section {
+				min-height: 100vh;
+				padding: 100px 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				opacity: 0;
+				transition: opacity 0.5s ease;
+			}
+			
+			.section.active {
+				opacity: 1;
+			}
+			
+			/* Home Section */
+			#home {
+				position: relative;
+				height: 100vh;
+				overflow: hidden;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+			}
+			
+			/* Badge Container Styles */
+            .badge-container {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            perspective: 1200px;
+            margin-bottom: -10rem;
+            overflow: visible;
+            }
+
+            /* Badge Styles */
+            .badge {
+            position: absolute;
+            width: 320px;
+            height: 480px;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease;
+            cursor: grab;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,140,186,0.3);
+            background-color: #111;
+            overflow: hidden;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            left: 50%;
+            top: 50%;
+            }
+
+            .badge:active {
+            cursor: grabbing;
+            }
+
+            /* Badge Content Styles */
+            .badge-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            box-sizing: border-box;
+            }
+
+            .badge-header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            }
+
+            .badge-logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            }
+
+            .badge-date {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            }
+
+            .badge-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            }
+
+            .badge-name {
+            font-size: 2rem;
+            margin-top: 0rem;
+            text-align: center;
+            }
+
+            .badge-role {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            }
+
+            .badge-footer {
+            width: fit-content;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            }
+
+            .badge-website {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            }
+
+            .badge-qr {
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            }
+
+            .badge-icon {
+            font-size: 100px;
+            color: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            }
+
+            /* Lanyard SVG Styles */
+            .lanyard-svg {
+            pointer-events: none;
+            z-index: -1;
+            }
+
+            /* Badge Particle Effect */
+            .badge-particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            animation: particle-fade 2s ease-out forwards;
+            z-index: -1;
+            }
+
+            @keyframes particle-fade {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            20% { opacity: 1; }
+            100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--x, 50px), var(--y, 50px)) scale(2); }
+            }
+
+            /* 3D shine effect */
+            .badge:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%);
+            opacity: 0.7;
+            z-index: 1;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            }
+
+            .badge:hover:before {
+            opacity: 1;
+            }
+
+            /* Responsive design */
+            @media screen and (max-width: 768px) {
+            .badge-container {
+                height: 400px;
+            }
+            
+            .badge {
+                width: 280px;
+                height: 420px;
+            }
+            }
+            /* Avatar styling for badge */
+			.badge-avatar {
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			overflow: hidden;
+			position: relative;
+			margin: 20px auto;
+			border: 3px solid rgba(255, 255, 255, 0.2);
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			}
+
+			.badge-avatar img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+			}
+
+			/* Add a subtle glow effect */
+			.badge-avatar::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			border-radius: 50%;
+			box-shadow: inset 0 0 10px rgba(0, 140, 186, 0.5);
+			pointer-events: none;
+			}
+
+			/* Add subtle hover effect */
+			.badge:hover .badge-avatar {
+			transform: scale(1.25);
+			box-shadow: 0 8px 25px rgba(0, 140, 186, 0.4);
+			}
+
+			/* Enhance icon styling if no image is available */
+			.badge-avatar .fas {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 50px;
+			color: rgba(255, 255, 255, 0.8);
+			}
+			
+			.home-buttons {
+				margin-top: 300px;
+			}
+			
+			/* About Section */
+			#about {
+				background-color: var(--bg-color);
+				padding: 120px 0;
+			}
+			
+			.about-content {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 50px;
+			}
+			
+			.about-text {
+				flex: 1;
+				max-width: 600px;
+			}
+			
+			.about-text h2 {
+				font-size: 3rem;
+				margin-bottom: 1.5rem;
+			}
+			
+			.about-text p {
+				font-size: 1.2rem;
+				margin-bottom: 1.5rem;
+				opacity: 0.9;
+			}
+			
+			.about-image {
+				flex: 1;
+				display: flex;
+				justify-content: center;
+				max-width: 400px;
+			}
+			
+			.about-image img {
+				width: 100%;
+				height: auto;
+				border-radius: 10px;
+				box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+			}
+			
+			/* Certificate Section */
+			#certificate {
+				background-color: var(--bg-color);
+				padding: 120px 0;
+			}
+			
+			.cert-container {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+				gap: 20px;
+				margin-top: 40px;
+			}
+			
+			.cert-item {
+				position: relative;
+				overflow: hidden;
+				border-radius: 8px;
+				transition: var(--transition);
+				background-color: var(--secondary-color);
+			}
+			
+			.cert-item:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+			}
+			
+			.cert-item img {
+				width: 100%;
+				height: 250px;
+				object-fit: cover;
+				transition: var(--transition);
+			}
+			
+			.cert-item:hover img {
+				transform: scale(1.05);
+			}
+			
+			.cert-item .tooltip {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				padding: 15px;
+				background-color: rgba(0,0,0,0.7);
+				color: var(--text-color);
+				transform: translateY(100%);
+				transition: var(--transition);
+			}
+			
+			.cert-item:hover .tooltip {
+				transform: translateY(0);
+			}
+			
+			/* Category Tabs */
+			.category-tabs {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-bottom: 30px;
+			}
+			
+			.category-tab {
+				padding: 8px 16px;
+				background-color: var(--secondary-color);
+				border-radius: 30px;
+				cursor: pointer;
+				transition: var(--transition);
+			}
+			
+			.category-tab.active, .category-tab:hover {
+				background-color: var(--accent-color);
+			}
+			
+			/* Projects Section */
+			#work {
+				background-color: var(--bg-color);
+				padding: 120px 0;
+			}
+			
+			.projects-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+				gap: 30px;
+				margin-top: 40px;
+			}
+			
+			.project-card {
+				background-color: var(--secondary-color);
+				border-radius: 10px;
+				overflow: hidden;
+				transition: var(--transition);
+			}
+			
+			.project-card:hover {
+				transform: translateY(-10px);
+				box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+			}
+			
+			.project-img {
+				width: 100%;
+				height: 200px;
+				overflow: hidden;
+			}
+			
+			.project-img img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: var(--transition);
+			}
+			
+			.project-card:hover .project-img img {
+				transform: scale(1.1);
+			}
+			
+			.project-info {
+				padding: 20px;
+			}
+			
+			.project-info h3 {
+				margin-bottom: 10px;
+			}
+			
+			.project-info p {
+				opacity: 0.8;
+				margin-bottom: 15px;
+			}
+			
+			.project-links {
+				display: flex;
+				gap: 10px;
+			}
+			
+			.project-links a {
+				display: inline-block;
+				padding: 8px 16px;
+				background-color: var(--accent-color);
+				border-radius: 4px;
+				transition: var(--transition);
+			}
+			
+			.project-links a:hover {
+				background-color: #006d96;
+			}
+			
+			/* Photography Section */
+			#photograph {
+				background-color: var(--bg-color);
+				padding: 120px 0;
+			}
+			
+			.photo-gallery {
+				margin-top: 40px;
+				column-count: 3;
+				column-gap: 20px;
+			}
+			
+			@media screen and (max-width: 768px) {
+				.photo-gallery {
+					column-count: 2;
+				}
+			}
+			
+			@media screen and (max-width: 480px) {
+				.photo-gallery {
+					column-count: 1;
+				}
+			}
+			
+			.photo-item {
+				break-inside: avoid;
+				margin-bottom: 20px;
+				position: relative;
+				overflow: hidden;
+				border-radius: 8px;
+			}
+			
+			.photo-item img {
+				width: 100%;
+				display: block;
+				transition: var(--transition);
+			}
+			
+			.photo-item:hover img {
+				transform: scale(1.05);
+			}
+			
+			/* Instagram Section */
+			#instagram {
+				background-color: var(--bg-color);
+				padding: 120px 0;
+			}
+			
+			.instagram-embed {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 30px;
+				margin-top: 40px;
+			}
+			
+			.instagram-post {
+				flex: 0 1 calc(33.33% - 30px);
+				min-width: 300px;
+				transition: var(--transition);
+			}
+			
+			.instagram-post:hover {
+				transform: translateY(-5px);
+			}
+			
+			/* Footer */
+			#footer {
+				background-color: var(--secondary-color);
+				padding: 30px 0;
+				text-align: center;
+			}
+			
+			.social-links {
+				display: flex;
+				justify-content: center;
+				gap: 20px;
+				margin-bottom: 20px;
+			}
+			
+			.social-links a {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				background-color: var(--highlight-color);
+				transition: var(--transition);
+			}
+			
+			.social-links a:hover {
+				background-color: var(--accent-color);
+				transform: translateY(-3px);
+			}
+			
+			.copyright {
+				opacity: 0.7;
+				font-size: 0.9rem;
+			}
+			
+			/* Modal */
+			.modal {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,0.9);
+				z-index: 2000;
+				padding: 60px 20px;
+				overflow-y: auto;
+			}
+			
+			.modal-content {
+				background-color: var(--secondary-color);
+				max-width: 800px;
+				margin: 0 auto;
+				border-radius: 10px;
+				overflow: hidden;
+				position: relative;
+			}
+			
+			.close-modal {
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				font-size: 30px;
+				color: var(--text-color);
+				cursor: pointer;
+				z-index: 2001;
+			}
+			
+			.modal-header {
+				padding: 20px;
+				border-bottom: 1px solid rgba(255,255,255,0.1);
+			}
+			
+			.modal-body {
+				padding: 20px;
+			}
+			
+			.modal-images {
+				display: flex;
+				gap: 20px;
+				margin-bottom: 20px;
+				flex-wrap: wrap;
+			}
+			
+			.modal-images img {
+				max-width: 100%;
+				border-radius: 6px;
+			}
+			
+			/* Responsive */
+			@media screen and (max-width: 768px) {
+				.home-content {
+					flex-direction: column;
+					text-align: center;
+					gap: 40px;
 				}
 				
-				img:hover {
-					-webkit-transform:scale(1.15); /* or some other value */
-					transform:scale(1.15);
+				.about-content {
+					flex-direction: column;
+					text-align: center;
 				}
-
-			</style>
-			<style>
+				
+				.about-image {
+					margin: 0 auto;
+				}
+				
+				#nav {
+					top: 10px;
+					right: 10px;
+				}
+				
+				#nav a span {
+					display: none;
+				}
+				
+				.section {
+					padding: 80px 0;
+				}
+				
+				.badge-container {
+					width: 280px;
+					height: 420px;
+				}
+			}
+			
+			/* Animations */
+			@keyframes fadeIn {
+				from { opacity: 0; transform: translateY(20px); }
+				to { opacity: 1; transform: translateY(0); }
+			}
+			
+			.animate {
+				animation: fadeIn 0.8s ease forwards;
+			}
+			
+			.delay-1 { animation-delay: 0.2s; }
+			.delay-2 { animation-delay: 0.4s; }
+			.delay-3 { animation-delay: 0.6s; }
+			
+			/* Quote styling */
 			.ludwig {
 				position: relative;
 				padding-left: 1em;
-				border-left: 0.2em solid lighten(hsl(200, 40, 10), 40%);
-				font-family: 'Roboto', serif;
-				font-size: 22px;
+				border-left: 0.2em solid var(--accent-color);
+				font-family: 'Source Sans Pro', serif;
+				font-size: 1.2rem;
 				line-height: 1.5;
 				font-weight: 100;
+				margin: 30px 0;
 			}
-			.ludwig:before,
-			.ludwig:after {
+			
+			.ludwig:before, .ludwig:after {
 				content: '\201C';
+				color: var(--accent-color);
 			}
-			</style>
+			
+			/* Button styling */
+			.button {
+				display: inline-block;
+				background-color: transparent;
+				color: var(--text-color);
+				border: 2px solid var(--accent-color);
+				border-radius: 30px;
+				padding: 10px 25px;
+				font-size: 1rem;
+				cursor: pointer;
+				transition: var(--transition);
+				margin: 10px 5px;
+			}
+			
+			.button:hover {
+				background-color: var(--accent-color);
+				color: white;
+				transform: translateY(-3px);
+			}
+			
+			/* Special */
+			.badge-particle {
+				position: absolute;
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				background-color: rgba(255, 255, 255, 0.8);
+				opacity: 0;
+				transform: translate(-50%, -50%);
+				animation: particle-fade 2s ease-out infinite;
+			}
+			
+			@keyframes particle-fade {
+				0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+				20% { opacity: 1; }
+				100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+			}
+			
+			.badge-icon {
+				font-size: 100px;
+				color: rgba(255, 255, 255, 0.1);
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+		</style>
+		<!-- Added Font Awesome for icons -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	</head>
 	<body class="is-preload">
 
-		<!-- Wrapper-->
-			<div id="wrapper">
+		<!-- Nav -->
+		<nav id="nav">
+			<a href="#home" class="active"><i class="fas fa-home"></i><span>Home</span></a>
+			<a href="#about"><i class="fas fa-user"></i><span>About Me</span></a>
+			<a href="#work"><i class="fas fa-code"></i><span>Projects</span></a>
+			<a href="#certificate"><i class="fas fa-certificate"></i><span>Certificates</span></a>
+			<a href="#instagram"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+		</nav>
 
-				<!-- Nav -->
-					<nav id="nav">
-						<a href="#" class="icon solid fa-user-circle"><span>Home</span></a>
-						<a href="#certificate" class="icon solid fa-certificate"><span>Certificates</span></a>
-						<a href="#work" class="icon solid fa-code"><span>Projects</span></a>
-						<a href="#photograph" class="icon solid fa-camera"><span>Photograph</span></a>
-						<!-- <a href="#contact" class="icon solid fa-envelope"><span>Contact</span></a> -->
-						<a href="#instagram" class="icon brands fa-instagram"><span>Instagram</span></a>
-					</nav>
+		<!-- Main Content -->
+		<div id="main">
+			
+			<!-- Home -->
+            <section id="home" class="section active">
+                <div class="badge-container animate">
+                <div class="badge" id="interactiveBadge">
+                    <div class="badge-content">
+                    <div class="badge-header">
+                        <div class="badge-logo">K·N</div>
+                        <div class="badge-date">2002</div>
+                    </div>
+                    <div class="badge-center">
+                        <div class="badge-avatar">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczOH2cUlHW8DYTuFxTKKLoHB5FiDF5gzkbRBG-seuc2tHlIhqY_v2i4s3XSMrhrpu1CyqIB_NDDmZe_2ll5LL573qwoDHhO_SXhZ5FyQ-8MpEHWdwgvS=w2400" alt="Kim Nguyen" />
 
-				<!-- Main -->
-					<div id="main">
-
-						<!-- Me -->
-							<article id="home" class="panel intro">
-								<header>
-									<h2>Kim Nguyen</h2>
-									<br/>
-									<div style="text-align: justify;">
-									<h7><b>
-										As a self-taught Data Science and Machine Learning, 
-										I have developed a keen interest in creating solutions that deliver 
-										tangible value and make a meaningful impact at every stage. 
-										My primary focus now is on Biomedical Informatics, 
-										which is essential for real-world application and medical system.
-									</b></h7>
-									</div>
-								</header>
-								<a href="#certificate" class="jumplink pic">
-									<span class="arrow icon solid fa-chevron-right"><span>See my certificate</span></span>
-									<img src="https://lh3.googleusercontent.com/X_XiHeTCgNsduDY9sX9025nelC11UV1qmU0jGOFt60d1iqvq-LLAMb2IAD3o99uYtcNmhcZO93s_tSMQ3lpvTb194zrONf3axG8771ETPyywCSmNpPoxsO3aO7sOzPDoiaZfHX4B2s8=w2400" alt="" />
-								</a>
-							</article>
-
-							<!-- Certificate -->
-							<article id="certificate" class="panel">
-								<header>
-									<h2>Certificates</h2>
-								</header>
-								<p><b>There are certificates that I have gained from learning activities and participation.</b></p>
-								<p><b><u>Please note</u>: Clicking on picture leading to Google Drive for a full view of that one.</b></p>
-								<blockquote class="ludwig">
-									<b>Knowledge isn't free. You have to pay attention.</b>
-								</blockquote>
-								<!--Genetics-->
-								<h4 style="text-align:center"><b>Biomedical - Genetics</b></h4>
-								<br/>
-								<section>
-									<div class="row">
-										<div class="col-6">
-											<div class="tooltip">
-											<a href="https://drive.google.com/file/d/1uoRxeaxrXP9UDDKR-uV-2DOeu6eFuhSn/view?usp=sharing" target="_blank" class="image fit">
-												<img src="https://lh3.googleusercontent.com/pw/AP1GczPA-HtnGbZCyIEbgvCFi1LmkJ3PZfLQ0MYdH6z-7Ral_AZ4w1eaFvdlUa-fr0GmMRxEjbe3OlOjEiRvG491V7YPd-vQ46AZTJubyEaRMPPBmb7Rt3xa=w2400"/>
-												<span class="tooltiptext">AI for Medical Diagnosis</span>
-											</a>
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="tooltip">
-											<a href="https://drive.google.com/file/d/1dw52URZlqnxSOEprWJpTGXFNoiWAxa_b/view?usp=sharing" target="_blank" class="image fit">
-												<img src="https://lh3.googleusercontent.com/pw/AP1GczPCX-LNQy4qEILoNNKTThBxQ2TRzBTgac-OJHoCcieManZLtQICHs46HapLP54ZqOvfxLP4CxBXmZX4PjqkKV24-21nSv_yl13rkAfgbwfjt1mA2pLJ=w2400"/>
-												<span class="tooltiptext">ChIP-seq with Bioconductor in R</span>
-											</a>
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="tooltip">
-											<a href="https://drive.google.com/file/d/1ClELELa2NJGB93kgAnKbwFRcB2PuBaFJ/view?usp=sharing" target="_blank" class="image fit">
-												<img src="https://lh3.googleusercontent.com/pw/AP1GczPRDehB5W4uPJ7oMvPKkqJAyJfz89Rc1WOv1WDIieWwazhgjvb5wJqsDLD2X2Xg0gbXIwdo4nq1_CZaRWBjoLiRR0jMtPVMFSimua6swXihbXIc3RaP=w2400"/>
-												<span class="tooltiptext">Biomedical Image Analysis in Python</span>
-											</a>
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="tooltip">
-											<a href="https://drive.google.com/file/d/1cVlU0ATlrjRAH2Ddef0dPH2szcWi5AQv/view?usp=sharing" target="_blank" class="image fit">
-												<img src="https://lh3.googleusercontent.com/pw/AP1GczNg-v16gQzk-3yIJBBaFMO9QE_wUwycmXWAZUxgGQatWWKmdH5kl6LKPRTjwPn-QHjE4gUPerGJqBcpAYfTw775-VdQdohSA5mvTIGQ2QlYe9yzt9XC=w2400"/>
-												<span class="tooltiptext">Introduction to Bioconductor in R</span>
-											</a>
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="tooltip">
-						                     <a href="https://drive.google.com/file/d/1eTKE2dEc1434YCoxwO3W2jD82rJHke7m/view?usp=sharing" target="_blank" class="image fit">
-						                        <img src="https://lh3.googleusercontent.com/pw/AP1GczOdULofM3fOg5zyclBBYPWyLLGuEMOaEwgJ1gqtE5wbub_RzIGJanD4af3e7W5PkGP9tN0_KlEjFgs1rXE3ifQOYmbx2O79XbeDejas-61Hjw8QtyoN=w2400"/>
-						                        <span class="tooltiptext">Introduction to RT-qPCR and Gene Expression</span>
-											</a>
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="tooltip">
-						                    <a href="https://drive.google.com/file/d/1k9ecKrqMMeRCKnYZ2v-4M62NmNXW_ULC/view?usp=sharing" target="_blank" class="image fit">
-						                        <img src="https://lh3.googleusercontent.com/pw/AP1GczMJVGYDeqZhPkYxaqwAzSaSydHtWCNYbhslxdHoXX603GcnEmNfE40qCYHarEO4djqHrUsgCmswMLdEJI08ft4j-p9YN8ghHfgy60MKxtk3tlSG1VD5=w2400"/>
-						                        <span class="tooltiptext">Advanced Genomics Techniques for PCR Controls</span>
-											</a>
-											</div>
-										</div>
-									</section>
-									
-										<!--AI & ML-->
-									<h4 style="text-align:center"><b>AI - Machine Learning - Data Analytics</b></h4>
-									<br/>
-									<section>
-										<div class="row">
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1LiJINoMTR9hAHpLMqMFLvMWG45hCWd7O/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/AP1GczOfcASEgQCAt8RE_2b5WpDVpNs8I7aNpguKIt78xuQYEZAicDA304VUgHbUIrT0H15JUWZCARfN8Pv3kilAAr8t9sBTmGG8MCGALj-RaK4Sv9Uappfq=w2400"/>
-													<span class="tooltiptext">Introduction to Deep Learning with Pytorch</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1RH63MSJ3ujbW6PvqfouLTcWAlKR1i1fa/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/AP1GczPKne_jMVi0bKLyoAuogoLySs3ULUDohaPWIDkexmla_dujU0oW3OtMwl-jPnqb2-ZKBvPCKKw246wq4v2zQi_odTKKS-68TErXq9RzK38ZR41iznMA=w2400"/>
-													<span class="tooltiptext">Gemini API by Google</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/14n4bfNjA-xsaDY9C91Yx4s7ehSM-m4Ve/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ABLVV860TX4O7qWQnV3NTTwwbCfVrXSYnfP0WYtYHc2VxMgHboPD6ZgYtr1zEYNAorTz2HJM9wmKMlXmhmZMoLX97FuGvCPWEktQHH-CJhovcFk5vrsDI3WN=w2400"/>
-													<span class="tooltiptext">Machine Learning</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/13zgposG21_Qatfs41dYYhwg8ojaQo3UV/view?usp=sharing"  target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ADCreHfElq38e49MyT6rRkxN8NcN5gqtHMDS0IClgFyQHePqIB_ZodpFhWH7qlUNSNZWsAY7hSJJsvbnQ2ncyf6v3YDLkX2j7Nq3DUoiQs_IFnN2wPZp412z=w2400">
-													<span class="tooltiptext">Retrieval API Webinar</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1trba2YNVqpgotTDVgKL344CLJyh3kZU9/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ABLVV85C_C5ntqdNvlZwCXAZ8aQYWJi7SA7mzwBBsWRJmTQK3nMK9-BGaDiw9seAJk5CR72BynSG_muUjWzU-xdbipKyEXB6LKzYr6KpeKIY88O1_74sX_CC=w2400"/>
-													<span class="tooltiptext">Introduction to TensorFlow in Python</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1faJJpD0ilayC2dRVDq7N_vJUxntdJDCp/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ADCreHdPq7l3OnRpsQbiS4Pbd-1F9WtFW-mzW_0BcvKrjNhCLb2A3WXrWFbBB6PZlRKti06V_ySFn2pJjkWcnjBmhPsTuErUNo1SiRB7KxTug_gYCZ59V0Y8=w2400"/>
-													<span class="tooltiptext">Introduction to Deep Learning in Python</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1xMl0Jt5dMyQe_S44tOWp1CGQCawerhG6/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ADCreHfeFtZA95hjwmL5GFS7s_d0iDrMGEYfF6I8Vr0J89ijt-qJLuN1KuCx7c7wL6lpdT51qffF5Znuw87EscnXxR3NN9HcH6ynCqSHk7jRlRwn3bV9mfjO=w2400"/>
-													<span class="tooltiptext">Machine Learning with Tree-Based Models in Python</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1-sO1ZULUZ8_9KGY0Nb8Kq22qMHtr9Y9B/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ADCreHdzvqiXS5yRisLukxjsv3LTvJ6eTOsBmmcs8aIx-E2VnZu_HU30dj6RZKcoIVREFXvvrrzq7xxcoAILU47QmOfHjJhBy2x4_4nx0NOCmIps1jzHCBe6=w2400"/>
-													<span class="tooltiptext">Linear Classifiers in Python</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1AHRInVj3SsUCSBMPwg2J-6uKIJDv8u8U/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ABLVV867BM3CRBNN3O5EtBtY98ZWI6B0C85r9zJgRY9NNg2sRtOujFsrNvzSdG0Gkx06GXz5dmM8LdneVGxXzAgesype6xcECiyGAJvEQ4qnIBGtavpe8zHJ=w2400"/>
-													<span class="tooltiptext">Unsupervised Learning in Python</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1674Pd9S-m055OGCLwq7_tid6gmNtecVr/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ADCreHe10KhaP8v1HwMcwdjKJYQAMtsKmF_ie4y2B5EtR3VROSIwRXjgZCqLVbf2QV9ujoyHNbj-DdVhqWwvr5e5CRVduEGSmCQSAephfoLALmXlP3v9g8uL=w2400"/>
-													<span class="tooltiptext">Supervised Learning with scikit-learn</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1aRlTD64Rj1bEnUkuYoCZYJexo8DNMOTw/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ABLVV86Bv5CPyrT-nvHKfNmHzYr8dQg5McNjiqJS3mkFBa4g_17PirzYgvQhpz4-5zxRIS6DlezaUXn2eXYqyVTh7b5Cdod-FM5MLxFYmp_XtGIpLanLeUcq=w2400"/>
-													<span class="tooltiptext">Introduction to Artificial Intelligence</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1oknEFNgda2RaF5_U-oMaYqOItwy01L71/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ABLVV860o2CJu_dsSWwgp6M5r7iDIO-3fIYsfzkx7O-W4XFrLeDgj1AcrWFR9_4lFd2poU4_GYZEj5ozKIPYRG4A4Z1X05p0J4USFhsslFsWnS7LSGUowtn6=w2400"/>
-													<span class="tooltiptext">Ethics in the Age of Generative AI</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1v7sZnClMalq2UMkSMQWiuEj_ZfynOV-l/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ABLVV87bGPJ3Js8YymkYGSZSKfP_kIO3XpWnqVZvH0khg0bVvU_VGdd9GyhnM0_sJE6yG7CDbu9Z7SlQbiBMjoBzNMgpopCdscdguAMLvVnXQTZYuKX3xQWj=w2400"/>
-													<span class="tooltiptext">Streamlining Your Work with Microsoft Bing Chat</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1vB1WVzgfPDj5gYSHvQuToWA3e-VszvC8/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ABLVV85vTi4u1_QU12b8hNcfN0dpbjtxpij1_YLsK9Xsm_1YoeEQi7ffQBYgaZ6uad7DBDA__PJmpq1_UF26HW0QXjCHD87rxgW75lNI23_Db7h3cD3xGQkS=w2400"/>
-													<span class="tooltiptext">Gen AI: The Evolution of Thoughful Online Search</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1E60MCuXZvgvJUp35X6Q_PI2G9hUwWV2d/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ABLVV85Cj2tmWrh6QxkoGVNuyVNh1F6-70rQ8bA-xLmlFyHO3nitLbzH42I3zRCTq97ZdJAV0YGxafSsi7qTs4ZlKbmAaDUy5E7qHiAXtnnDgcWNarnkzY54=w2400"/>
-													<span class="tooltiptext">Business Analysis Foundations</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1SehzS98Dchjl9Y3-XJQ0JMGuCJZCcr_E/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ABLVV86nmHtavMStpE2a_juUiLK9pCMVqiHjy2UTSB-6unJtN1dUeFvuTLbepVHSJqU5vQmX38UM6zaZY92HtvEUuIDqjRqEORP0NUzKeWgdnGwIrhCh5LLH=w2400"/>
-													<span class="tooltiptext">What is Generative AI?</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1NL-Nh2M3DG-TeVr0IEBNCdCQrKxTGCS5/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/YmMQZTafULQaRA4GnH6wBvqAxSw8SPOSW0p-rbMYNwlzPmz44rDoOO10VoR1_u_6NKifo_VkJtMMKR6mIJ7FKp6LRVDhuJ9L1exikGXtxbKNKBYGcYZ1lJ_zeRWXkKKcfQe_DdFpTck=w2400"/>
-													<span class="tooltiptext">Google IT Automation with Python</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1EZj894ha26x0xTR6gXz8NswfqpY46Fuq/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/dcgQIwQlZJUxp-F1erqUJVA82GpfFHscQae64rfilSETXljbtAe2t3PZDrKRpa6e9O0IYzKKhiHmOUS0-raMrrHgsRD7g3CRZNpGJzQobvN30vAs0xWszKesg7LIyWjL0TCtzxuW7yA=w2400"/>
-													<span class="tooltiptext">Google Data Analytics</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1SbXJTDa6MUqC3ZRMW8hdfuEyZdBhfn_v/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/ARtd9qblEr5NuHnaBVk_H8vU3TUBljM2pq1-RVv4FL1pXlR9McTWN4KwQx50WLCi8mBgb76nci1-R6cn7BzmAsaUaNb5_YSfoBoWCVy8goo6Zt4puKcKvNKe2HIIUgy7x-XLwyoBXiE=w2400"/>
-													<span class="tooltiptext">Programming Foundation Fundamentals</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/17x_gN-XHKJiXlgGqiB6Y5ePsipGbcLN2/view?usp=share_link" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/FoxpBhqaXO-lLHf44fMYEJ5fVDt3vJoZ_MxJcBPOxl6evhh2jOZbnQbMoLegrCadlaaJ5gzNmZ5Dcc7V2JBCJiuk9NX1S3bvV5bPk39njYXmsQxd4U8qqWzl8yCubPCkHOCTUAscaxw=w2400"/>
-													<span class="tooltiptext">Data Analysis Fundamentals</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1og1VjFuL9YdyZdaWclvaUQUKlVoMY7og/view?usp=share_link"  target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/6yzWriBI7bEeuJyYZz4PXvWbq4lOjsltoniGwjy2aUCwu-7rI4EI8yrRqbf9VOGrxUkiEjabqH-LX_OhEU9wDTuy5mmF4WiXVeytJT8kjJYKU3L9KjsVBj72IhjMvuQk6ji8uT2cQH4=w2400">
-													<span class="tooltiptext">Python Fundamentals</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1HaSlOWYS_EoX2DHTMW9rkIy95pzYkPRt/view?usp=sharing"  target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/AP1GczNsO5OCheM8x5Ahjh5jjhsRGQQBxri17sMaubT7YEossNawSn3scNsxZffG8TWzF2UnkBIYSA7mUghtSulrPkRoRbtOhbHAgKW2hf1CMF6IuR6Hh3t2=w2400">
-													<span class="tooltiptext">Building Your Own Chat with GPT 4</span>
-												</a>
-												</div>
-											</div>
-										</div>
-									</section>
-
-								<!--Cloud-->
-								<h4 style="text-align:center"><b>Cloud</b></h4>
-								<br/>
-								<section>
-									<div class="row">
-										<div class="col-6">
-											<div class="tooltip">
-											<a href="https://drive.google.com/file/d/1rSnTscZOJlIUKvSM-6wzkzYXkhu0U9Tz/view?usp=sharing" target="_blank" class="image fit">
-												<img src="https://lh3.googleusercontent.com/pw/ABLVV85VpT4qALU9VNKzfWmgtRWR4Tyg1AEUknniA1oqkjTEV87IBMhXbPJ4qnJ3JQ3OeTncD9T0vQQY-by53xDcsqm_3aNTqawAbR5r1ZbZuaLey-1MJ2S1=w2400"/>
-												<span class="tooltiptext">AWS Cloud Practitioner Essentials</span>
-											</a>
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="tooltip">
-											<a href="https://drive.google.com/file/d/1Ec4DxH5pg99B9IaocCqsEZLjD-ICmZIq/view?usp=sharing" target="_blank" class="image fit">
-												<img src="https://lh3.googleusercontent.com/pw/ADCreHdu_KXu7gsN0UYY4QTfoUGg29jM70Gjk6MoVDk3aSDtfaqy3HGREZBpVYpEY9OhjtpokF9cSHlVDUT0TTL2-Nvid85BaW6ZjcwGRtjiZrtpFdI3fMTr=w2400">
-												<span class="tooltiptext">Demystify Generative AI</span>
-											</a>
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="tooltip">
-											<a href="https://drive.google.com/file/d/1K-yL3y4kct2T6pSh6Z6s7x8b6qIYKS2O/view?usp=sharing" target="_blank" class="image fit">
-												<img src="https://lh3.googleusercontent.com/pw/ADCreHcwnOFp7rUuEMjU2ygxMv2kUXZJ1aKrcHaCoKd4jMmEmAvbtYx-yVOBMp8arILDfXAQTdcq6GA3lWhVZpu0DF1ncI8ZJ-G8P89WAJoShWO7AVBbZ_sq=w2400">
-												<span class="tooltiptext">Azure Data Fundamentals</span>
-											</a>
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="tooltip">
-											<a href="https://drive.google.com/file/d/16JoutOKSk9aNe3QmmB9Nt2EGLV-7s6_u/view?usp=sharing" target="_blank" class="image fit">
-												<img src="https://lh3.googleusercontent.com/pw/AJFCJaXsXzjqJhQQasuS5o7kdwBMBXKN3KrJBFMlq6ruwmt0iMieB2zTH1ceM3J0ZYSaK1P3oLxDrIMjhPg-VI1UdbC51zn40wN5OOJ_wqoK8UBnRg1XmfCc=w2400">
-												<span class="tooltiptext">Google Cloud Fundamentals</span>
-											</a>
-											</div>
-										</div>
-									</section>
-
-									<!--Cybersecurity-->
-								<h4 style="text-align:center"><b>Cybersecurity</b></h4>
-								<br/>
-								<section>
-									<div class="row">
-										<div class="col-6">
-											<div class="tooltip">
-						                                        <a href="https://drive.google.com/file/d/1Ix_4E_dzrMkiOVxaowLuKZ11Ce0HeU89/view?usp=sharing" target="_blank" class="image fit">
-						                                                <img src="https://lh3.googleusercontent.com/pw/AP1GczMjrRSdCBd1smQPHJgCfAWUiD3Mfj-9LQwZjD5pl77pv1NyQyfgNO1WicsCACRqjR_nFsa0MG4b0x-GLFt71ii1tZuriHHhZ9v_oGghhDNbaOt4iRdn=w2400"/>
-						                                                <span class="tooltiptext">Foundations of Cybersecurity</span>
-											</a>
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="tooltip">
-											<a href="https://drive.google.com/file/d/1UzPjow1MpV4_av8gD-Iu1kmcwGAGS8nc/view?usp=share_link" target="_blank" class="image fit">
-												<img src="https://lh3.googleusercontent.com/6xr94a_b35_lkWXrXspzk3_Cs_gtfzE_vd8XM67CypB5GKmxjvJP-g_lJHE2mB7Y0M-dtAy-qTZjfUcVQp2Ok2wu1sqFOIkarnZynA5hjNFuP9FHm54sAXVkpUVz06muWXYb0aS60sA=w2400">
-												<span class="tooltiptext">Introduction to Cybersecurity</span>
-											</a>
-											</div>
-										</div>
-									</section>
-									<!--Extra activities-->
-									<h4 style="text-align:center"><b>Extracurricular activities</b></h4>
-									<br/>
-									<section>
-										<div class="row">
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1Pvqb1JCAelW92yk4X10MhnkCRQ6UelyQ/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/AP1GczPbJEIr8GKtd9uACCGeWUT6F2nqooGXmAxBt3IzvJ9eVOE0i3jrb8iwuX4nQ5Z4i_3dLpuUmXTYaIHUFfuWqEcgByU8uSdCGL14Z16V2pYFh6W5rq26=w2400">
-													<span class="tooltiptext">Hair donation for cancer patients</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1sj1moehAgI5OwqVnG5D1HMLp6oZiCWBo/view?usp=share_link" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/uNmS3eEhuNCy8YSNcq3CMwNtIdbyrIG90wvrufpXa1tF8RCKwE7hW8vIFi9LMw9EKvhV-4JgCpGYS2QP6T_im06IAx_7oZLQ6BElnBjnAQtLehNlkzikJz9CtPJrzzZhSzi36rAlbk0=w2400">
-													<span class="tooltiptext">High contribution in extracurricular activities (Vietnamese)</span>
-												</a>
-												</div>
-											</div>
-											<div class="col-6">
-												<div class="tooltip">
-												<a href="https://drive.google.com/file/d/1Y-rS4n9ra02kQnSjZquDgLHTyO3qRWdj/view?usp=sharing" target="_blank" class="image fit">
-													<img src="https://lh3.googleusercontent.com/pw/ADCreHcYEzZyzQ45VyWnVjkqOIiLEdhs9MK1i4VkJ0fPof1x35LtPCUlACgS0RNbt5_oPmvIYhosiguIO1CU5ISSuE5kaazq2yT2pnV-nn74LNzEDxW4QUEE=w2400">
-													<span class="tooltiptext">IEEE Open Access Symposium</span>
-												</a>
-												</div>
-											</div>
-											
-											</div>
-									</section>
-								</article>
-
-						<!-- Work -->
-						<article id="work" class="panel">
-							<header>
-								<h2>Projects</h2>
-							</header>
-										
-								<!-- The Modal -->
-							<div id="myModal" class="modal">
-								<div class="modal-content" style="text-align: justify;">
-									<h4>Anemia Diagnostic Assistant - Streamlit App</h4>
-									<br/>
-									<div class="col-6">
-										<div class="tooltip">
-										<a href="https://anemia-diagnosis.streamlit.app/" target="_blank" class="image fit">
-											<img src="https://lh3.googleusercontent.com/pw/AP1GczOjksvb-G0a_kOf13Bf8v6EtrYlX7CmoJ8tgAfsrIHHlq0DEDRJpEeC2BG6xuEmV6IlWPDTkuECTZ-1jgL02tGQn8NRyaqGn7zJ0_LC-kZZb4FMAfQ_=w2400"/>
-										</a>
-										</div>
-									</div>
-									<div class="col-6">
-										<div class="tooltip">
-										<a href="https://anemia-diagnosis.streamlit.app/" target="_blank" class="image fit">
-											<img src="https://lh3.googleusercontent.com/pw/AP1GczMjq5uRnr9fQ9gHdVmmN3I-4YyhUDT_d9mGJmjBL2LPBWLaTx5pLa5vg-jNytR74geTROOMHfGF0_tF5CtrJdxy2nl0TsQJG1QsKxOc00XH8oYNFgl0=w2400"/>
-										</a>
-										</div>
-									</div>
-									<br/>
-									<p><b>This project presents a web application designed to predict the risk of anemia using advanced machine learning techniques. By inputting their hematological parameters, users can receive an accurate anemia diagnosis based on a predictive model that has been rigorously trained.
-										Inspired by the pioneering research of <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11699093/">Mojumdar et al. (2025)</a>, this project is a seamless integration of clinical expertise and cutting-edge data science. It marks a significant leap forward in transforming the way we diagnose and intervene in anemia, enabling early detection and better patient care.
-										The success of this project is the result of an exceptional collaboration: <a href="https://scholar.google.com.tw/citations?user=MwIr5fMAAAAJ&hl=en"> Dr. Gem Wu</a> from Chang Gung Memorial Hospital provided invaluable medical insights, while my dedicated <a href="https://github.com/NgocDuy3112"> data science partner</a> played a crucial role in developing and refining the model.
-										</b></p>
-										<p><b><u>Note</u>: It might take a few seconds to wake this app up</b></p>
-									<a href="https://anemia-diagnosis.streamlit.app/" target ="_blank" class="button">View the app</a>
-									<a href="https://github.com/kimnguyen2002/Anemia-Prediction" target ="_blank" class="button">Source code repository</a>
-								</div>
-								<br/>
-								<div class="modal-content" style="text-align: justify;">
-									<h4>Chest X-Ray Image Analysis - Streamlit App</h4>
-									<br/>
-									<div class="row">
-									<div class="col-6">
-										<div class="tooltip">
-										<a href="https://chestxrayanalysis.streamlit.app/" target="_blank" class="image fit">
-											<img src="https://lh3.googleusercontent.com/pw/AP1GczMnFxVlt5xk6Y6TZDPwgmu6u3iHnCo4idmkvsfUC2KZ9qFt7ezq-8GvalO7esUBbmNShqQwIygRHDmA5BfZiZQnxMVvCX8XdIR_XgjCk_CloWPsIygo=w2400"/>
-										</a>
-										</div>
-									</div>
-									<div class="col-6">
-										<div class="tooltip">
-										<a href="https://chestxrayanalysis.streamlit.app/" target="_blank" class="image fit">
-											<img src="https://lh3.googleusercontent.com/pw/AP1GczMV9bbE7wXN5UKj2Ve_NhVG_LrcApL8e9JuX5tznZgtVOFubmUP1vcZqhr2xrQO3iguagnPZ7WHTiuzgkVqBABekPqRPxBKC5PHUkSNl0Mso_94ywE4=w2400"/>
-										</a>
-										</div>
-									</div>
-									</div>
-									<br/>
-									<p><b>The Chest X-Ray Image Analysis app is designed to assist users in detecting potential abnormalities in chest X-ray images using deep learning techniques. 
-										  This user-friendly web application leverages the DenseNet121 model to analyze uploaded X-ray images and provide insights into various medical conditions.
-										</b></p>
-										<p><b><u>Note</u>: It might take a few seconds to wake this app up</b></p>
-									<a href="https://chestxrayanalysis.streamlit.app/" target ="_blank" class="button">View the app</a>
-									<a href="https://github.com/kimnguyen2002/Chest-X-Ray-Image-Analysis" target ="_blank" class="button">Source code repository</a>
-								</div>
-								<br/>
-								<div class="modal-content" style="text-align: justify;">
-									<h4>Heart Risk Prediction - Streamlit App</h4>
-									<br/>
-									<div class="col-6">
-										<div class="tooltip">
-										<a href="https://heartriskprediction.streamlit.app/" target="_blank" class="image fit">
-											<img src="https://lh3.googleusercontent.com/pw/AP1GczPpyFWJhVNAwJ_N3PvJBhpWtRQ3HkPNTjH6bImFfGj6v1W-ipYZ26hqVT2f8s-reyGwdmvZHC5Jra0SYd6hcz6t-kuEKQUTmljzvnUFmx4vGOw6JiOG=w2400"/>
-										</a>
-										</div>
-									</div>
-									<br/>
-									<p><b>The Heart Risk Prediction is a web application designed to assess the risk of heart disease based on user-input health metrics. 
-										Utilizing machine learning models, the app provides a user-friendly interface through Streamlit, offers insights into the user's heart health, 
-										categorizing their risk as low or high. 
-										This project aims to raise awareness about heart disease and promote early detection and preventive measures.
-										</b></p>
-										<p><b><u>Note</u>: It might take a few seconds to wake this app up</b></p>
-									<a href="https://heartriskprediction.streamlit.app/" target ="_blank" class="button">View the app</a>
-									<a href="https://github.com/kimnguyen2002/Heart_Risk_Prediction" target ="_blank" class="button">Source code repository</a>
-								</div>
-								<br/>
-								<div class="modal-content" style="text-align: justify;">
-									<h4>Symptom Checker with Drug Info - Streamlit App</h4>
-									<br/>
-									<div class="col-6">
-										<div class="tooltip">
-										<a href="https://symptomschecker.streamlit.app/" target="_blank" class="image fit">
-											<img src="https://lh3.googleusercontent.com/pw/AP1GczM16e_4IArohsV0KL6vUvDFab-rbaF6mCduFryDIm9ujVMW2elgKkOVEcWxHZsa5CBROokY-Jr5gRFdLHsMpJmmO9LdGo2CCPrAPivCtRw46oybP0Kl=w2400"/>
-										</a>
-										</div>
-									</div>
-									<br/>
-									<p><b>Symptom Checker is a basic web-based tool developed using Streamlit that allows users to quickly predict 
-										minor illnesses based on their selected symptoms. By utilizing a Decision Tree Classifier, 
-										this application provides an initial diagnosis, displays related drug options for the predicted condition, sourced from a drug side effects dataset.
-										</b></p>
-										<p><b><u>Note</u>: It might take a few seconds to wake this app up</b></p>
-									<a href="https://symptomschecker.streamlit.app/" target ="_blank" class="button">View the app</a>
-									<a href="https://github.com/kimnguyen2002/Symptoms_Checker" target ="_blank" class="button">Source code repository</a>
-								</div>
-								<br/>
-								<div class="modal-content" style="text-align: justify;">
-									<h4>Retrieving Biological Data</h4>
-									<br/>
-									<p><b>My focus is to query the Europe PMC API to retrieve information related to the term "gene". 
-										By constructing the API request with the specified query and parameters, 
-										the code fetches the relevant data in JSON format and stores it in the "gen_data" variable for further use or analysis.</p>
-										<p>The key purpose of this code is to programmatically access and extract data from the EBI Europe PMC API based on a specific search query, 
-										allowing the user to incorporate this data into their broader application or research workflow.
-									</b></p>
-									<a href="https://colab.research.google.com/drive/1KBPbEEqhrHGpxUn_VqO0fsl0UYo9M9I6?usp=sharing" target ="_blank" class="button">View the source code</a>
-								</div>
-								<br/>
-								<div class="modal-content" style="text-align: justify;">
-									<h4>White Wine Classification - Streamlit App</h4>
-									<br/>
-									<p><b>This Streamlit App is used to automatically predict different types of white
-										wine based on three Machine Learning models: Random Forest, Support Vector Machine and Logistic Regression.
-										</b></p>
-									<a href="https://wineclassification.streamlit.app/" target ="_blank" class="button">View the app</a>
-									<a href="https://github.com/kimnguyen2002/Wine_Classification" target ="_blank" class="button">Source code repository</a>
-								</div>
-								<br/>
-								<div class="modal-content" style="text-align: justify;">
-									<h4>Glass Classification</h4>
-									<br/>
-									<p><b>I trained the Machine Learning model that used at three Multi-Classification Machine
-										Learning Algorithms, included Logistics Regression, K-Nearest Neighbor and Random Forest to predict multi-types of glass.
-										</b></p>
-									<a href="https://colab.research.google.com/drive/1B4fgk4Z9qhOySsAOp8baqOtqIzLoDM4n" target ="_blank" class="button">View the source code</a>
-									<a href="https://github.com/kimnguyen2002/Glass-Classification/blob/main/glass.csv" target ="_blank" class="button">View the dataset</a>
-								</div>
-								<br/>
-								<div class="modal-content" style="text-align: justify;">
-									<h4> Stock Market </h4>
-									<br/>
-									<p><b>In my Python scripts, I began by importing the necessary modules and libraries to connect to MongoDB and extracted data from Yahoo Finance. 
-										Specifically, I established a connection to the Yahoo Finance database to retrieve information pertaining to the stock markets of Google and Amazon over the course of one year.
-										</b></p>
-									<a href="https://colab.research.google.com/drive/16eFfi7AZQnx3ITU14eDpQcFOjTEjVnzY" target ="_blank" class="button">View the source code</a>
-								</div>
-								<br/>
-								<div class="modal-content" style="text-align: justify;">
-									<h3>Simple Python Games</h3>
-								<br/>
-									<p><b>Simple Slot Machine and Casino Player were built on Python with OOP model.
-									They were created using function application and composition, with values being passed from one function to another. 
-									This approach also prevents state modification, reducing the risk of deadlocks when parallelizing the code.
-									</b></p>
-									<a href="https://kimnguyen2002.github.io/Simple-Python-Games/" target ="_blank" class="button">View the website</a>
-								</div>
-								<br/>
-							</div>	
-
-								  <!-- JavaScript code -->
-							  <script>
-								  function openModal() {
-									document.getElementById("myModal").style.display = "block";
-								  }
-
-								  function closeModal() {
-									document.getElementById("myModal").style.display = "none";
-								  }
-
-								  var slideIndex = 1;
-										  showSlides(slideIndex);
-
-								  function plusSlides(n) {
-										showSlides(slideIndex += n);
-								  }
-
-								  function currentSlide(n) {
-										showSlides(slideIndex = n);
-								  }
-
-								  function showSlides(n) {
-									var i;
-									var slides = document.getElementsByClassName("mySlides");
-									var dots = document.getElementsByClassName("demo");
-									var captionText = document.getElementById("caption");
-								if (n > slides.length) {slideIndex = 1}
-								if (n < 1) {slideIndex = slides.length}
-								for (i = 0; i < slides.length; i++) {
-										slides[i].style.display = "none";
-								}
-								for (i = 0; i < dots.length; i++) {
-										dots[i].className = dots[i].className.replace(" active", "");
-								}
-									slides[slideIndex-1].style.display = "block";
-								}
-							</script>
-
-							</body>
-							
-							</html>
-							
-						</article>
-
-						<!-- Photograph -->
-						<article id="photograph" class="panel">
-							<header>
-								<h2>Photography Work</h2>
-							</header>
-							<div style="text-align: justify;">
-							<b><p>
-								My work is about using the power of visual storytelling to connect with people on a deeper level. Each picture I take is a window into a moment in time, a glimpse into the lives of the subjects I photograph.
-							</p>
-							<p>	
-								By focusing on the stories behind the images, I strive to create a bridge between the viewer and the subject, allowing people to see the world through a different lens and gain a deeper appreciation for the diversity and complexity of the human experience. 
-								It is my belief that photography has the power to transcend borders, break down barriers, and bring people together in a shared understanding of our common humanity.
-							</p></b>
-							</div>
-							
-							<div style="position:relative;padding-top:max(60%,324px);width:100%;height:0;">
-								<iframe style="position:absolute;border:none;width:100%;height:100%;left:0;top:0;" src="https://online.fliphtml5.com/jvhqy/cegy/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" >
-								</iframe>
-							</div>
-						</article>	
-
-                        <!-- Instagram -->
-							<article id="instagram" class="panel">
-                                <header>
-                                    <h2>Instagram Page</h2>
-                                </header>
-							<div style="text-align: justify;">
-                                <p><b>I have created this page specifically for aspiring AI learners who are unsure of where to start and how to approach their studies. As someone who has also self-taught in this field, 
-                                    I wanted to create a page that covers the knowledge I have acquired.
-                                </b></p>
-                                
-                                <p><b>This Instagram page will provide a comprehensive learning journey, taking you from the fundamentals to advanced concepts in Machine Learning and Data Science. 
-                                    The content will be designed to be easily understandable, minimizing the mathematical complexity and emphasizing practical implementation.
-                                </b></p>
-							</div>
-							<div class = row>
-								<section>
-								<div class = col-2>
-									<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/CvZuscpSopX/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
-										<div style="padding: 16px;">
-										<div style="display: flex; flex-direction: row; align-items: center;">
-										<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">&nbsp;</div>
-										<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">&nbsp;</div>
-										</div>
-										</div>
-										<div style="padding: 19% 0;">&nbsp;</div>
-										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;">&nbsp;</div>
-										<div style="padding-top: 8px;">
-										<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
-										</div>
-										<div style="padding: 12.5% 0;">&nbsp;</div>
-										<div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-										<div>
-										<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">&nbsp;</div>
-										<div style="background-color: #f4f4f4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">&nbsp;</div>
-										</div>
-										<div style="margin-left: 8px;">
-										<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">&nbsp;</div>
-										<div style="width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg);">&nbsp;</div>
-										</div>
-										<div style="margin-left: auto;">
-										<div style="width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">&nbsp;</div>
-										<div style="background-color: #f4f4f4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">&nbsp;</div>
-										<div style="width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">&nbsp;</div>
-										</div>
-										</div>
-										<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">&nbsp;</div>
-										</div>
-										<p style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; line-height: 17px; margin-bottom: 0; margin-top: 8px; overflow: hidden; padding: 8px 0 7px; text-align: center; text-overflow: ellipsis; white-space: nowrap;"><a style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: normal; line-height: 17px; text-decoration: none;" href="https://www.instagram.com/p/CvZuscpSopX/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank">A post shared by Kim | Data Science (@dasci.ai)</a></p>
-										</div>
-										</blockquote>
-                                 
-								</div>
-							</section>
-								 
-							<section>
-								<div class = col-2>
-								 <blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/C3iCwaXy02j/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
-									<div style="padding: 16px;">
-									<div style="display: flex; flex-direction: row; align-items: center;">
-									<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">&nbsp;</div>
-									<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-									<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">&nbsp;</div>
-									<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">&nbsp;</div>
-									</div>
-									</div>
-									<div style="padding: 19% 0;">&nbsp;</div>
-									<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;">&nbsp;</div>
-									<div style="padding-top: 8px;">
-									<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
-									</div>
-									<div style="padding: 12.5% 0;">&nbsp;</div>
-									<div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-									<div>
-									<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">&nbsp;</div>
-									<div style="background-color: #f4f4f4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">&nbsp;</div>
-									<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">&nbsp;</div>
-									</div>
-									<div style="margin-left: 8px;">
-									<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">&nbsp;</div>
-									<div style="width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg);">&nbsp;</div>
-									</div>
-									<div style="margin-left: auto;">
-									<div style="width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">&nbsp;</div>
-									<div style="background-color: #f4f4f4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">&nbsp;</div>
-									<div style="width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">&nbsp;</div>
-									</div>
-									</div>
-									<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-									<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">&nbsp;</div>
-									<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">&nbsp;</div>
-									</div>
-									<p style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; line-height: 17px; margin-bottom: 0; margin-top: 8px; overflow: hidden; padding: 8px 0 7px; text-align: center; text-overflow: ellipsis; white-space: nowrap;">
-										<a style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: normal; line-height: 17px; text-decoration: none;" href="https://www.instagram.com/p/C3iCwaXy02j/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank">A post shared by Kim | Data Science (@dasci.ai)</a>
-									</p>
-									</div>
-								</div>
-								</blockquote>
-							</section>
-
-							<section>
-								<div class = col-2>
-									<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/C4hRXSotwoY/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
-										<div style="padding: 16px;">
-										<div style="display: flex; flex-direction: row; align-items: center;">
-										<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">&nbsp;</div>
-										<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">&nbsp;</div>
-										</div>
-										</div>
-										<div style="padding: 19% 0;">&nbsp;</div>
-										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;">&nbsp;</div>
-										<div style="padding-top: 8px;">
-										<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
-										</div>
-										<div style="padding: 12.5% 0;">&nbsp;</div>
-										<div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-										<div>
-										<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">&nbsp;</div>
-										<div style="background-color: #f4f4f4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">&nbsp;</div>
-										</div>
-										<div style="margin-left: 8px;">
-										<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">&nbsp;</div>
-										<div style="width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg);">&nbsp;</div>
-										</div>
-										<div style="margin-left: auto;">
-										<div style="width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">&nbsp;</div>
-										<div style="background-color: #f4f4f4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">&nbsp;</div>
-										<div style="width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">&nbsp;</div>
-										</div>
-										</div>
-										<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">&nbsp;</div>
-										</div>
-										<p style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; line-height: 17px; margin-bottom: 0; margin-top: 8px; overflow: hidden; padding: 8px 0 7px; text-align: center; text-overflow: ellipsis; white-space: nowrap;"><a style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: normal; line-height: 17px; text-decoration: none;" href="https://www.instagram.com/p/C4hRXSotwoY/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank">A post shared by Kim | Data Science (@dasci.ai)</a></p>
-										</div>
-										</blockquote>
-								</div>
-							</section>
-
-							<section>
-								<div class = col-2>
-									<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/C9NMmXQBUfb/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
-										<div style="padding: 16px;">
-										<div style="display: flex; flex-direction: row; align-items: center;">
-										<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">&nbsp;</div>
-										<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">&nbsp;</div>
-										</div>
-										</div>
-										<div style="padding: 19% 0;">&nbsp;</div>
-										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;">&nbsp;</div>
-										<div style="padding-top: 8px;">
-										<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
-										</div>
-										<div style="padding: 12.5% 0;">&nbsp;</div>
-										<div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-										<div>
-										<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">&nbsp;</div>
-										<div style="background-color: #f4f4f4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">&nbsp;</div>
-										</div>
-										<div style="margin-left: 8px;">
-										<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">&nbsp;</div>
-										<div style="width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg);">&nbsp;</div>
-										</div>
-										<div style="margin-left: auto;">
-										<div style="width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">&nbsp;</div>
-										<div style="background-color: #f4f4f4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">&nbsp;</div>
-										<div style="width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">&nbsp;</div>
-										</div>
-										</div>
-										<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">&nbsp;</div>
-										</div>
-										<p style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; line-height: 17px; margin-bottom: 0; margin-top: 8px; overflow: hidden; padding: 8px 0 7px; text-align: center; text-overflow: ellipsis; white-space: nowrap;"><a style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: normal; line-height: 17px; text-decoration: none;" href="https://www.instagram.com/p/C9NMmXQBUfb/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank">A post shared by Kim | Data Science (@dasci.ai)</a></p>
-										</div>
-										</blockquote>
-								</div>
-							</section>
-
-							<section>
-								<div class = col-2>
-									<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/C9hvfD1vpH0/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
-										<div style="padding: 16px;">
-										<div style="display: flex; flex-direction: row; align-items: center;">
-										<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">&nbsp;</div>
-										<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">&nbsp;</div>
-										</div>
-										</div>
-										<div style="padding: 19% 0;">&nbsp;</div>
-										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;">&nbsp;</div>
-										<div style="padding-top: 8px;">
-										<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
-										</div>
-										<div style="padding: 12.5% 0;">&nbsp;</div>
-										<div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-										<div>
-										<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">&nbsp;</div>
-										<div style="background-color: #f4f4f4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">&nbsp;</div>
-										</div>
-										<div style="margin-left: 8px;">
-										<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">&nbsp;</div>
-										<div style="width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg);">&nbsp;</div>
-										</div>
-										<div style="margin-left: auto;">
-										<div style="width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">&nbsp;</div>
-										<div style="background-color: #f4f4f4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">&nbsp;</div>
-										<div style="width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">&nbsp;</div>
-										</div>
-										</div>
-										<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">&nbsp;</div>
-										</div>
-										<p style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; line-height: 17px; margin-bottom: 0; margin-top: 8px; overflow: hidden; padding: 8px 0 7px; text-align: center; text-overflow: ellipsis; white-space: nowrap;"><a style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: normal; line-height: 17px; text-decoration: none;" href="https://www.instagram.com/p/C9hvfD1vpH0/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank">A post shared by Kim | Data Science (@dasci.ai)</a></p>
-										</div>
-										</blockquote>
-								</div>
-							</section>
-
-							<section>
-								<div class = col-2>
-									<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/C-Yh95KShLf/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
-										<div style="padding: 16px;">
-										<div style="display: flex; flex-direction: row; align-items: center;">
-										<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;">&nbsp;</div>
-										<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;">&nbsp;</div>
-										</div>
-										</div>
-										<div style="padding: 19% 0;">&nbsp;</div>
-										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;">&nbsp;</div>
-										<div style="padding-top: 8px;">
-										<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
-										</div>
-										<div style="padding: 12.5% 0;">&nbsp;</div>
-										<div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;">
-										<div>
-										<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);">&nbsp;</div>
-										<div style="background-color: #f4f4f4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);">&nbsp;</div>
-										</div>
-										<div style="margin-left: 8px;">
-										<div style="background-color: #f4f4f4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;">&nbsp;</div>
-										<div style="width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg);">&nbsp;</div>
-										</div>
-										<div style="margin-left: auto;">
-										<div style="width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);">&nbsp;</div>
-										<div style="background-color: #f4f4f4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);">&nbsp;</div>
-										<div style="width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);">&nbsp;</div>
-										</div>
-										</div>
-										<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;">
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;">&nbsp;</div>
-										<div style="background-color: #f4f4f4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;">&nbsp;</div>
-										</div>
-										<p style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; line-height: 17px; margin-bottom: 0; margin-top: 8px; overflow: hidden; padding: 8px 0 7px; text-align: center; text-overflow: ellipsis; white-space: nowrap;"><a style="color: #c9c8cd; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: normal; line-height: 17px; text-decoration: none;" href="https://www.instagram.com/p/C-Yh95KShLf/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank">A post shared by Kim | Data Science (@dasci.ai)</a></p>
-										</div>
-										</blockquote>
-								</div>
-							</section>
-
-							</div>
-							<script async src="//www.instagram.com/embed.js"></script>
-                            </article>
-						<!-- Contact 
-							<article id="contact" class="panel">
-								<header>
-									<h2>Contact Me</h2>
-								</header>
-								<form action="#" method="post">
-									<div>
-										<div class="row">
-											<div class="col-6 col-12-medium">
-												<input type="text" name="name" placeholder="Name" />
-											</div>
-											<div class="col-6 col-12-medium">
-												<input type="text" name="email" placeholder="Email" />
-											</div>
-											<div class="col-12">
-												<input type="text" name="subject" placeholder="Subject" />
-											</div>
-											<div class="col-12">
-												<textarea name="message" placeholder="Message" rows="6"></textarea>
-											</div>
-											<div class="col-12">
-												<input type="submit" value="Send Message" />
-											</div>
-										</div>
-									</div>
-								</form>
-							</article>
-						-->
+                        </div>
+                        <div class="badge-name">Kim Nguyen</div>
+                        <div class="badge-role">Data Science & ML</div>
+                    </div>
+                    <div class="badge-footer">
+						<div class="social-links">
+							<a href="https://www.linkedin.com/in/kimnguyen2002/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+							<a href="https://github.com/kimnguyen2002" target="_blank"><i class="fab fa-github"></i></a>
+							<a href="mailto:kimnguyen.developer@gmail.com"><i class="fas fa-envelope"></i></a>
+							<a href="https://www.instagram.com/dasci.ai" target="_blank"><i class="fab fa-instagram"></i></a>
+						</div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="home-buttons animate delay-1">
+                <a href="#about" class="button">Get To Know Me</a>
+                <a href="#work" class="button">View My Projects</a>
+                </div>
+            </section>
+			
+			<!-- About Me -->
+			<section id="about" class="section active">
+				<div class="container">
+					<div class="about-content">
+						<div class="about-text animate">
+							<h2>About Me</h2>
+							<p>As a self-taught in Data Science and Machine Learning with educational background in International Business, I have developed a keen interest in creating solutions that deliver tangible value and make a meaningful impact at every stage.</p>
+							<p>My primary focus now is on Biomedical Informatics, which is essential for real-world application and medical systems. I'm passionate about leveraging technology to improve healthcare outcomes and create innovative solutions to complex problems.</p>
+							<a href="#work" class="button">View My Projects</a>
+						</div>
+						<div class="about-image animate delay-1">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczOH2cUlHW8DYTuFxTKKLoHB5FiDF5gzkbRBG-seuc2tHlIhqY_v2i4s3XSMrhrpu1CyqIB_NDDmZe_2ll5LL573qwoDHhO_SXhZ5FyQ-8MpEHWdwgvS=w2400" alt="Kim Nguyen" />
+						</div>
 					</div>
-						
-				<!-- Footer -->
-					<div id="footer">
-						<a href="https://www.linkedin.com/in/kimnguyen2002/" target="_blank">
-						<img alt="Static Badge" src="https://img.shields.io/badge/LinkedIn-0E76A8?style=social&logo=LinkedIn&labelColor=gray&link=https://www.linkedin.com/in/kimnguyen2002/" width="130" height="30">
-						</a>
-						&nbsp
-						
-						<a href="https://github.com/kimnguyen2002" target="_blank">
-						<img alt="Static Badge" src="https://img.shields.io/badge/Github-0E76A8?style=social&logo=Github&labelColor=gray&link=https://github.com/kimnguyen2002" width="110" height="30">
-						</a>
-						&nbsp
-						
-						<a href="mailto: kimnguyen.developer@gmail.com">
-						<img alt="Static Badge" src="https://img.shields.io/badge/Gmail-0E76A8?style=social&logo=Gmail" width="100" height="30">
-						</a>
-						
-						<ul class="copyright">
-							<li>&copy; Kim Nguyen</li>
-						</ul>
-					</div>
+				</div>
+			</section>
 
+			<!-- Projects -->
+			<section id="work" class="section active">
+				<div class="container">
+					<h2 class="animate">Projects</h2>
+					<p class="animate delay-1">Here are some of the projects I've worked on. Click on any project to view in details.</p>
+					
+					<div class="projects-grid animate delay-2">
+						<!-- TOCFL -->
+						<div class="project-card" data-project="tocfl">
+							<div class="project-img">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczOL3lhvSMr-_LODx2R4L8Z9Nvt8KdImTbTo9Wtfc7VYese3uLQHi0oMM3CL_Vng-ThLVUTETPaDmxHAZcZ9XWxBXyMwrAAvlkLHfcwpPduh2YLZasBO=w2400" alt="Learning Traditional Chinese">
+							</div>
+							<div class="project-info">
+								<h3>Learning Traditional Chinese</h3>
+								<p>A comprehensive web platform designed to support learners with the TOCFL levels (A1 to B1).</p>
+								<div class="project-links">
+									<a href="https://the-bithub.com/learning-tocfl/" target="_blank">View App</a>
+								</div>
+							</div>
+						</div>
+						<!-- Anemia -->
+						<div class="project-card" data-project="anemia">
+							<div class="project-img">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczOjksvb-G0a_kOf13Bf8v6EtrYlX7CmoJ8tgAfsrIHHlq0DEDRJpEeC2BG6xuEmV6IlWPDTkuECTZ-1jgL02tGQn8NRyaqGn7zJ0_LC-kZZb4FMAfQ_=w2400" alt="Anemia Diagnostic Assistant">
+							</div>
+							<div class="project-info">
+								<h3>Anemia Diagnostic Assistant</h3>
+								<p>A web application designed to predict the risk of anemia using advanced machine learning techniques.</p>
+								<div class="project-links">
+									<a href="https://anemia-diagnosis.streamlit.app/" target="_blank">View App</a>
+									<a href="https://github.com/kimnguyen2002/Anemia-Prediction" target="_blank">View Code</a>
+								</div>
+							</div>
+						</div>
+						
+						<!-- X-ray -->
+						<div class="project-card" data-project="xray">
+							<div class="project-img">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczMnFxVlt5xk6Y6TZDPwgmu6u3iHnCo4idmkvsfUC2KZ9qFt7ezq-8GvalO7esUBbmNShqQwIygRHDmA5BfZiZQnxMVvCX8XdIR_XgjCk_CloWPsIygo=w2400" alt="Chest X-Ray Image Analysis">
+							</div>
+							<div class="project-info">
+								<h3>Chest X-Ray Image Analysis</h3>
+								<p>An web that assists users in detecting potential abnormalities in chest X-ray images using deep learning techniques.</p>
+								<div class="project-links">
+									<a href="https://chestxrayanalysis.streamlit.app/" target="_blank">View App</a>
+									<a href="https://github.com/kimnguyen2002/Chest-X-Ray-Image-Analysis" target="_blank">View Code</a>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Heart Risk -->
+						<div class="project-card" data-project="heart">
+							<div class="project-img">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczPpyFWJhVNAwJ_N3PvJBhpWtRQ3HkPNTjH6bImFfGj6v1W-ipYZ26hqVT2f8s-reyGwdmvZHC5Jra0SYd6hcz6t-kuEKQUTmljzvnUFmx4vGOw6JiOG=w2400" alt="Heart Risk Prediction">
+							</div>
+							<div class="project-info">
+								<h3>Heart Risk Prediction</h3>
+								<p>A web application designed to assess the risk of heart disease based on user-input health metrics.</p>
+								<br>
+								<div class="project-links">
+									<a href="https://heartriskprediction.streamlit.app/" target="_blank">View App</a>
+									<a href="https://github.com/kimnguyen2002/Heart_Risk_Prediction" target="_blank">View Code</a>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Symptom -->
+						<div class="project-card" data-project="symptom">
+							<div class="project-img">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczM16e_4IArohsV0KL6vUvDFab-rbaF6mCduFryDIm9ujVMW2elgKkOVEcWxHZsa5CBROokY-Jr5gRFdLHsMpJmmO9LdGo2CCPrAPivCtRw46oybP0Kl=w2400" alt="Symptom Checker with Drug Info">
+							</div>
+							<div class="project-info">
+								<h3>Symptom Checker with Drug Info</h3>
+								<p>A web application designed to allow users to quickly predict 
+									minor illnesses based on selected symptoms and display related drug options.</p>
+								<div class="project-links">
+									<a href="https://symptomschecker.streamlit.app/" target="_blank">View App</a>
+									<a href="https://github.com/kimnguyen2002/Symptoms_Checker" target="_blank">View Code</a>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Add more projects as needed -->
+					</div>
+				</div>
+			</section>
+			
+			<!-- Certificates -->
+			<section id="certificate" class="section active">
+				<div class="container">
+					<h2 class="animate">Certificates</h2>
+					<p class="animate delay-1">These are certificates that I have gained from learning activities and participation. Click on any certificate to view the full image and some may have storytelling.</p>
+					
+					<blockquote class="ludwig animate delay-2">
+						Knowledge isn't free. You have to pay attention.
+					</blockquote>
+					
+					<div class="category-tabs animate delay-2">
+						<div class="category-tab" data-category="biomedical">Biomedical & Genetics</div>
+						<div class="category-tab" data-category="ai">AI & Machine Learning</div>
+						<div class="category-tab" data-category="cloud">Cloud</div>
+						<div class="category-tab" data-category="security">Cybersecurity</div>
+						<div class="category-tab" data-category="extra">Extracurricular</div>
+					</div>
+					
+					<div class="cert-container animate delay-3">
+						<!-- Biomedical - Genetics -->
+						<div class="cert-item" data-category="biomedical">
+							<a href="https://drive.google.com/file/d/1uoRxeaxrXP9UDDKR-uV-2DOeu6eFuhSn/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczPA-HtnGbZCyIEbgvCFi1LmkJ3PZfLQ0MYdH6z-7Ral_AZ4w1eaFvdlUa-fr0GmMRxEjbe3OlOjEiRvG491V7YPd-vQ46AZTJubyEaRMPPBmb7Rt3xa=w2400"/>
+								<div class="tooltip">AI for Medical Diagnosis</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="biomedical">
+							<a href="https://drive.google.com/file/d/1dw52URZlqnxSOEprWJpTGXFNoiWAxa_b/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczPCX-LNQy4qEILoNNKTThBxQ2TRzBTgac-OJHoCcieManZLtQICHs46HapLP54ZqOvfxLP4CxBXmZX4PjqkKV24-21nSv_yl13rkAfgbwfjt1mA2pLJ=w2400"/>
+								<div class="tooltip">ChIP-seq with Bioconductor in R</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="biomedical">
+							<a href="https://drive.google.com/file/d/1ClELELa2NJGB93kgAnKbwFRcB2PuBaFJ/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczPRDehB5W4uPJ7oMvPKkqJAyJfz89Rc1WOv1WDIieWwazhgjvb5wJqsDLD2X2Xg0gbXIwdo4nq1_CZaRWBjoLiRR0jMtPVMFSimua6swXihbXIc3RaP=w2400"/>
+								<div class="tooltip">Biomedical Image Analysis in Python</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="biomedical">
+							<a href="https://drive.google.com/file/d/1cVlU0ATlrjRAH2Ddef0dPH2szcWi5AQv/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczNg-v16gQzk-3yIJBBaFMO9QE_wUwycmXWAZUxgGQatWWKmdH5kl6LKPRTjwPn-QHjE4gUPerGJqBcpAYfTw775-VdQdohSA5mvTIGQ2QlYe9yzt9XC=w2400"/>
+								<div class="tooltip">Introduction to Bioconductor in R</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="biomedical">
+							<a href="https://drive.google.com/file/d/1eTKE2dEc1434YCoxwO3W2jD82rJHke7m/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczOdULofM3fOg5zyclBBYPWyLLGuEMOaEwgJ1gqtE5wbub_RzIGJanD4af3e7W5PkGP9tN0_KlEjFgs1rXE3ifQOYmbx2O79XbeDejas-61Hjw8QtyoN=w2400"/>
+								<div class="tooltip">Introduction to RT-qPCR and Gene Expression</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="biomedical">
+							<a href="https://drive.google.com/file/d/1k9ecKrqMMeRCKnYZ2v-4M62NmNXW_ULC/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczMJVGYDeqZhPkYxaqwAzSaSydHtWCNYbhslxdHoXX603GcnEmNfE40qCYHarEO4djqHrUsgCmswMLdEJI08ft4j-p9YN8ghHfgy60MKxtk3tlSG1VD5=w2400"/>
+								<div class="tooltip">Advanced Genomics Techniques for PCR Controls</div>
+							</a>
+						</div>
+						
+						<!-- AI & ML Certificates -->
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1LiJINoMTR9hAHpLMqMFLvMWG45hCWd7O/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczOfcASEgQCAt8RE_2b5WpDVpNs8I7aNpguKIt78xuQYEZAicDA304VUgHbUIrT0H15JUWZCARfN8Pv3kilAAr8t9sBTmGG8MCGALj-RaK4Sv9Uappfq=w2400"/>
+								<div class="tooltip">Introduction to Deep Learning with Pytorch</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1RH63MSJ3ujbW6PvqfouLTcWAlKR1i1fa/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczPKne_jMVi0bKLyoAuogoLySs3ULUDohaPWIDkexmla_dujU0oW3OtMwl-jPnqb2-ZKBvPCKKw246wq4v2zQi_odTKKS-68TErXq9RzK38ZR41iznMA=w2400"/>
+								<div class="tooltip">Gemini API by Google</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/14n4bfNjA-xsaDY9C91Yx4s7ehSM-m4Ve/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ABLVV860TX4O7qWQnV3NTTwwbCfVrXSYnfP0WYtYHc2VxMgHboPD6ZgYtr1zEYNAorTz2HJM9wmKMlXmhmZMoLX97FuGvCPWEktQHH-CJhovcFk5vrsDI3WN=w2400"/>
+								<div class="tooltip">Machine Learning</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/13zgposG21_Qatfs41dYYhwg8ojaQo3UV/view?usp=sharing"  target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ADCreHfElq38e49MyT6rRkxN8NcN5gqtHMDS0IClgFyQHePqIB_ZodpFhWH7qlUNSNZWsAY7hSJJsvbnQ2ncyf6v3YDLkX2j7Nq3DUoiQs_IFnN2wPZp412z=w2400">
+								<div class="tooltip">Retrieval API Webinar</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1trba2YNVqpgotTDVgKL344CLJyh3kZU9/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ABLVV85C_C5ntqdNvlZwCXAZ8aQYWJi7SA7mzwBBsWRJmTQK3nMK9-BGaDiw9seAJk5CR72BynSG_muUjWzU-xdbipKyEXB6LKzYr6KpeKIY88O1_74sX_CC=w2400"/>
+								<div class="tooltip">Introduction to TensorFlow in Python</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1faJJpD0ilayC2dRVDq7N_vJUxntdJDCp/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ADCreHdPq7l3OnRpsQbiS4Pbd-1F9WtFW-mzW_0BcvKrjNhCLb2A3WXrWFbBB6PZlRKti06V_ySFn2pJjkWcnjBmhPsTuErUNo1SiRB7KxTug_gYCZ59V0Y8=w2400"/>
+								<div class="tooltip">Introduction to Deep Learning in Python</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1xMl0Jt5dMyQe_S44tOWp1CGQCawerhG6/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ADCreHfeFtZA95hjwmL5GFS7s_d0iDrMGEYfF6I8Vr0J89ijt-qJLuN1KuCx7c7wL6lpdT51qffF5Znuw87EscnXxR3NN9HcH6ynCqSHk7jRlRwn3bV9mfjO=w2400"/>
+								<div class="tooltip">Machine Learning with Tree-Based Models in Python</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1-sO1ZULUZ8_9KGY0Nb8Kq22qMHtr9Y9B/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ADCreHdzvqiXS5yRisLukxjsv3LTvJ6eTOsBmmcs8aIx-E2VnZu_HU30dj6RZKcoIVREFXvvrrzq7xxcoAILU47QmOfHjJhBy2x4_4nx0NOCmIps1jzHCBe6=w2400"/>
+								<div class="tooltip">Linear Classifiers in Python</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1AHRInVj3SsUCSBMPwg2J-6uKIJDv8u8U/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ABLVV867BM3CRBNN3O5EtBtY98ZWI6B0C85r9zJgRY9NNg2sRtOujFsrNvzSdG0Gkx06GXz5dmM8LdneVGxXzAgesype6xcECiyGAJvEQ4qnIBGtavpe8zHJ=w2400"/>
+								<div class="tooltip">Unsupervised Learning in Python</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1674Pd9S-m055OGCLwq7_tid6gmNtecVr/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ADCreHe10KhaP8v1HwMcwdjKJYQAMtsKmF_ie4y2B5EtR3VROSIwRXjgZCqLVbf2QV9ujoyHNbj-DdVhqWwvr5e5CRVduEGSmCQSAephfoLALmXlP3v9g8uL=w2400"/>
+								<div class="tooltip">Supervised Learning with scikit-learn</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1aRlTD64Rj1bEnUkuYoCZYJexo8DNMOTw/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ABLVV86Bv5CPyrT-nvHKfNmHzYr8dQg5McNjiqJS3mkFBa4g_17PirzYgvQhpz4-5zxRIS6DlezaUXn2eXYqyVTh7b5Cdod-FM5MLxFYmp_XtGIpLanLeUcq=w2400"/>
+								<div class="tooltip">Introduction to Artificial Intelligence</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1oknEFNgda2RaF5_U-oMaYqOItwy01L71/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ABLVV860o2CJu_dsSWwgp6M5r7iDIO-3fIYsfzkx7O-W4XFrLeDgj1AcrWFR9_4lFd2poU4_GYZEj5ozKIPYRG4A4Z1X05p0J4USFhsslFsWnS7LSGUowtn6=w2400"/>
+								<div class="tooltip">Ethics in the Age of Generative AI</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1v7sZnClMalq2UMkSMQWiuEj_ZfynOV-l/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ABLVV87bGPJ3Js8YymkYGSZSKfP_kIO3XpWnqVZvH0khg0bVvU_VGdd9GyhnM0_sJE6yG7CDbu9Z7SlQbiBMjoBzNMgpopCdscdguAMLvVnXQTZYuKX3xQWj=w2400"/>
+								<div class="tooltip">Streamlining Your Work with Microsoft Bing Chat</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1vB1WVzgfPDj5gYSHvQuToWA3e-VszvC8/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ABLVV85vTi4u1_QU12b8hNcfN0dpbjtxpij1_YLsK9Xsm_1YoeEQi7ffQBYgaZ6uad7DBDA__PJmpq1_UF26HW0QXjCHD87rxgW75lNI23_Db7h3cD3xGQkS=w2400"/>
+								<div class="tooltip">Gen AI: The Evolution of Thoughful Online Search</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1E60MCuXZvgvJUp35X6Q_PI2G9hUwWV2d/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ABLVV85Cj2tmWrh6QxkoGVNuyVNh1F6-70rQ8bA-xLmlFyHO3nitLbzH42I3zRCTq97ZdJAV0YGxafSsi7qTs4ZlKbmAaDUy5E7qHiAXtnnDgcWNarnkzY54=w2400"/>
+								<div class="tooltip">Business Analysis Foundations</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1SehzS98Dchjl9Y3-XJQ0JMGuCJZCcr_E/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ABLVV86nmHtavMStpE2a_juUiLK9pCMVqiHjy2UTSB-6unJtN1dUeFvuTLbepVHSJqU5vQmX38UM6zaZY92HtvEUuIDqjRqEORP0NUzKeWgdnGwIrhCh5LLH=w2400"/>
+								<div class="tooltip">What is Generative AI?</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1NL-Nh2M3DG-TeVr0IEBNCdCQrKxTGCS5/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/YmMQZTafULQaRA4GnH6wBvqAxSw8SPOSW0p-rbMYNwlzPmz44rDoOO10VoR1_u_6NKifo_VkJtMMKR6mIJ7FKp6LRVDhuJ9L1exikGXtxbKNKBYGcYZ1lJ_zeRWXkKKcfQe_DdFpTck=w2400"/>
+								<div class="tooltip">Google IT Automation with Python</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1EZj894ha26x0xTR6gXz8NswfqpY46Fuq/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/dcgQIwQlZJUxp-F1erqUJVA82GpfFHscQae64rfilSETXljbtAe2t3PZDrKRpa6e9O0IYzKKhiHmOUS0-raMrrHgsRD7g3CRZNpGJzQobvN30vAs0xWszKesg7LIyWjL0TCtzxuW7yA=w2400"/>
+								<div class="tooltip">Google Data Analytics</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1SbXJTDa6MUqC3ZRMW8hdfuEyZdBhfn_v/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/ARtd9qblEr5NuHnaBVk_H8vU3TUBljM2pq1-RVv4FL1pXlR9McTWN4KwQx50WLCi8mBgb76nci1-R6cn7BzmAsaUaNb5_YSfoBoWCVy8goo6Zt4puKcKvNKe2HIIUgy7x-XLwyoBXiE=w2400"/>
+								<div class="tooltip">Programming Foundation Fundamentals</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/17x_gN-XHKJiXlgGqiB6Y5ePsipGbcLN2/view?usp=share_link" target="_blank">
+								<img src="https://lh3.googleusercontent.com/FoxpBhqaXO-lLHf44fMYEJ5fVDt3vJoZ_MxJcBPOxl6evhh2jOZbnQbMoLegrCadlaaJ5gzNmZ5Dcc7V2JBCJiuk9NX1S3bvV5bPk39njYXmsQxd4U8qqWzl8yCubPCkHOCTUAscaxw=w2400"/>
+								<div class="tooltip">Data Analysis Fundamentals</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1og1VjFuL9YdyZdaWclvaUQUKlVoMY7og/view?usp=share_link" target="_blank">
+								<img src="https://lh3.googleusercontent.com/6yzWriBI7bEeuJyYZz4PXvWbq4lOjsltoniGwjy2aUCwu-7rI4EI8yrRqbf9VOGrxUkiEjabqH-LX_OhEU9wDTuy5mmF4WiXVeytJT8kjJYKU3L9KjsVBj72IhjMvuQk6ji8uT2cQH4=w2400">
+								<div class="tooltip">Python Fundamentals</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="ai">
+							<a href="https://drive.google.com/file/d/1HaSlOWYS_EoX2DHTMW9rkIy95pzYkPRt/view?usp=sharing"  target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczNsO5OCheM8x5Ahjh5jjhsRGQQBxri17sMaubT7YEossNawSn3scNsxZffG8TWzF2UnkBIYSA7mUghtSulrPkRoRbtOhbHAgKW2hf1CMF6IuR6Hh3t2=w2400">
+								<div class="tooltip">Building Your Own Chat with GPT 4</div>
+							</a>
+						</div>
+						<!-- Cloud Certificates -->
+						<div class="cert-item" data-category="cloud">
+							<a href="https://drive.google.com/file/d/1rSnTscZOJlIUKvSM-6wzkzYXkhu0U9Tz/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ABLVV85VpT4qALU9VNKzfWmgtRWR4Tyg1AEUknniA1oqkjTEV87IBMhXbPJ4qnJ3JQ3OeTncD9T0vQQY-by53xDcsqm_3aNTqawAbR5r1ZbZuaLey-1MJ2S1=w2400"/>
+								<div class="tooltip">AWS Cloud Practitioner Essentials</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="cloud">
+							<a href="https://drive.google.com/file/d/1Ec4DxH5pg99B9IaocCqsEZLjD-ICmZIq/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ADCreHdu_KXu7gsN0UYY4QTfoUGg29jM70Gjk6MoVDk3aSDtfaqy3HGREZBpVYpEY9OhjtpokF9cSHlVDUT0TTL2-Nvid85BaW6ZjcwGRtjiZrtpFdI3fMTr=w2400">
+								<div class="tooltip">Demystify Generative AI</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="cloud">
+							<a href="https://drive.google.com/file/d/1K-yL3y4kct2T6pSh6Z6s7x8b6qIYKS2O/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ADCreHcwnOFp7rUuEMjU2ygxMv2kUXZJ1aKrcHaCoKd4jMmEmAvbtYx-yVOBMp8arILDfXAQTdcq6GA3lWhVZpu0DF1ncI8ZJ-G8P89WAJoShWO7AVBbZ_sq=w2400">
+								<div class="tooltip">Azure Data Fundamentals</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="cloud">
+							<a href="https://drive.google.com/file/d/16JoutOKSk9aNe3QmmB9Nt2EGLV-7s6_u/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AJFCJaXsXzjqJhQQasuS5o7kdwBMBXKN3KrJBFMlq6ruwmt0iMieB2zTH1ceM3J0ZYSaK1P3oLxDrIMjhPg-VI1UdbC51zn40wN5OOJ_wqoK8UBnRg1XmfCc=w2400">
+								<div class="tooltip">Google Cloud Fundamentals</div>
+							</a>
+						</div>
+						
+						<!-- Cybersecurity Certificates -->
+						<div class="cert-item" data-category="security">
+							<a href="https://drive.google.com/file/d/1Ix_4E_dzrMkiOVxaowLuKZ11Ce0HeU89/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczMjrRSdCBd1smQPHJgCfAWUiD3Mfj-9LQwZjD5pl77pv1NyQyfgNO1WicsCACRqjR_nFsa0MG4b0x-GLFt71ii1tZuriHHhZ9v_oGghhDNbaOt4iRdn=w2400"/>
+								<div class="tooltip">Foundations of Cybersecurity</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="security">
+							<a href="https://drive.google.com/file/d/1UzPjow1MpV4_av8gD-Iu1kmcwGAGS8nc/view?usp=share_link" target="_blank">
+								<img src="https://lh3.googleusercontent.com/6xr94a_b35_lkWXrXspzk3_Cs_gtfzE_vd8XM67CypB5GKmxjvJP-g_lJHE2mB7Y0M-dtAy-qTZjfUcVQp2Ok2wu1sqFOIkarnZynA5hjNFuP9FHm54sAXVkpUVz06muWXYb0aS60sA=w2400">
+								<div class="tooltip">Introduction to Cybersecurity</div>
+							</a>
+						</div>
+
+
+						<!-- Extra-Curricular Certificates -->
+						<div class="cert-item" data-category="extra">
+							<a href="https://drive.google.com/file/d/1Pvqb1JCAelW92yk4X10MhnkCRQ6UelyQ/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczPbJEIr8GKtd9uACCGeWUT6F2nqooGXmAxBt3IzvJ9eVOE0i3jrb8iwuX4nQ5Z4i_3dLpuUmXTYaIHUFfuWqEcgByU8uSdCGL14Z16V2pYFh6W5rq26=w2400">
+								<div class="tooltip">Hair donation for cancer patients</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="extra">
+							<a href="https://drive.google.com/file/d/1sj1moehAgI5OwqVnG5D1HMLp6oZiCWBo/view?usp=share_link" target="_blank">
+								<img src="https://lh3.googleusercontent.com/uNmS3eEhuNCy8YSNcq3CMwNtIdbyrIG90wvrufpXa1tF8RCKwE7hW8vIFi9LMw9EKvhV-4JgCpGYS2QP6T_im06IAx_7oZLQ6BElnBjnAQtLehNlkzikJz9CtPJrzzZhSzi36rAlbk0=w2400">
+								<div class="tooltip">High contribution in extracurricular activities</div>
+							</a>
+						</div>
+						<div class="cert-item" data-category="extra">
+							<a href="https://drive.google.com/file/d/1Y-rS4n9ra02kQnSjZquDgLHTyO3qRWdj/view?usp=sharing" target="_blank">
+								<img src="https://lh3.googleusercontent.com/pw/ADCreHcYEzZyzQ45VyWnVjkqOIiLEdhs9MK1i4VkJ0fPof1x35LtPCUlACgS0RNbt5_oPmvIYhosiguIO1CU5ISSuE5kaazq2yT2pnV-nn74LNzEDxW4QUEE=w2400">
+								<div class="tooltip">IEEE Open Access Symposium</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			
+			<!-- Photography
+			<section id="photograph" class="section active">
+				<div class="container">
+					<h2 class="animate">Photography Work</h2>
+					<div class="animate delay-1">
+						<p>My work is about using the power of visual storytelling to connect with people on a deeper level. Each picture I take is a window into a moment in time, a glimpse into the lives of the subjects I photograph.</p>
+						<p>By focusing on the stories behind the images, I strive to create a bridge between the viewer and the subject, allowing people to see the world through a different lens and gain a deeper appreciation for the diversity and complexity of the human experience.</p>
+					</div>
+					
+					<div class="photo-gallery animate delay-2">
+						Photo portfolio embedded here 
+						<div class="photo-item">
+							<iframe src="https://online.fliphtml5.com/jvhqy/cegy/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="width: 100%; height: 400px;"></iframe>
+						</div>
+					</div>
+				</div>
+			</section>
+		-->
+			<!-- Instagram -->
+			<section id="instagram" class="section active">
+				<div class="container">
+					<h2 class="animate">Instagram Page</h2>
+					<div class="animate delay-1">
+						<p>I have created this page specifically for aspiring AI learners who are unsure of where to start and how to approach their studies. As someone who has also self-taught in this field, I wanted to create a page that covers the knowledge I have acquired.</p>
+						<p>This Instagram page provides a comprehensive learning journey, taking you from the fundamentals to advanced concepts in Machine Learning and Data Science. The content is designed to be easily understandable, minimizing the mathematical complexity and emphasizing practical implementation.</p>
+					</div>
+					
+					<div class="instagram-embed animate delay-2">
+						<!-- Instagram posts would go here -->
+						<div class="instagram-post">
+							<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/CvZuscpSopX/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
+								<div style="padding: 16px;">
+									<a href="https://www.instagram.com/p/CvZuscpSopX/?utm_source=ig_embed&amp;utm_campaign=loading" style="background: #FFFFFF; line-height: 0; padding: 0 0; text-align: center; text-decoration: none; width: 100%;" target="_blank">
+										<div style="display: flex; flex-direction: row; align-items: center;">
+											<div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div>
+											<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div>
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div>
+											</div>
+										</div>
+										<div style="padding: 19% 0;"></div>
+										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;"></div>
+										<div style="padding-top: 8px;">
+											<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
+										</div>
+									</a>
+								</div>
+							</blockquote>
+						</div>
+						
+						<div class="instagram-post">
+							<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/C3iCwaXy02j/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
+								<div style="padding: 16px;">
+									<a href="https://www.instagram.com/p/C3iCwaXy02j/?utm_source=ig_embed&amp;utm_campaign=loading" style="background: #FFFFFF; line-height: 0; padding: 0 0; text-align: center; text-decoration: none; width: 100%;" target="_blank">
+										<div style="display: flex; flex-direction: row; align-items: center;">
+											<div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div>
+											<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div>
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div>
+											</div>
+										</div>
+										<div style="padding: 19% 0;"></div>
+										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;"></div>
+										<div style="padding-top: 8px;">
+											<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
+										</div>
+									</a>
+								</div>
+							</blockquote>
+						</div>
+						
+						<div class="instagram-post">
+							<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/C4hRXSotwoY/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
+								<div style="padding: 16px;">
+									<a href="https://www.instagram.com/p/C4hRXSotwoY/?utm_source=ig_embed&amp;utm_campaign=loading" style="background: #FFFFFF; line-height: 0; padding: 0 0; text-align: center; text-decoration: none; width: 100%;" target="_blank">
+										<div style="display: flex; flex-direction: row; align-items: center;">
+											<div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div>
+											<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div>
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div>
+											</div>
+										</div>
+										<div style="padding: 19% 0;"></div>
+										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;"></div>
+										<div style="padding-top: 8px;">
+											<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
+										</div>
+									</a>
+								</div>
+							</blockquote>
+						</div>
+						<div class="instagram-post">
+							<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/C9NMmXQBUfb/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
+								<div style="padding: 16px;">
+									<a href="https://www.instagram.com/p/C9NMmXQBUfb/?utm_source=ig_embed&amp;utm_campaign=loading" style="background: #FFFFFF; line-height: 0; padding: 0 0; text-align: center; text-decoration: none; width: 100%;" target="_blank">
+										<div style="display: flex; flex-direction: row; align-items: center;">
+											<div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div>
+											<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div>
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div>
+											</div>
+										</div>
+										<div style="padding: 19% 0;"></div>
+										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;"></div>
+										<div style="padding-top: 8px;">
+											<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
+										</div>
+									</a>
+								</div>
+							</blockquote>
+						</div>
+						<div class="instagram-post">
+							<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/C9hvfD1vpH0/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
+								<div style="padding: 16px;">
+									<a href="https://www.instagram.com/p/C9hvfD1vpH0/?utm_source=ig_embed&amp;utm_campaign=loading" style="background: #FFFFFF; line-height: 0; padding: 0 0; text-align: center; text-decoration: none; width: 100%;" target="_blank">
+										<div style="display: flex; flex-direction: row; align-items: center;">
+											<div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div>
+											<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div>
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div>
+											</div>
+										</div>
+										<div style="padding: 19% 0;"></div>
+										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;"></div>
+										<div style="padding-top: 8px;">
+											<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
+										</div>
+									</a>
+								</div>
+							</blockquote>
+						</div>
+						<div class="instagram-post">
+							<blockquote class="instagram-media" style="background: #FFF; border: 0; border-radius: 3px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width: 540px; min-width: 326px; padding: 0; width: calc(100% - 2px);" data-instgrm-permalink="https://www.instagram.com/p/C-Yh95KShLf/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
+								<div style="padding: 16px;">
+									<a href="https://www.instagram.com/p/C-Yh95KShLf/?utm_source=ig_embed&amp;utm_campaign=loading" style="background: #FFFFFF; line-height: 0; padding: 0 0; text-align: center; text-decoration: none; width: 100%;" target="_blank">
+										<div style="display: flex; flex-direction: row; align-items: center;">
+											<div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div>
+											<div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;">
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div>
+												<div style="background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div>
+											</div>
+										</div>
+										<div style="padding: 19% 0;"></div>
+										<div style="display: block; height: 50px; margin: 0 auto 12px; width: 50px;"></div>
+										<div style="padding-top: 8px;">
+											<div style="color: #3897f0; font-family: Arial,sans-serif; font-size: 14px; font-style: normal; font-weight: 550; line-height: 18px;">View this post on Instagram</div>
+										</div>
+									</a>
+								</div>
+							</blockquote>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<!-- Footer -->
+			<div id="footer">
+				<div class="container">
+					<div class="social-links">
+						<a href="https://www.linkedin.com/in/kimnguyen2002/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+						<a href="https://github.com/kimnguyen2002" target="_blank"><i class="fab fa-github"></i></a>
+						<a href="mailto:kimnguyen.developer@gmail.com"><i class="fas fa-envelope"></i></a>
+					</div>
+					<div class="copyright">
+						&copy; Kim Nguyen
+					</div>
+				</div>
 			</div>
+		</div>
+
+		<!-- Project Modal -->
+		<div id="projectModal" class="modal">
+			<span class="close-modal">&times;</span>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 id="modal-title">Project Title</h2>
+				</div>
+				<div class="modal-body">
+					<div class="modal-images">
+						<!-- Images added dynamically -->
+					</div>
+					<div id="modal-description">
+						<!-- Description added dynamically -->
+					</div>
+					<div id="modal-links">
+						<!-- Links added dynamically -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="certificateModal" class="modal">
+			<span class="close-modal">&times;</span>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 id="cert-modal-title">Certificate Title</h2>
+				</div>
+				<div class="modal-body">
+					<div class="modal-images">
+						<!-- Certificate image -->
+						<img id="cert-modal-image" src="" alt="Certificate" />
+					</div>
+					<div id="cert-modal-description">
+						<!-- Certificate description -->
+					</div>
+					<div id="cert-modal-links">
+						<!-- Link to full certificate -->
+						<a id="cert-modal-link" href="" target="_blank" class="button">View Full Certificate</a>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+                
+			// Get elements
+			const badgeContainer = document.querySelector('.badge-container');
+			const badge = document.getElementById('interactiveBadge');
+			
+			// Create SVG for lanyard
+			const svgNS = "http://www.w3.org/2000/svg";
+			const lanyardSvg = document.createElementNS(svgNS, "svg");
+			lanyardSvg.setAttribute("width", "100%");
+			lanyardSvg.setAttribute("height", "100%");
+			lanyardSvg.style.position = "absolute";
+			lanyardSvg.style.top = "0";
+			lanyardSvg.style.left = "0";
+			lanyardSvg.style.pointerEvents = "none";
+			lanyardSvg.style.zIndex = "-1";
+			
+			// Create lanyard elements with gradient
+			const lanyardGradient = document.createElementNS(svgNS, "linearGradient");
+			lanyardGradient.setAttribute("id", "lanyardGradient");
+			lanyardGradient.setAttribute("gradientTransform", "rotate(90)");
+			
+			const stop1 = document.createElementNS(svgNS, "stop");
+			stop1.setAttribute("offset", "0%");
+			stop1.setAttribute("stop-color", "#006d96");
+			
+			const stop2 = document.createElementNS(svgNS, "stop");
+			stop2.setAttribute("offset", "100%");
+			stop2.setAttribute("stop-color", "#008CBA");
+			
+			lanyardGradient.appendChild(stop1);
+			lanyardGradient.appendChild(stop2);
+			
+			// Create defs element to hold the gradient
+			const defs = document.createElementNS(svgNS, "defs");
+			defs.appendChild(lanyardGradient);
+			lanyardSvg.appendChild(defs);
+			
+			// Create lanyard path
+			const lanyardPath = document.createElementNS(svgNS, "path");
+			lanyardPath.setAttribute("stroke", "url(#lanyardGradient)");
+			lanyardPath.setAttribute("stroke-width", "15");
+			lanyardPath.setAttribute("fill", "none");
+			lanyardPath.setAttribute("stroke-linecap", "round");
+			
+			// Add shadow filter for lanyard
+			const filter = document.createElementNS(svgNS, "filter");
+			filter.setAttribute("id", "lanyardShadow");
+			filter.setAttribute("x", "-20%");
+			filter.setAttribute("y", "-20%");
+			filter.setAttribute("width", "140%");
+			filter.setAttribute("height", "140%");
+			
+			const feGaussianBlur = document.createElementNS(svgNS, "feGaussianBlur");
+			feGaussianBlur.setAttribute("in", "SourceAlpha");
+			feGaussianBlur.setAttribute("stdDeviation", "3");
+			
+			const feOffset = document.createElementNS(svgNS, "feOffset");
+			feOffset.setAttribute("dx", "0");
+			feOffset.setAttribute("dy", "4");
+			feOffset.setAttribute("result", "offsetblur");
+			
+			const feComponentTransfer = document.createElementNS(svgNS, "feComponentTransfer");
+			const feFuncA = document.createElementNS(svgNS, "feFuncA");
+			feFuncA.setAttribute("type", "linear");
+			feFuncA.setAttribute("slope", "0.3");
+			feComponentTransfer.appendChild(feFuncA);
+			
+			const feMerge = document.createElementNS(svgNS, "feMerge");
+			const feMergeNode1 = document.createElementNS(svgNS, "feMergeNode");
+			const feMergeNode2 = document.createElementNS(svgNS, "feMergeNode");
+			feMergeNode2.setAttribute("in", "SourceGraphic");
+			feMerge.appendChild(feMergeNode1);
+			feMerge.appendChild(feMergeNode2);
+			
+			filter.appendChild(feGaussianBlur);
+			filter.appendChild(feOffset);
+			filter.appendChild(feComponentTransfer);
+			filter.appendChild(feMerge);
+			defs.appendChild(filter);
+			
+			lanyardPath.setAttribute("filter", "url(#lanyardShadow)");
+			
+			// Create lanyard clip
+			const lanyardClip = document.createElementNS(svgNS, "circle");
+			lanyardClip.setAttribute("cx", "0");
+			lanyardClip.setAttribute("cy", "-60");
+			lanyardClip.setAttribute("r", "10");
+			lanyardClip.setAttribute("fill", "#555");
+			lanyardClip.setAttribute("filter", "url(#lanyardShadow)");
+			
+			// Append SVG elements
+			lanyardSvg.appendChild(lanyardPath);
+			lanyardSvg.appendChild(lanyardClip);
+			
+			// Insert the lanyard SVG before the badge
+			if (badgeContainer) {
+				badgeContainer.insertBefore(lanyardSvg, badge);
+			}
 
+			// State variables
+			let isDragging = false;
+			let restY = 200; // Initial vertical position
+			let currentY = restY;
+			let velocityY = 0;
+			let velocityX = 0; // Added X velocity for more chaotic movement
+			let currentX = 0;
+			let targetRotationX = 0;
+			let targetRotationY = 0;
+			let currentRotationX = 0;
+			let currentRotationY = 0;
+			let anchorX = 0; // X position of lanyard anchor (center of container)
+			let anchorY = -60; // Y position of lanyard anchor (top of container)
+			let lastMouseY = 0;
+			let lastMouseX = 0;
+			let mouseVelocityY = 0;
+			let mouseVelocityX = 0;
+			let isInitialAnimation = true;
+			
+			// Constants for physics
+			const springStrength = 0.02; // Lower value for more bounce
+			const friction = 0.96; // Higher value for more sustained oscillation
+			const gravity = 0.2;
+			const maxStretch = 350; // Maximum stretch distance
+			const chaosFactorX = 0.5; // Factor for horizontal chaotic movement
+			const chaosFactorY = 0.2; // Factor for vertical chaotic movement
+			
+			// Function to create particles for visual effect
+			function createParticle() {
+				if (!badge || !badgeContainer) return;
+				
+				// Only create particles when the badge is moving fast enough
+				const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+				if (speed < 3 && !isDragging) return;
+				
+				const particle = document.createElement('div');
+				particle.className = 'badge-particle';
+				
+				// Random position around the badge
+				const badgeWidth = badge.offsetWidth;
+				const badgeHeight = badge.offsetHeight;
+				const x = Math.random() * badgeWidth - badgeWidth/2;
+				const y = Math.random() * badgeHeight - badgeHeight/2;
+				
+				// Create a random direction for the particle
+				const angle = Math.random() * Math.PI * 2;
+				const distance = Math.random() * 50 + 20;
+				const varX = Math.cos(angle) * distance;
+				const varY = Math.sin(angle) * distance;
+				
+				// Set custom properties for the animation
+				particle.style.setProperty('--x', `${varX}px`);
+				particle.style.setProperty('--y', `${varY}px`);
+				
+				particle.style.left = (anchorX + x) + 'px';
+				particle.style.top = (currentY + y) + 'px';
+				
+				// Random size
+				const size = Math.random() * 3 + 2;
+				particle.style.width = size + 'px';
+				particle.style.height = size + 'px';
+				
+				// Random colors from blue to white
+				const blueAmount = Math.floor(Math.random() * 155) + 100;
+				particle.style.backgroundColor = `rgba(${blueAmount}, ${blueAmount + 20}, 255, 0.8)`;
+				
+				// Random animation duration
+				const duration = Math.random() * 2 + 1;
+				particle.style.animationDuration = duration + 's';
+				
+				badgeContainer.appendChild(particle);
+				
+				// Remove particle after animation
+				setTimeout(() => {
+				if (particle.parentNode) {
+					particle.parentNode.removeChild(particle);
+				}
+				}, duration * 1000);
+			}
+			
+			// Initialize badge position
+			function initBadge() {
+				if (!badgeContainer || !badge) return;
+				
+				// Set the anchor X position to the center of the container
+				anchorX = badgeContainer.offsetWidth / 2;
+				currentX = anchorX;
+				
+				// Set initial badge position
+				badge.style.transform = `translate(-50%, -50%) rotateX(0deg) rotateY(0deg)`;
+				badge.style.left = `${anchorX}px`;
+				badge.style.top = `${currentY}px`;
+				
+				// Start with the badge above the screen
+				if (isInitialAnimation) {
+				currentY = -200;
+				velocityY = 3;
+				isInitialAnimation = false;
+				
+				// Add some random sideways movement
+				velocityX = (Math.random() - 0.5) * 5;
+				}
+				
+				// Draw initial lanyard
+				updateLanyard();
+			}
+			
+			// Update lanyard path
+			function updateLanyard() {
+				if (!lanyardPath) return;
+				
+				const startX = anchorX;
+				const startY = anchorY;
+				const endX = currentX; // Allow horizontal movement
+				const endY = currentY;
+				
+				// Calculate control points for a nice curve
+				const distance = Math.sqrt(Math.pow(endY - startY, 2) + Math.pow(endX - startX, 2));
+				const dx = endX - startX;
+				const dy = endY - startY;
+				
+				// Create more natural curve based on distance
+				const curve = Math.min(0.5, distance / 800);
+				
+				// Mid-point with slight offset for natural curve
+				const midX = (startX + endX) / 2 - dy * curve;
+				const midY = (startY + endY) / 2 + dx * curve;
+				
+				// More control points for smoother curve
+				const ctrl1X = startX + (midX - startX) * 0.5;
+				const ctrl1Y = startY + (midY - startY) * 0.5;
+				
+				const ctrl2X = midX + (endX - midX) * 0.5;
+				const ctrl2Y = midY + (endY - midY) * 0.5;
+				
+				// Set the path with multiple control points for a realistic lanyard curve
+				lanyardPath.setAttribute('d', 
+				`M${startX},${startY} C${ctrl1X},${ctrl1Y} ${midX},${midY} ${ctrl2X},${ctrl2Y} S${endX},${endY} ${endX},${endY}`
+				);
+			}
+			
+			// Update badge position and rotation
+			function updateBadge() {
+				if (!badge) return;
+				
+				// Update position
+				badge.style.left = `${currentX}px`;
+				badge.style.top = `${currentY}px`;
+				
+				// Smooth rotation update
+				currentRotationX += (targetRotationX - currentRotationX) * 0.1;
+				currentRotationY += (targetRotationY - currentRotationY) * 0.1;
+				
+				// Apply transformation with both X and Y rotation
+				badge.style.transform = `translate(-50%, -50%) rotateX(${currentRotationX}deg) rotateY(${currentRotationY}deg)`;
+			}
+			
+			// Handle mouse down
+			function handleMouseDown(e) {
+				if (!badgeContainer) return;
+				
+				isDragging = true;
+				badge.style.cursor = 'grabbing';
+				
+				const rect = badgeContainer.getBoundingClientRect();
+				lastMouseX = e.clientX - rect.left;
+				lastMouseY = e.clientY - rect.top;
+				
+				// Prevent default to avoid text selection
+				e.preventDefault();
+			}
+			
+			// Handle mouse move
+			function handleMouseMove(e) {
+				if (!isDragging || !badgeContainer) return;
+				
+				const rect = badgeContainer.getBoundingClientRect();
+				const mouseX = e.clientX - rect.left;
+				const mouseY = e.clientY - rect.top;
+				
+				// Calculate mouse velocity for more dynamic movement
+				mouseVelocityX = mouseX - lastMouseX;
+				mouseVelocityY = mouseY - lastMouseY;
+				
+				lastMouseX = mouseX;
+				lastMouseY = mouseY;
+				
+				// Allow some horizontal movement for more natural feel
+				// But still constrain to center area for vertical alignment
+				const xLimit = 50; // How far from center the badge can move horizontally
+				const targetX = anchorX + (mouseX - anchorX) * 0.2; // Move partially toward mouse X
+				currentX = Math.max(anchorX - xLimit, Math.min(anchorX + xLimit, targetX));
+				
+				// Vertical movement
+				currentY = mouseY;
+				
+				// Limit how far the badge can be dragged
+				const dx = currentX - anchorX;
+				const dy = currentY - anchorY;
+				const distance = Math.sqrt(dx*dx + dy*dy);
+				
+				if (distance > maxStretch) {
+				const angle = Math.atan2(dy, dx);
+				currentX = anchorX + Math.cos(angle) * maxStretch;
+				currentY = anchorY + Math.sin(angle) * maxStretch;
+				}
+				
+				// Calculate rotation based on movement
+				targetRotationX = mouseVelocityY * 0.5;
+				targetRotationY = -mouseVelocityX * 0.5;
+				
+				// Update lanyard and badge
+				updateLanyard();
+				updateBadge();
+				
+				// Create particles during fast movement
+				if (Math.abs(mouseVelocityX) > 5 || Math.abs(mouseVelocityY) > 5) {
+				createParticle();
+				}
+				
+				e.preventDefault();
+			}
+			
+			// Handle mouse up
+			function handleMouseUp() {
+				if (isDragging) {
+				isDragging = false;
+				badge.style.cursor = 'grab';
+				
+				// Apply mouse velocity to badge for momentum
+				velocityX = mouseVelocityX * 0.5;
+				velocityY = mouseVelocityY * 0.5;
+				
+				// Add some chaos to the release
+				velocityX += (Math.random() - 0.5) * 5;
+				velocityY += (Math.random() - 0.5) * 5;
+				
+				// Create particles on release
+				for (let i = 0; i < 10; i++) {
+					setTimeout(() => createParticle(), i * 50);
+				}
+				}
+			}
+			
+			// Animation loop
+			function animate() {
+				if (!isDragging) {
+				// Calculate distance from rest position
+				const dx = currentX - anchorX;
+				const dy = currentY - restY;
+				
+				// Apply spring forces
+				const springForceX = dx * springStrength;
+				const springForceY = dy * springStrength;
+				
+				// Add some chaotic movement
+				const chaosX = (Math.random() - 0.5) * chaosFactorX * (Math.abs(velocityY) > 1 ? 1 : 0);
+				const chaosY = (Math.random() - 0.5) * chaosFactorY * (Math.abs(velocityX) > 1 ? 1 : 0);
+				
+				// Update velocity with spring forces, gravity, chaos, and friction
+				velocityX -= springForceX;
+				velocityX += chaosX;
+				velocityX *= friction;
+				
+				velocityY -= springForceY;
+				velocityY += gravity;
+				velocityY += chaosY;
+				velocityY *= friction;
+				
+				// Update position
+				currentX += velocityX;
+				currentY += velocityY;
+				
+				// Check container boundaries
+				const badgeWidth = badge.offsetWidth;
+				const badgeHeight = badge.offsetHeight;
+				const containerWidth = badgeContainer.offsetWidth;
+				const containerHeight = badgeContainer.offsetHeight;
+				
+				// Constrain lanyard length
+				const dx2 = currentX - anchorX;
+				const dy2 = currentY - anchorY;
+				const distance = Math.sqrt(dx2*dx2 + dy2*dy2);
+				
+				if (distance > maxStretch) {
+					const angle = Math.atan2(dy2, dx2);
+					currentX = anchorX + Math.cos(angle) * maxStretch;
+					currentY = anchorY + Math.sin(angle) * maxStretch;
+					
+					// Bounce with energy loss
+					const normalX = dx2 / distance;
+					const normalY = dy2 / distance;
+					const dotProduct = velocityX * normalX + velocityY * normalY;
+					
+					velocityX -= dotProduct * normalX * 1.6; // Bounce energy
+					velocityY -= dotProduct * normalY * 1.6;
+				}
+				
+				// Calculate rotation based on velocity and position
+				targetRotationX = velocityY * 2;
+				targetRotationY = -velocityX * 2;
+				
+				// Create particles during fast movement
+				if (Math.abs(velocityX) > 5 || Math.abs(velocityY) > 5) {
+					createParticle();
+				}
+				
+				// Update lanyard and badge
+				updateLanyard();
+				updateBadge();
+				}
+				
+				requestAnimationFrame(animate);
+			}
+			
+			// Set up event listeners
+			if (badge && badgeContainer) {
+				// Mouse events
+				badge.addEventListener('mousedown', handleMouseDown);
+				document.addEventListener('mousemove', handleMouseMove);
+				document.addEventListener('mouseup', handleMouseUp);
+				
+				// Touch events for mobile
+				badge.addEventListener('touchstart', (e) => {
+				const touch = e.touches[0];
+				handleMouseDown({
+					clientX: touch.clientX,
+					clientY: touch.clientY,
+					preventDefault: () => e.preventDefault()
+				});
+				}, { passive: false });
+				
+				document.addEventListener('touchmove', (e) => {
+				if (isDragging) {
+					const touch = e.touches[0];
+					handleMouseMove({
+					clientX: touch.clientX,
+					clientY: touch.clientY,
+					preventDefault: () => e.preventDefault()
+					});
+				}
+				}, { passive: false });
+				
+				document.addEventListener('touchend', handleMouseUp);
+				
+				// Initialize and start animation
+				window.addEventListener('resize', initBadge);
+				initBadge();
+				animate();
+				
+				// Auto-sway animation
+				function autoSway() {
+				if (!isDragging && Math.abs(velocityX) < 0.5 && Math.abs(velocityY) < 0.5) {
+					// Add a gentle impulse for subtle swaying
+					velocityX += (Math.random() - 0.5) * 0.8;
+					velocityY += (Math.random() - 0.5) * 0.8;
+				}
+				setTimeout(autoSway, 5000); // Apply gentle force every 5 seconds
+				}
+				
+				// Start auto-sway after initial animation settles
+				setTimeout(autoSway, 3000);
+			}
+
+  
+				// Create particles periodically
+				setInterval(createParticle, 300);
+				
+				// Navigation
+				const navLinks = document.querySelectorAll('#nav a');
+				const sections = document.querySelectorAll('.section');
+				
+				// Active section on scroll
+				window.addEventListener('scroll', function() {
+					let current = '';
+					
+					sections.forEach(section => {
+						const sectionTop = section.offsetTop;
+						const sectionHeight = section.clientHeight;
+						if(pageYOffset >= (sectionTop - sectionHeight/3)) {
+							current = section.getAttribute('id');
+						}
+					});
+					
+					navLinks.forEach(link => {
+						link.classList.remove('active');
+						if(link.getAttribute('href').substring(1) === current) {
+							link.classList.add('active');
+						}
+					});
+				});
+				
+				// Smooth scroll for navigation links
+				navLinks.forEach(link => {
+					link.addEventListener('click', function(e) {
+						e.preventDefault();
+						
+						const targetId = this.getAttribute('href').substring(1);
+						const targetSection = document.getElementById(targetId);
+						
+						window.scrollTo({
+							top: targetSection.offsetTop,
+							behavior: 'smooth'
+						});
+						
+						// Update active link
+						navLinks.forEach(link => link.classList.remove('active'));
+						this.classList.add('active');
+					});
+				});
+				
+				// Handle certificate category filtering
+				const categoryTabs = document.querySelectorAll('.category-tab');
+				const certItems = document.querySelectorAll('.cert-item');
+
+				// Function to filter certificates by category
+				function filterCertificates(category) {
+				// Update active tab
+				categoryTabs.forEach(tab => {
+					if(tab.getAttribute('data-category') === category) {
+					tab.classList.add('active');
+					} else {
+					tab.classList.remove('active');
+					}
+				});
+				
+				// Filter certificates
+				certItems.forEach(item => {
+					if(item.getAttribute('data-category') === category) {
+					item.style.display = 'block';
+					} else {
+					item.style.display = 'none';
+					}
+				});
+				}
+
+				// Set up event listeners for tabs
+				categoryTabs.forEach(tab => {
+				tab.addEventListener('click', function() {
+					const category = this.getAttribute('data-category');
+					filterCertificates(category);
+				});
+				});
+
+				// Initial filter - set the first tab category as default
+				if(categoryTabs.length > 0) {
+				const defaultCategory = categoryTabs[0].getAttribute('data-category');
+				filterCertificates(defaultCategory);
+				}
+				
+				// Project modal functionality
+				const projectCards = document.querySelectorAll('.project-card');
+				const modal = document.getElementById('projectModal');
+				const modalClose = document.querySelector('.close-modal');
+				const modalTitle = document.getElementById('modal-title');
+				const modalDescription = document.getElementById('modal-description');
+				const modalImages = document.querySelector('.modal-images');
+				const modalLinks = document.getElementById('modal-links');
+				
+				// Project details
+				const projectDetails = {
+					'tocfl': {
+						title: 'Learning Mandarin with TOCFL',
+						description: `<p>This web platform was created to address the challenges of learning Traditional Chinese, especially for non-native speakers. As a language learner myself, currently studying in Taiwan, I recognized the need for a user-friendly resource tailored to the TOCFL (Test of Chinese as a Foreign Language) levels, from A1 to B1 proficiency. </p>
+						<br>
+						<p> The website offers a wide range of materials, including vocabulary, grammar lessons, practice exercises, and real-world language applications that go beyond textbook knowledge. </p>
+						<br>
+						<p> Developed with the support of Taiwanese teachers and professors, the content on this platform reflects authentic Taiwanese culture, local expressions, and practical language usage. The goal is not only to help learners prepare for the TOCFL exam but also to immerse them in the nuances of everyday communication in Taiwan.</p>`,
+						images: [
+							'https://lh3.googleusercontent.com/pw/AP1GczOL3lhvSMr-_LODx2R4L8Z9Nvt8KdImTbTo9Wtfc7VYese3uLQHi0oMM3CL_Vng-ThLVUTETPaDmxHAZcZ9XWxBXyMwrAAvlkLHfcwpPduh2YLZasBO=w2400',
+							'https://lh3.googleusercontent.com/pw/AP1GczMxjmCviath7aRd-OMm2vhBr23kY00N2fSxsIlwurN6xcQxF4hR_N0gtL6clnHj3sAv5mHGnQsoQl2iU-_vOXxyYxqaXep9U4RJB0i_qlSzj9PFkz5I=w2400'
+						],
+						links: [
+							{ title: 'View App', url: 'https://the-bithub.com/learning-tocfl/' },
+						]
+					},
+					'anemia': {
+						title: 'Anemia Diagnostic Assistant',
+						description: `<p>This project presents a web application designed to predict the risk of anemia using advanced machine learning techniques. By inputting their hematological parameters, users can receive an accurate anemia diagnosis based on a predictive model that has been rigorously trained.</p>
+						<p>Inspired by the pioneering research of <u> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11699093/" target="_blank">Mojumdar et al. (2025)</a></u>, this project is a seamless integration of clinical expertise and cutting-edge data science. It marks a significant leap forward in transforming the way we diagnose and intervene in anemia, enabling early detection and better patient care.</p>
+						<p>The success of this project is the result of an exceptional collaboration: <u> <a href="https://scholar.google.com.tw/citations?user=MwIr5fMAAAAJ&hl=en" target="_blank">Dr. Gem Wu</a></u> from Chang Gung Memorial Hospital provided invaluable medical insights, while my dedicated <a href="https://github.com/NgocDuy3112" target="_blank">data science partner</a> played a crucial role in developing and refining the model.</p>`,
+						images: [
+							'https://lh3.googleusercontent.com/pw/AP1GczOjksvb-G0a_kOf13Bf8v6EtrYlX7CmoJ8tgAfsrIHHlq0DEDRJpEeC2BG6xuEmV6IlWPDTkuECTZ-1jgL02tGQn8NRyaqGn7zJ0_LC-kZZb4FMAfQ_=w2400',
+							'https://lh3.googleusercontent.com/pw/AP1GczMjq5uRnr9fQ9gHdVmmN3I-4YyhUDT_d9mGJmjBL2LPBWLaTx5pLa5vg-jNytR74geTROOMHfGF0_tF5CtrJdxy2nl0TsQJG1QsKxOc00XH8oYNFgl0=w2400'
+						],
+						links: [
+							{ title: 'View App', url: 'https://anemia-diagnosis.streamlit.app/' },
+							{ title: 'Source Code', url: 'https://github.com/kimnguyen2002/Anemia-Prediction' }
+						]
+					},
+					'xray': {
+						title: 'Chest X-Ray Image Analysis',
+						description: `<p>The Chest X-Ray Image Analysis app is designed to assist users in detecting potential abnormalities in chest X-ray images using deep learning techniques. This user-friendly web application leverages the DenseNet121 model to analyze uploaded X-ray images and provide insights into various medical conditions.</p>`,
+						images: [
+							'https://lh3.googleusercontent.com/pw/AP1GczMnFxVlt5xk6Y6TZDPwgmu6u3iHnCo4idmkvsfUC2KZ9qFt7ezq-8GvalO7esUBbmNShqQwIygRHDmA5BfZiZQnxMVvCX8XdIR_XgjCk_CloWPsIygo=w2400',
+							'https://lh3.googleusercontent.com/pw/AP1GczMV9bbE7wXN5UKj2Ve_NhVG_LrcApL8e9JuX5tznZgtVOFubmUP1vcZqhr2xrQO3iguagnPZ7WHTiuzgkVqBABekPqRPxBKC5PHUkSNl0Mso_94ywE4=w2400'
+						],
+						links: [
+							{ title: 'View App', url: 'https://chestxrayanalysis.streamlit.app/' },
+							{ title: 'Source Code', url: 'https://github.com/kimnguyen2002/Chest-X-Ray-Image-Analysis' }
+						]
+					},
+					'heart': {
+						title: 'Heart Risk Prediction',
+						description: `<p>The Heart Risk Prediction is a web application designed to assess the risk of heart disease based on user-input health metrics. Utilizing machine learning models, the app provides a user-friendly interface through Streamlit, offers insights into the user's heart health, categorizing their risk as low or high. This project aims to raise awareness about heart disease and promote early detection and preventive measures.</p>`,
+						images: [
+							'https://lh3.googleusercontent.com/pw/AP1GczPpyFWJhVNAwJ_N3PvJBhpWtRQ3HkPNTjH6bImFfGj6v1W-ipYZ26hqVT2f8s-reyGwdmvZHC5Jra0SYd6hcz6t-kuEKQUTmljzvnUFmx4vGOw6JiOG=w2400'
+						],
+						links: [
+							{ title: 'View App', url: 'https://heartriskprediction.streamlit.app/' },
+							{ title: 'Source Code', url: 'https://github.com/kimnguyen2002/Heart_Risk_Prediction' }
+						]
+					},
+					'symptom': {
+						title: 'Symptom Checker with Drug Information',
+						description: `<p>The Symptom Checker with Drug Information is a web application designed to assist users in identifying potential health conditions based on their symptoms. By inputting specific symptoms, users can receive a list of possible diseases and relevant drug information. This project aims to empower users with knowledge about their health and provide valuable insights into potential treatments.</p>`,
+						images: [
+							'https://lh3.googleusercontent.com/pw/AP1GczM16e_4IArohsV0KL6vUvDFab-rbaF6mCduFryDIm9ujVMW2elgKkOVEcWxHZsa5CBROokY-Jr5gRFdLHsMpJmmO9LdGo2CCPrAPivCtRw46oybP0Kl=w2400'
+						],
+						links: [
+							{ title: 'View App', url: 'https://symptomschecker.streamlit.app/' },
+							{ title: 'Source Code', url: 'https://github.com/kimnguyen2002/Symptoms_Checker' }
+						]
+					},
+				};
+				
+				// Open modal on project card click
+				projectCards.forEach(card => {
+					card.addEventListener('click', function() {
+						const projectId = this.getAttribute('data-project');
+						const details = projectDetails[projectId];
+						
+						if(details) {
+							modalTitle.textContent = details.title;
+							modalDescription.innerHTML = details.description;
+							
+							// Clear previous images and links
+							modalImages.innerHTML = '';
+							modalLinks.innerHTML = '';
+							
+							// Add images to modal
+							if(details.images && details.images.length > 0) {
+								details.images.forEach(imgSrc => {
+									const img = document.createElement('img');
+									img.src = imgSrc;
+									modalImages.appendChild(img);
+								});
+							}
+							
+							// Add links to modal
+							if(details.links && details.links.length > 0) {
+								details.links.forEach(link => {
+									const a = document.createElement('a');
+									a.href = link.url;
+									a.target = '_blank';
+									a.textContent = link.title;
+									a.className = 'button';
+									modalLinks.appendChild(a);
+								});
+							}
+							
+							// Show modal
+							modal.style.display = 'block';
+							document.body.style.overflow = 'hidden'; // Prevent scrolling
+						}
+					});
+				});
+				
+				// Close modal
+				modalClose.addEventListener('click', function() {
+					modal.style.display = 'none';
+					document.body.style.overflow = 'auto'; // Re-enable scrolling
+				});
+				
+				// Close modal on clicking outside
+				window.addEventListener('click', function(e) {
+					if(e.target === modal) {
+						modal.style.display = 'none';
+						document.body.style.overflow = 'auto';
+					}
+				});
+				
+				// Animate sections on scroll
+				const animateElements = document.querySelectorAll('.animate');
+				
+				function checkInView() {
+					animateElements.forEach(element => {
+						const elementPosition = element.getBoundingClientRect();
+						
+						// If element is in viewport
+						if(elementPosition.top < window.innerHeight * 0.8) {
+							element.style.opacity = '1';
+							element.style.transform = 'translateY(0)';
+						}
+					});
+				}
+				
+				// Run once to check initial state
+				checkInView();
+				
+				// Check on scroll
+				window.addEventListener('scroll', checkInView);
+				
+				// Instagram embed
+				window.addEventListener('load', function() {
+					if(window.instgrm) {
+						window.instgrm.Embeds.process();
+					}
+				});
+			});
+			// Modal functionality for certificates
+			const certItems = document.querySelectorAll('.cert-item');
+			const certModal = document.getElementById('certificateModal');
+			const certModalClose = certModal.querySelector('.close-modal');
+			const certModalTitle = document.getElementById('cert-modal-title');
+			const certModalImage = document.getElementById('cert-modal-image');
+			const certModalDescription = document.getElementById('cert-modal-description');
+			const certModalLink = document.getElementById('cert-modal-link');
+
+			// Certificate details
+			const certificateDetails = {
+				'ai-for-medical-diagnosis': {
+					title: 'AI for Medical Diagnosis',
+					description: 'This certificate covers the application of artificial intelligence techniques for medical diagnosis, including medical image analysis and test result interpretation.',
+					image: 'https://lh3.googleusercontent.com/pw/AP1GczPA-HtnGbZCyIEbgvCFi1LmkJ3PZfLQ0MYdH6z-7Ral_AZ4w1eaFvdlUa-fr0GmMRxEjbe3OlOjEiRvG491V7YPd-vQ46AZTJubyEaRMPPBmb7Rt3xa=w2400',
+					link: 'https://drive.google.com/file/d/1uoRxeaxrXP9UDDKR-uV-2DOeu6eFuhSn/view?usp=sharing'
+				},
+				'chipseq-with-bioconductor-in-r': {
+					title: 'ChIP-seq with Bioconductor in R',
+					description: 'This certificate validates my skills in using Bioconductor in R for ChIP-seq data analysis, a crucial technique for studying protein-DNA interactions.',
+					image: 'https://lh3.googleusercontent.com/pw/AP1GczPCX-LNQy4qEILoNNKTThBxQ2TRzBTgac-OJHoCcieManZLtQICHs46HapLP54ZqOvfxLP4CxBXmZX4PjqkKV24-21nSv_yl13rkAfgbwfjt1mA2pLJ=w2400',
+					link: 'https://drive.google.com/file/d/1dw52URZlqnxSOEprWJpTGXFNoiWAxa_b/view?usp=sharing'
+				},
+				'biomedical-image-analysis-in-python': {
+					title: 'Biomedical Image Analysis in Python',
+					description: 'This certificate demonstrates my proficiency in biomedical image analysis techniques using Python, including image processing, segmentation, and classification.',
+					image: 'https://lh3.googleusercontent.com/pw/AP1GczPRDehB5W4uPJ7oMvPKkqJAyJfz89Rc1WOv1WDIieWwazhgjvb5wJqsDLD2X2Xg0gbXIwdo4nq1_CZaRWBjoLiRR0jMtPVMFSimua6swXihbXIc3RaP=w2400',
+					link: 'https://drive.google.com/file/d/1ClELELa2NJGB93kgAnKbwFRcB2PuBaFJ/view?usp=sharing'
+				},
+				'introduction-to-bioconductor-in-r': {
+					title: 'Introduction to Bioconductor in R',
+					description: 'This certificate covers the fundamentals of Bioconductor in R, an essential tool for biological data analysis and genomic exploration.',
+					image: 'https://lh3.googleusercontent.com/pw/AP1GczNg-v16gQzk-3yIJBBaFMO9QE_wUwycmXWAZUxgGQatWWKmdH5kl6LKPRTjwPn-QHjE4gUPerGJqBcpAYfTw775-VdQdohSA5mvTIGQ2QlYe9yzt9XC=w2400',
+					link: 'https://drive.google.com/file/d/1cVlU0ATlrjRAH2Ddef0dPH2szcWi5AQv/view?usp=sharing'
+				},
+				'introduction-to-deep-learning-with-pytorch': {
+					title: 'Introduction to Deep Learning with PyTorch',
+					description: 'This certificate attests to my understanding of the fundamental principles of deep learning and the use of PyTorch to create and train neural networks.',
+					image: 'https://lh3.googleusercontent.com/pw/AP1GczOfcASEgQCAt8RE_2b5WpDVpNs8I7aNpguKIt78xuQYEZAicDA304VUgHbUIrT0H15JUWZCARfN8Pv3kilAAr8t9sBTmGG8MCGALj-RaK4Sv9Uappfq=w2400',
+					link: 'https://drive.google.com/file/d/1LiJINoMTR9hAHpLMqMFLvMWG45hCWd7O/view?usp=sharing'
+				},
+				'gemini-api-by-google': {
+					title: 'Gemini API by Google',
+					description: 'This certificate validates my skills in using Google\'s Gemini API for developing advanced generative AI applications.',
+					image: 'https://lh3.googleusercontent.com/pw/AP1GczPKne_jMVi0bKLyoAuogoLySs3ULUDohaPWIDkexmla_dujU0oW3OtMwl-jPnqb2-ZKBvPCKKw246wq4v2zQi_odTKKS-68TErXq9RzK38ZR41iznMA=w2400',
+					link: 'https://drive.google.com/file/d/1RH63MSJ3ujbW6PvqfouLTcWAlKR1i1fa/view?usp=sharing'
+				},
+				'aws-cloud-practitioner-essentials': {
+					title: 'AWS Cloud Practitioner Essentials',
+					description: 'This certificate demonstrates my understanding of AWS cloud services and best practices for deploying applications on AWS infrastructure.',
+					image: 'https://lh3.googleusercontent.com/pw/ABLVV85VpT4qALU9VNKzfWmgtRWR4Tyg1AEUknniA1oqkjTEV87IBMhXbPJ4qnJ3JQ3OeTncD9T0vQQY-by53xDcsqm_3aNTqawAbR5r1ZbZuaLey-1MJ2S1=w2400',
+					link: 'https://drive.google.com/file/d/1rSnTscZOJlIUKvSM-6wzkzYXkhu0U9Tz/view?usp=sharing'
+				},
+				'hair-donation-for-cancer-patients': {
+					title: 'Hair Donation for Cancer Patients',
+					description: 'This certificate is one of the most meaningful achievements to me, as it represents a personal act of giving that I believe goes beyond the physical gesture. Donating my hair to cancer patients was a deeply emotional decision, and it was driven by a desire to make a difference, no matter how small. This experience ignited within me a passion for healthcare - specifically in the field of Biomedical Informatics. I realized that behind every patient, there is a story, a struggle, and a need for compassion. This is why I have chosen to dedicate myself to improving healthcare systems, using technology to make healthcare more accessible, efficient, and humane. My goal is not only to advance medical science but to ensure that every patient’s journey is filled with the dignity and care they deserve.',
+					image: 'https://lh3.googleusercontent.com/pw/AP1GczPbJEIr8GKtd9uACCGeWUT6F2nqooGXmAxBt3IzvJ9eVOE0i3jrb8iwuX4nQ5Z4i_3dLpuUmXTYaIHUFfuWqEcgByU8uSdCGL14Z16V2pYFh6W5rq26=w2400',
+					link: 'https://drive.google.com/file/d/1Pvqb1JCAelW92yk4X10MhnkCRQ6UelyQ/view?usp=sharing'
+				},
+				'high-contribution-in-extracurricular-activities': {
+					title: 'High contribution in extracurricular activities (Vietnamese)',
+					description: 'I was actively involved in various extracurricular activities, where I made significant contributions as a photographer. I had the opportunity to capture key moments at university to several high-profile events, including official receptions for distinguished guests and orientations for incoming students. As the event photographer, I was responsible for capturing the essence of these important occasions. <br> <br> In addition to my work at school events, I also actively participated in volunteer programs, where I had the opportunity to meet and engage with individuals from underprivileged backgrounds. Through my photography, I aimed to raise awareness of their stories and challenges, helping to highlight the importance of social responsibility and compassion. <br> <br> If you are interested, you can explore more of my photographs capturing the essence of these volunteer programs and the stories of individuals facing difficult circumstances <u> <b> <a href="https://online.fliphtml5.com/jvhqy/cegy/" target="_blank">here</a></b></u>.',
+					image: 'https://lh3.googleusercontent.com/uNmS3eEhuNCy8YSNcq3CMwNtIdbyrIG90wvrufpXa1tF8RCKwE7hW8vIFi9LMw9EKvhV-4JgCpGYS2QP6T_im06IAx_7oZLQ6BElnBjnAQtLehNlkzikJz9CtPJrzzZhSzi36rAlbk0=w2400',
+					link: 'https://drive.google.com/file/d/1sj1moehAgI5OwqVnG5D1HMLp6oZiCWBo/view?usp=share_link'
+				}
+				// You can add more certificates as needed
+			};
+
+			// Open modal when clicking on a certificate
+			certItems.forEach(item => {
+				// Get the current URL in the a element
+				const link = item.querySelector('a').href;
+				const img = item.querySelector('img').src;
+				const tooltip = item.querySelector('.tooltip').textContent;
+				
+				// Create a unique ID based on the tooltip text (no spaces, lowercase)
+				let certId = tooltip.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+				
+				// Add data-cert-id attribute to the cert-item element
+				item.setAttribute('data-cert-id', certId);
+				
+				// Add if this certificate is not in our details list
+				if (!certificateDetails[certId]) {
+					certificateDetails[certId] = {
+						title: tooltip,
+						description: `Certificate: ${tooltip}`,
+						image: img,
+						link: link
+					};
+				}
+				
+				// Replace default link behavior
+				item.querySelector('a').addEventListener('click', function(e) {
+					e.preventDefault();
+					
+					const certId = item.getAttribute('data-cert-id');
+					const details = certificateDetails[certId];
+					
+					if (details) {
+						certModalTitle.textContent = details.title;
+						certModalImage.src = details.image;
+						certModalDescription.innerHTML = `<p>${details.description}</p>`;
+						certModalLink.href = details.link;
+						
+						// Show the modal
+						certModal.style.display = 'block';
+						document.body.style.overflow = 'hidden'; // Prevent scrolling
+					}
+				});
+			});
+
+			// Close certificate modal
+			certModalClose.addEventListener('click', function() {
+				certModal.style.display = 'none';
+				document.body.style.overflow = 'auto'; // Re-enable scrolling
+			});
+
+			// Close modal when clicking outside
+			window.addEventListener('click', function(e) {
+				if (e.target === certModal) {
+					certModal.style.display = 'none';
+					document.body.style.overflow = 'auto';
+				}
+			});
+		</script>
+		<script async src="//www.instagram.com/embed.js"></script>
 	</body>
 </html>
