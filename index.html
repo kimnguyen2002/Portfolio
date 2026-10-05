@@ -784,45 +784,303 @@
 			text-shadow: none;
 		}
 
+		/* Awards & Proposal Section */
+		#awards,
+		#proposal {
+			padding: 120px 0;
+		}
+
+		.awards-grid,
+		.proposal-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+			gap: 24px;
+			margin-top: 40px;
+		}
+
+		.awards-card,
+		.proposal-card {
+			background-color: var(--secondary-color);
+			border: 1px solid var(--border-color);
+			border-radius: 8px;
+			overflow: hidden;
+			transition: var(--transition);
+			display: flex;
+			flex-direction: column;
+		}
+
+		.awards-card:hover,
+		.proposal-card:hover {
+			transform: translateY(-6px);
+			border-color: var(--accent-color);
+			box-shadow: var(--glow);
+		}
+
+		.awards-img-wrapper,
+		.proposal-img-wrapper {
+			position: relative;
+			width: 100%;
+			height: 220px;
+			overflow: hidden;
+			background: #091729;
+		}
+
+		.awards-img-wrapper img,
+		.proposal-img-wrapper img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: var(--transition);
+		}
+
+		.awards-card:hover .awards-img-wrapper img,
+		.proposal-card:hover .proposal-img-wrapper img {
+			transform: scale(1.05);
+		}
+
+		.awards-badge,
+		.proposal-badge {
+			position: absolute;
+			top: 12px;
+			right: 12px;
+			background: rgba(9, 23, 41, 0.85);
+			border: 1px solid var(--accent-gold);
+			color: var(--accent-gold);
+			padding: 4px 10px;
+			border-radius: 20px;
+			font-size: 0.72rem;
+			letter-spacing: 0.5px;
+			font-weight: 500;
+			backdrop-filter: blur(8px);
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+		}
+
+		.awards-info,
+		.proposal-info {
+			padding: 22px;
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+		}
+
+		.awards-info h3,
+		.proposal-info h3 {
+			margin-bottom: 10px;
+			font-size: 1.15rem;
+			line-height: 1.4;
+		}
+
+		.awards-meta,
+		.proposal-meta {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			font-size: 0.78rem;
+			color: var(--accent-color);
+			margin-bottom: 12px;
+			opacity: 0.9;
+		}
+
+		.awards-meta span,
+		.proposal-meta span {
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+		}
+
+		.awards-info p,
+		.proposal-info p {
+			opacity: 0.85;
+			margin-bottom: 18px;
+			font-size: 0.9rem;
+			line-height: 1.6;
+			flex-grow: 1;
+		}
+
+		.click-detail-note {
+			font-size: 0.75rem !important;
+			font-style: italic;
+			opacity: 0.6 !important;
+			margin: -8px 0 16px !important;
+			line-height: 1.4 !important;
+		}
+
+		.awards-links,
+		.proposal-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-top: auto;
+		}
+
+		.awards-links a,
+		.awards-links button,
+		.proposal-links a,
+		.proposal-links button {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 7px 14px;
+			background-color: transparent;
+			border: 1px solid var(--border-color);
+			border-radius: 4px;
+			color: var(--accent-color);
+			font-size: 0.8rem;
+			letter-spacing: 0.5px;
+			transition: var(--transition);
+			cursor: pointer;
+			text-decoration: none;
+			font-family: inherit;
+		}
+
+		.awards-links a:hover,
+		.awards-links button:hover,
+		.proposal-links a:hover,
+		.proposal-links button:hover {
+			background-color: rgba(93, 173, 226, 0.12);
+			border-color: var(--accent-color);
+			box-shadow: var(--glow);
+			color: var(--accent-color);
+			text-shadow: none;
+		}
+
 		/* Photography Section */
 		#photograph {
 			padding: 120px 0;
 		}
 
-		.photo-gallery {
+		.photo-slide-container {
 			margin-top: 40px;
-			column-count: 3;
-			column-gap: 20px;
+			width: 100%;
+			background: var(--secondary-color);
+			border: 1px solid var(--border-color);
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), var(--glow);
+			transition: var(--transition);
+		}
+
+		.photo-slide-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 12px 20px;
+			background: rgba(9, 23, 41, 0.95);
+			border-bottom: 1px solid var(--border-color);
+			gap: 15px;
+			flex-wrap: wrap;
+		}
+
+		.photo-slide-header .window-controls {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+		}
+
+		.photo-slide-header .window-controls span {
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			display: inline-block;
+		}
+
+		.photo-slide-header .btn-close {
+			background: #ff5f56;
+		}
+
+		.photo-slide-header .btn-min {
+			background: #ffbd2e;
+		}
+
+		.photo-slide-header .btn-max {
+			background: #27c93f;
+		}
+
+		.photo-slide-title {
+			font-size: 0.88rem;
+			color: var(--accent-color);
+			letter-spacing: 0.5px;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-weight: 400;
+		}
+
+		.photo-slide-actions {
+			display: flex;
+			gap: 10px;
+			align-items: center;
+		}
+
+		.photo-slide-actions a,
+		.photo-slide-actions button {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 6px 14px;
+			background: rgba(93, 173, 226, 0.1);
+			border: 1px solid var(--border-color);
+			border-radius: 4px;
+			color: var(--accent-color);
+			font-size: 0.78rem;
+			text-decoration: none;
+			cursor: pointer;
+			transition: var(--transition);
+			font-family: inherit;
+		}
+
+		.photo-slide-actions a:hover,
+		.photo-slide-actions button:hover {
+			background: rgba(93, 173, 226, 0.2);
+			border-color: var(--accent-color);
+			box-shadow: var(--glow);
+		}
+
+		.photo-iframe-wrapper {
+			position: relative;
+			width: 100%;
+			height: 78vh;
+			min-height: 540px;
+			max-height: 880px;
+			background: #091729;
+		}
+
+		.photo-iframe-wrapper iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+			display: block;
+		}
+
+		@media screen and (max-width: 1024px) {
+			.photo-iframe-wrapper {
+				height: 70vh;
+				min-height: 480px;
+			}
 		}
 
 		@media screen and (max-width: 768px) {
-			.photo-gallery {
-				column-count: 2;
+			.photo-iframe-wrapper {
+				height: 64vh;
+				min-height: 400px;
+			}
+
+			.proposal-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.photo-slide-header {
+				padding: 10px 14px;
 			}
 		}
 
 		@media screen and (max-width: 480px) {
-			.photo-gallery {
-				column-count: 1;
+			.photo-iframe-wrapper {
+				height: 56vh;
+				min-height: 340px;
 			}
-		}
-
-		.photo-item {
-			break-inside: avoid;
-			margin-bottom: 20px;
-			position: relative;
-			overflow: hidden;
-			border-radius: 8px;
-		}
-
-		.photo-item img {
-			width: 100%;
-			display: block;
-			transition: var(--transition);
-		}
-
-		.photo-item:hover img {
-			transform: scale(1.05);
 		}
 
 		/* Instagram Section */
@@ -979,11 +1237,44 @@
 		}
 
 		#modal-links,
-		#cert-modal-links {
-			margin-top: 30px;
+		#cert-modal-links,
+		#award-modal-links {
+			margin-top: 25px;
 			display: flex;
 			gap: 12px;
 			flex-wrap: wrap;
+		}
+
+		/* Modal PDF Styles */
+		.modal-content.modal-pdf {
+			max-width: 1050px;
+			width: 95%;
+		}
+
+		.modal-pdf-container {
+			position: relative;
+			width: 100%;
+			height: 76vh;
+			min-height: 540px;
+			background: #091729;
+			border: 1px solid var(--border-color);
+			border-radius: 8px;
+			overflow: hidden;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+		}
+
+		.modal-pdf-container iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+			display: block;
+		}
+
+		@media screen and (max-width: 768px) {
+			.modal-pdf-container {
+				height: 65vh;
+				min-height: 400px;
+			}
 		}
 
 		/* Responsive */
@@ -1707,8 +1998,10 @@
 		<a href="#home" class="active"><i class="fas fa-home"></i><span>Home</span></a>
 		<a href="#about"><i class="fas fa-user"></i><span>About Me</span></a>
 		<a href="#speaking"><i class="fas fa-microphone"></i><span>Public Speaking</span></a>
+		<a href="#awards"><i class="fas fa-award"></i><span>Awards</span></a>
 		<a href="#work"><i class="fas fa-code"></i><span>Projects</span></a>
 		<a href="#certificate"><i class="fas fa-certificate"></i><span>Certificates</span></a>
+		<a href="#photograph"><i class="fas fa-camera"></i><span>Photography</span></a>
 		<a href="#instagram"><i class="fab fa-instagram"></i><span>Instagram</span></a>
 	</nav>
 
@@ -1869,8 +2162,8 @@
 		<section id="speaking" class="section active">
 			<div class="container">
 				<h2 class="animate">Public Speaking</h2>
-				<p class="section-subtitle animate delay-1">My speaking engagements at events. Click on any event to
-					view photos, stories and videos.</p>
+				<p class="section-subtitle animate delay-1">My speaking engagements at events. Click on an event to
+					view photos, stories and videos (if applicable).</p>
 
 				<!-- Google DevFest Taipei 2025 -->
 				<div class="speaking-category animate delay-2">
@@ -1912,14 +2205,71 @@
 			</div>
 		</section>
 
+		<!-- Awards -->
+		<section id="awards" class="section active">
+			<div class="container">
+				<h2 class="animate">Awards</h2>
+				<div class="awards-grid animate delay-2">
+
+					<!-- 3rd Place - Department Proposal Competition -->
+					<div class="awards-card" data-award="ntu-proposal-2025" style="cursor: pointer;">
+						<div class="awards-img-wrapper">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczNmMrEPI_zGx-MLoI9v_IiutuRQXU3s_xPhQThCrQ2C_h8AKQVFx-DFuwuIMIMYZoVQQ7bmCPq334nsJyhAryQb9PlLt7ZIrYHXhmdHa6pItjWTXhKP=w2400"
+								alt="Proposal Presentation Preview">
+							<span class="awards-badge"><i class="fas fa-medal"></i> 3rd Place Award</span>
+						</div>
+						<div class="awards-info">
+							<h3>3rd Place - Department Proposal Competition</h3>
+							<div class="awards-meta">
+								<span><i class="fas fa-calendar-alt"></i> 2025</span>
+								<span><i class="fas fa-university"></i> National Taiwan University</span>
+							</div>
+							<p>Topic: Application of Deep Learning Models for Multi-Omics–Based Drug Response Prediction
+								in Non-Small Cell Lung Cancer (NSCLC)</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="awards-links">
+								<a href="https://drive.google.com/" class="open-pdf-modal"
+									data-title="3rd Place - Department Proposal Competition (NTU 2025)"
+									data-pdf="https://drive.google.com/file/d/1t9AMX9tqR4wSlpG0qjAknpcthF-HQNvZ/view?usp=sharing"
+									data-desc="Topic: Application of Deep Learning Models for Multi-Omics–Based Drug Response Prediction in Non-Small Cell Lung Cancer (NSCLC) &bull; National Taiwan University">
+									<i class="fas fa-file-powerpoint"></i> View Proposal
+								</a>
+								<a href="https://smartmhi.ntu.edu.tw/news/News/detail/%E3%80%90News%E3%80%91-Results-of-the-2025-Proposal-Competition"
+									target="_blank"><i class="fas fa-external-link-alt"></i> Result Link</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
 		<!-- Projects -->
 		<section id="work" class="section active">
 			<div class="container">
 				<h2 class="animate">Projects</h2>
-				<p class="animate delay-1">Here are some of the projects I've worked on. Click on any project to view in
-					details.</p>
+				
 
 				<div class="projects-grid animate delay-2">
+					<!-- Surgical Video Intelligence -->
+					<div class="project-card" data-project="surgery">
+						<div class="project-img">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczMvPJCD-4xjZD1nSn5wQppy0LMlrxwyB_bVCNkeqgq7o-iAqpG1MduHOpU9-NBjcTsxBbHC_zIOPIpXVdYMxnidGDqwxRF5jTeGu0ojKIXmFveemW2F=w2400"
+								alt="Surgical Video Intelligence">
+						</div>
+						<div class="project-info">
+							<h3>Surgical Video Intelligence</h3>
+							<p>Browser-based analysis of robotic surgery videos using on-device computer vision, annotated surgical data, and explainable assistant responses.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="project-links">
+								<a href="https://surgical-video-intelligence-beta.vercel.app/" target="_blank">View
+									App</a>
+								<a href="https://github.com/kimnguyen2002/surgical-video-intelligence"
+									target="_blank">View
+									Code</a>
+							</div>
+						</div>
+					</div>
+
 					<!-- Anemia -->
 					<div class="project-card" data-project="anemia">
 						<div class="project-img">
@@ -1930,6 +2280,7 @@
 							<h3>Anemia Diagnostic Assistant</h3>
 							<p>A high-precision predictive engine utilizing advanced Machine Learning to evaluate
 								hematological risks and streamline clinical diagnostics.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
 							<div class="project-links">
 								<a href="https://anemia-diagnosis.streamlit.app/" target="_blank">View App</a>
 								<a href="https://github.com/kimnguyen2002/Anemia-Prediction" target="_blank">View
@@ -1948,6 +2299,7 @@
 							<h3>Chest X-Ray Image Analysis</h3>
 							<p>A Computer Vision platform leveraging Deep Learning (DenseNet121) to detect pulmonary
 								abnormalities and assist in medical imaging diagnostics.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
 							<div class="project-links">
 								<a href="https://chestxrayanalysis.streamlit.app/" target="_blank">View App</a>
 								<a href="https://github.com/kimnguyen2002/Chest-X-Ray-Image-Analysis"
@@ -1966,6 +2318,7 @@
 							<h3>Heart Risk Prediction</h3>
 							<p>An interactive diagnostic dashboard providing real-time cardiovascular risk assessment
 								through feature engineering and predictive analytics.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
 							<br>
 							<div class="project-links">
 								<a href="https://heartriskprediction.streamlit.app/" target="_blank">View App</a>
@@ -1985,6 +2338,7 @@
 							<h3>Symptom Checker with Drug Info</h3>
 							<p>An intelligent symptom-to-disease mapping system integrated with pharmaceutical databases
 								to provide comprehensive healthcare insights.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
 							<div class="project-links">
 								<a href="https://symptomschecker.streamlit.app/" target="_blank">View App</a>
 								<a href="https://github.com/kimnguyen2002/Symptoms_Checker" target="_blank">View
@@ -2002,72 +2356,22 @@
 		<section id="certificate" class="section active">
 			<div class="container">
 				<h2 class="animate">Certificates</h2>
-				<p class="animate delay-1">These are certificates that I have gained from learning activities and
-					participation. Click on any certificate to view the full image and some may have storytelling.</p>
+				<p class="animate delay-1">Click on any certificate to view the full image and some may have storytelling.</p>
 
 				<blockquote class="ludwig animate delay-2">
 					Knowledge isn't free. You have to pay attention.
 				</blockquote>
 
 				<div class="category-tabs animate delay-2">
-					<div class="category-tab" data-category="biomedical">Biomedical & Genetics</div>
 					<div class="category-tab" data-category="ai">AI & Machine Learning</div>
+					<div class="category-tab" data-category="biomedical">Biomedical & Genetics</div>
 					<div class="category-tab" data-category="cloud">Cloud</div>
 					<div class="category-tab" data-category="security">Cybersecurity</div>
 					<div class="category-tab" data-category="extra">Extracurricular</div>
+					<div class="category-tab" data-category="hardware">Hardware & Semiconductor</div>
 				</div>
 
 				<div class="cert-container animate delay-3">
-					<!-- Biomedical - Genetics -->
-					<div class="cert-item" data-category="biomedical">
-						<a href="https://drive.google.com/file/d/1uoRxeaxrXP9UDDKR-uV-2DOeu6eFuhSn/view?usp=sharing"
-							target="_blank">
-							<img
-								src="https://lh3.googleusercontent.com/pw/AP1GczPA-HtnGbZCyIEbgvCFi1LmkJ3PZfLQ0MYdH6z-7Ral_AZ4w1eaFvdlUa-fr0GmMRxEjbe3OlOjEiRvG491V7YPd-vQ46AZTJubyEaRMPPBmb7Rt3xa=w2400" />
-							<div class="tooltip">AI for Medical Diagnosis</div>
-						</a>
-					</div>
-					<div class="cert-item" data-category="biomedical">
-						<a href="https://drive.google.com/file/d/1dw52URZlqnxSOEprWJpTGXFNoiWAxa_b/view?usp=sharing"
-							target="_blank">
-							<img
-								src="https://lh3.googleusercontent.com/pw/AP1GczPCX-LNQy4qEILoNNKTThBxQ2TRzBTgac-OJHoCcieManZLtQICHs46HapLP54ZqOvfxLP4CxBXmZX4PjqkKV24-21nSv_yl13rkAfgbwfjt1mA2pLJ=w2400" />
-							<div class="tooltip">ChIP-seq with Bioconductor in R</div>
-						</a>
-					</div>
-					<div class="cert-item" data-category="biomedical">
-						<a href="https://drive.google.com/file/d/1ClELELa2NJGB93kgAnKbwFRcB2PuBaFJ/view?usp=sharing"
-							target="_blank">
-							<img
-								src="https://lh3.googleusercontent.com/pw/AP1GczPRDehB5W4uPJ7oMvPKkqJAyJfz89Rc1WOv1WDIieWwazhgjvb5wJqsDLD2X2Xg0gbXIwdo4nq1_CZaRWBjoLiRR0jMtPVMFSimua6swXihbXIc3RaP=w2400" />
-							<div class="tooltip">Biomedical Image Analysis in Python</div>
-						</a>
-					</div>
-					<div class="cert-item" data-category="biomedical">
-						<a href="https://drive.google.com/file/d/1cVlU0ATlrjRAH2Ddef0dPH2szcWi5AQv/view?usp=sharing"
-							target="_blank">
-							<img
-								src="https://lh3.googleusercontent.com/pw/AP1GczNg-v16gQzk-3yIJBBaFMO9QE_wUwycmXWAZUxgGQatWWKmdH5kl6LKPRTjwPn-QHjE4gUPerGJqBcpAYfTw775-VdQdohSA5mvTIGQ2QlYe9yzt9XC=w2400" />
-							<div class="tooltip">Introduction to Bioconductor in R</div>
-						</a>
-					</div>
-					<div class="cert-item" data-category="biomedical">
-						<a href="https://drive.google.com/file/d/1eTKE2dEc1434YCoxwO3W2jD82rJHke7m/view?usp=sharing"
-							target="_blank">
-							<img
-								src="https://lh3.googleusercontent.com/pw/AP1GczOdULofM3fOg5zyclBBYPWyLLGuEMOaEwgJ1gqtE5wbub_RzIGJanD4af3e7W5PkGP9tN0_KlEjFgs1rXE3ifQOYmbx2O79XbeDejas-61Hjw8QtyoN=w2400" />
-							<div class="tooltip">Introduction to RT-qPCR and Gene Expression</div>
-						</a>
-					</div>
-					<div class="cert-item" data-category="biomedical">
-						<a href="https://drive.google.com/file/d/1k9ecKrqMMeRCKnYZ2v-4M62NmNXW_ULC/view?usp=sharing"
-							target="_blank">
-							<img
-								src="https://lh3.googleusercontent.com/pw/AP1GczMJVGYDeqZhPkYxaqwAzSaSydHtWCNYbhslxdHoXX603GcnEmNfE40qCYHarEO4djqHrUsgCmswMLdEJI08ft4j-p9YN8ghHfgy60MKxtk3tlSG1VD5=w2400" />
-							<div class="tooltip">Advanced Genomics Techniques for PCR Controls</div>
-						</a>
-					</div>
-
 					<!-- AI & ML Certificates -->
 					<div class="cert-item" data-category="ai">
 						<a href="https://drive.google.com/file/d/1LiJINoMTR9hAHpLMqMFLvMWG45hCWd7O/view?usp=sharing"
@@ -2245,6 +2549,57 @@
 							<div class="tooltip">Building Your Own Chat with GPT 4</div>
 						</a>
 					</div>
+
+					<!-- Biomedical & Genetics Certificates -->
+					<div class="cert-item" data-category="biomedical">
+						<a href="https://drive.google.com/file/d/1uoRxeaxrXP9UDDKR-uV-2DOeu6eFuhSn/view?usp=sharing"
+							target="_blank">
+							<img
+								src="https://lh3.googleusercontent.com/pw/AP1GczPA-HtnGbZCyIEbgvCFi1LmkJ3PZfLQ0MYdH6z-7Ral_AZ4w1eaFvdlUa-fr0GmMRxEjbe3OlOjEiRvG491V7YPd-vQ46AZTJubyEaRMPPBmb7Rt3xa=w2400" />
+							<div class="tooltip">AI for Medical Diagnosis</div>
+						</a>
+					</div>
+					<div class="cert-item" data-category="biomedical">
+						<a href="https://drive.google.com/file/d/1dw52URZlqnxSOEprWJpTGXFNoiWAxa_b/view?usp=sharing"
+							target="_blank">
+							<img
+								src="https://lh3.googleusercontent.com/pw/AP1GczPCX-LNQy4qEILoNNKTThBxQ2TRzBTgac-OJHoCcieManZLtQICHs46HapLP54ZqOvfxLP4CxBXmZX4PjqkKV24-21nSv_yl13rkAfgbwfjt1mA2pLJ=w2400" />
+							<div class="tooltip">ChIP-seq with Bioconductor in R</div>
+						</a>
+					</div>
+					<div class="cert-item" data-category="biomedical">
+						<a href="https://drive.google.com/file/d/1ClELELa2NJGB93kgAnKbwFRcB2PuBaFJ/view?usp=sharing"
+							target="_blank">
+							<img
+								src="https://lh3.googleusercontent.com/pw/AP1GczPRDehB5W4uPJ7oMvPKkqJAyJfz89Rc1WOv1WDIieWwazhgjvb5wJqsDLD2X2Xg0gbXIwdo4nq1_CZaRWBjoLiRR0jMtPVMFSimua6swXihbXIc3RaP=w2400" />
+							<div class="tooltip">Biomedical Image Analysis in Python</div>
+						</a>
+					</div>
+					<div class="cert-item" data-category="biomedical">
+						<a href="https://drive.google.com/file/d/1cVlU0ATlrjRAH2Ddef0dPH2szcWi5AQv/view?usp=sharing"
+							target="_blank">
+							<img
+								src="https://lh3.googleusercontent.com/pw/AP1GczNg-v16gQzk-3yIJBBaFMO9QE_wUwycmXWAZUxgGQatWWKmdH5kl6LKPRTjwPn-QHjE4gUPerGJqBcpAYfTw775-VdQdohSA5mvTIGQ2QlYe9yzt9XC=w2400" />
+							<div class="tooltip">Introduction to Bioconductor in R</div>
+						</a>
+					</div>
+					<div class="cert-item" data-category="biomedical">
+						<a href="https://drive.google.com/file/d/1eTKE2dEc1434YCoxwO3W2jD82rJHke7m/view?usp=sharing"
+							target="_blank">
+							<img
+								src="https://lh3.googleusercontent.com/pw/AP1GczOdULofM3fOg5zyclBBYPWyLLGuEMOaEwgJ1gqtE5wbub_RzIGJanD4af3e7W5PkGP9tN0_KlEjFgs1rXE3ifQOYmbx2O79XbeDejas-61Hjw8QtyoN=w2400" />
+							<div class="tooltip">Introduction to RT-qPCR and Gene Expression</div>
+						</a>
+					</div>
+					<div class="cert-item" data-category="biomedical">
+						<a href="https://drive.google.com/file/d/1k9ecKrqMMeRCKnYZ2v-4M62NmNXW_ULC/view?usp=sharing"
+							target="_blank">
+							<img
+								src="https://lh3.googleusercontent.com/pw/AP1GczMJVGYDeqZhPkYxaqwAzSaSydHtWCNYbhslxdHoXX603GcnEmNfE40qCYHarEO4djqHrUsgCmswMLdEJI08ft4j-p9YN8ghHfgy60MKxtk3tlSG1VD5=w2400" />
+							<div class="tooltip">Advanced Genomics Techniques for PCR Controls</div>
+						</a>
+					</div>
+
 					<!-- Cloud Certificates -->
 					<div class="cert-item" data-category="cloud">
 						<a href="https://drive.google.com/file/d/1rSnTscZOJlIUKvSM-6wzkzYXkhu0U9Tz/view?usp=sharing"
@@ -2297,7 +2652,6 @@
 						</a>
 					</div>
 
-
 					<!-- Extra-Curricular Certificates -->
 					<div class="cert-item" data-category="extra">
 						<a href="https://drive.google.com/file/d/1Pvqb1JCAelW92yk4X10MhnkCRQ6UelyQ/view?usp=sharing"
@@ -2323,29 +2677,58 @@
 							<div class="tooltip">IEEE Open Access Symposium</div>
 						</a>
 					</div>
+
+					<!-- Hardware & Semiconductor Certificates -->
+					<div class="cert-item" data-category="hardware">
+						<a href="https://drive.google.com/file/d/1yo_KihoPph9PQjmvX6W-EEVmt3zD0Te5/view?usp=sharing"
+							target="_blank">
+							<img
+								src="https://lh3.googleusercontent.com/pw/AP1GczMOsVQC8wUjWf6dVIz2rxYPK2j4BMp7UMhqiWHg4yessfIhzmyomv18Wp3kok_668IFd_-SLypFJsJ7aLvBAacYtVLqhzh8c4uLlho90EFgCDHKQ0cd=w2400">
+							<div class="tooltip">Introduction to Semiconductor Packaging</div>
+						</a>
+					</div>
 				</div>
 			</div>
 		</section>
 
+		<!-- Photography -->
+		<section id="photograph" class="section active">
+			<div class="container">
+				<h2 class="animate">Volunteer Photography &amp; Human Stories</h2>
+				<div class="animate delay-1">
+					<p>These photographs were created during volunteer activities in remote and underserved communities. Through documenting everyday moments, local environments, and personal encounters in highland areas, I sought to preserve the dignity, resilience, and humanity of the people I met.</p>
+					</br>
+					<p>Photography became a way to listen and bear witness rather than simply to observe. The images reflect the lives and circumstances of individuals and families who are often distant from public attention, while also capturing the warmth, strength, and community spirit that shaped those experiences. This collection is presented as a personal record of volunteer service and human connection, with respect for the people and communities represented.</p>
+				</div>
 
-		<!-- Photography
-			<section id="photograph" class="section active">
-				<div class="container">
-					<h2 class="animate">Photography Work</h2>
-					<div class="animate delay-1">
-						<p>My work is about using the power of visual storytelling to connect with people on a deeper level. Each picture I take is a window into a moment in time, a glimpse into the lives of the subjects I photograph.</p>
-						<p>By focusing on the stories behind the images, I strive to create a bridge between the viewer and the subject, allowing people to see the world through a different lens and gain a deeper appreciation for the diversity and complexity of the human experience.</p>
-					</div>
-					
-					<div class="photo-gallery animate delay-2">
-						Photo portfolio embedded here 
-						<div class="photo-item">
-							<iframe src="https://online.fliphtml5.com/jvhqy/cegy/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="width: 100%; height: 400px;"></iframe>
+				<div class="photo-slide-container animate delay-2">
+					<div class="photo-slide-header">
+						<div class="window-controls">
+							<span class="btn-close"></span>
+							<span class="btn-min"></span>
+							<span class="btn-max"></span>
+						</div>
+						<div class="photo-slide-title">
+							<i class="fas fa-book-open"></i> Volunteer Stories &amp; Documentary Photography
+						</div>
+						<div class="photo-slide-actions">
+							<button type="button" id="toggleFullscreenPhoto" title="Toggle Fullscreen">
+								<i class="fas fa-expand"></i> Fullscreen
+							</button>
+							<a href="https://online.fliphtml5.com/jvhqy/cegy/" target="_blank"
+								title="Open in FlipHTML5">
+								<i class="fas fa-external-link-alt"></i> Open Full View
+							</a>
 						</div>
 					</div>
+					<div class="photo-iframe-wrapper" id="photoIframeWrapper">
+						<iframe src="https://online.fliphtml5.com/jvhqy/cegy/" seamless="seamless" scrolling="no"
+							frameborder="0" allowtransparency="true" allowfullscreen="true"
+							title="Photography Portfolio Flipbook"></iframe>
+					</div>
 				</div>
-			</section>
-		-->
+			</div>
+		</section>
 		<!-- Instagram -->
 		<section id="instagram" class="section active">
 			<div class="container">
@@ -2665,6 +3048,67 @@
 				</div>
 				<div id="speaking-modal-description">
 					<!-- Description added dynamically -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Proposal / Award Details Modal -->
+	<div id="proposalDetailModal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="tb-bar"
+					style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: transparent; border-bottom: none; padding: 0;">
+					<span class="tb-dot r close-modal"></span>
+					<span class="tb-dot y"></span>
+					<span class="tb-dot g"></span>
+				</div>
+				<h2 id="proposal-detail-modal-title">3rd Place - Department Proposal Contest</h2>
+			</div>
+			<div class="modal-body">
+				<div class="modal-images" id="proposal-detail-modal-images">
+					<img id="proposal-detail-modal-img"
+						src="https://lh3.googleusercontent.com/pw/AP1GczNmMrEPI_zGx-MLoI9v_IiutuRQXU3s_xPhQThCrQ2C_h8AKQVFx-DFuwuIMIMYZoVQQ7bmCPq334nsJyhAryQb9PlLt7ZIrYHXhmdHa6pItjWTXhKP=w2400"
+						alt="Proposal Presentation Preview"
+						style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 5px 20px rgba(0,0,0,0.3);" />
+				</div>
+				<div id="proposal-detail-modal-description">
+
+				</div>
+				<div id="proposal-detail-modal-links"
+					style="margin-top: 25px; display: flex; gap: 12px; flex-wrap: wrap;">
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Award / Proposal PDF Modal -->
+	<div id="awardModal" class="modal">
+		<div class="modal-content modal-pdf">
+			<div class="modal-header">
+				<div class="tb-bar"
+					style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: transparent; border-bottom: none; padding: 0;">
+					<span class="tb-dot r close-modal"></span>
+					<span class="tb-dot y"></span>
+					<span class="tb-dot g"></span>
+				</div>
+				<h2 id="award-modal-title">Presentation Slides / Proposal</h2>
+			</div>
+			<div class="modal-body">
+				<div id="award-modal-description" style="margin-bottom: 15px;">
+					<!-- Description added dynamically -->
+				</div>
+				<div class="modal-pdf-container">
+					<iframe id="award-modal-iframe" src="" allow="autoplay" allowfullscreen="true" frameborder="0"
+						title="Presentation PDF Viewer"></iframe>
+				</div>
+				<div id="award-modal-links">
+					<a id="award-modal-external" href="" target="_blank" class="button"><i
+							class="fas fa-external-link-alt"></i> Open in Google Drive</a>
+					<button type="button" id="award-modal-fullscreen" class="button"
+						style="background: rgba(93, 173, 226, 0.15); border: 1px solid var(--accent-color); color: var(--accent-color); cursor: pointer;"><i
+							class="fas fa-expand"></i> Fullscreen</button>
 				</div>
 			</div>
 		</div>
@@ -3251,16 +3695,30 @@
 
 			// Project details
 			const projectDetails = {
-				'tocfl': {
-					title: 'Learning Mandarin with TOCFL',
-					description: `<p>A comprehensive E-Learning architecture specifically engineered to solve the complex linguistic challenges of Traditional Chinese acquisition. Tailored for the TOCFL (Test of Chinese as a Foreign Language) framework, this platform spans from A1 to B1 proficiency levels, integrating systematic vocabulary mapping and grammar logic.</p>
-						<p>Developed with direct pedagogical support from Taiwanese academic experts, the system moves beyond standard textbook paradigms to offer a high-fidelity immersion into authentic Taiwanese cultural contexts and local expressions. The architecture focuses on user-centric learning paths, helping students navigate the nuances of real-world communication while preparing for rigorous certification.</p>`,
+				'surgery': {
+					title: 'Surgical Video Intelligence',
+					description: `<p><strong>Overview</strong></p>
+						<p>Surgical Video Intelligence is a browser-based research and education platform for exploring robotic-assisted surgery videos. It combines local computer vision, structured surgical annotations, information retrieval, and an optional language model assistant in one interactive workflow. The application is designed to help users inspect what appears in a surgical frame, compare model predictions with recorded annotations, and ask questions about the procedure without treating generated text as clinical advice.</p>
+
+						<p><strong>Technical architecture</strong></p>
+						<p>The vision pipeline runs directly on the user's machine through ONNX Runtime Web. Three models are executed in a Web Worker so video playback stays responsive: a YOLO11n-based detector localizes surgical instruments, while ConvNeXtV2-based classifiers estimate instrument presence and surgical task categories. The interface distinguishes recorded dataset facts from model predictions, including confidence scores and visual overlays. A domain guard can refuse out-of-domain frames instead of producing confident predictions for unrelated images.</p>
+
+						<p>For explainability, the platform includes a CAM-based activation heatmap. It uses the classifier's final feature representation and head weights to show which image regions contributed to a prediction, without requiring a backward pass or a server-side explanation service. Inference is kept local, with the latest frame prioritized so latency does not grow while the video is playing.</p>
+
+						<p><strong>Three answer paths</strong></p>
+						<p>The assistant follows a source-aware order. The grounded path answers factual questions from structured annotations such as installed instruments, task intervals, detector output, and the timeline. The extractive path retrieves and quotes relevant passages from an indexed surgical knowledge base. The generative path is optional and uses a Gemini API key supplied by the visitor; it is intended for explanation and synthesis, while factual claims remain anchored to the first two paths. Each response is labelled as recorded, quoted, or generated so users can see where it came from.</p>
+
+						<p><strong>Dataset and research foundation</strong></p>
+						<p>The project is built around the <em>Surgical Visual Understanding (SurgVU) Dataset</em>, introduced in <a href="https://arxiv.org/abs/2501.09209" target="_blank">Zia et al. (2025)</a>. SurgVU contains robotic surgical training videos recorded with the da Vinci system, together with instrument-presence labels and expert-annotated surgical tasks. The paper describes approximately 840 hours of video at 60 frames per second, around 18 million labelled frames, 155 training sessions, and eight task categories. In this portfolio project, selected excerpts and annotations are packaged for an accessible browser demonstration rather than redistributing the full dataset.</p>
+
+						<p>The work connects to broader surgical data science research, including surgical tool detection, task recognition, workflow analysis, skill assessment, and video-language modelling. It is research and educational software, not a medical device, and it has not been clinically validated for diagnosis, treatment, or patient-care decisions.</p>`,
 					images: [
-						'https://lh3.googleusercontent.com/pw/AP1GczOL3lhvSMr-_LODx2R4L8Z9Nvt8KdImTbTo9Wtfc7VYese3uLQHi0oMM3CL_Vng-ThLVUTETPaDmxHAZcZ9XWxBXyMwrAAvlkLHfcwpPduh2YLZasBO=w2400',
-						'https://lh3.googleusercontent.com/pw/AP1GczMxjmCviath7aRd-OMm2vhBr23kY00N2fSxsIlwurN6xcQxF4hR_N0gtL6clnHj3sAv5mHGnQsoQl2iU-_vOXxyYxqaXep9U4RJB0i_qlSzj9PFkz5I=w2400'
+						'https://lh3.googleusercontent.com/pw/AP1GczOCMx5kRJlLnnggWKpjqsgdTI78kFb4L73pfL66Xc05WsArrVjJpj8VFOiVyHhoofUWS716j7vydNWjLYi1mdfRuZC_E364daGz7V8tj2I-JV_83qzJ=w2400',
+						'https://lh3.googleusercontent.com/pw/AP1GczMvPJCD-4xjZD1nSn5wQppy0LMlrxwyB_bVCNkeqgq7o-iAqpG1MduHOpU9-NBjcTsxBbHC_zIOPIpXVdYMxnidGDqwxRF5jTeGu0ojKIXmFveemW2F=w2400'
 					],
 					links: [
-						{ title: 'View App', url: 'https://the-bithub.com/learning-tocfl/' },
+						{ title: 'View App', url: 'https://surgical-video-intelligence-beta.vercel.app/' },
+						{ title: 'Source Code', url: 'https://github.com/kimnguyen2002/surgical-video-intelligence' }
 					]
 				},
 				'anemia': {
@@ -3279,7 +3737,7 @@
 				},
 				'xray': {
 					title: 'Chest X-Ray Image Analysis',
-					description: `<p>A Computer Vision diagnostic tool engineered to assist radiologists in identifying pulmonary pathologies with high precision. This platform leverages the **DenseNet121** deep convolutional neural network architecture, pre-trained on large-scale medical datasets to perform multi-label classification on chest radiographs.</p>
+					description: `<p>A Computer Vision diagnostic tool engineered to assist radiologists in identifying pulmonary pathologies with high precision. This platform leverages the <b><u>DenseNet121</u></b> deep convolutional neural network architecture, pre-trained on large-scale medical datasets to perform multi-label classification on chest radiographs.</p>
 						<p>The application facilitates real-time inference, providing diagnostic heatmaps and probability scores for various medical conditions. By integrating sophisticated medical imaging processing with a high-performance web dashboard, it streamlines the screening of potential abnormalities in clinical workflows.</p>`,
 					images: [
 						'https://lh3.googleusercontent.com/pw/AP1GczMnFxVlt5xk6Y6TZDPwgmu6u3iHnCo4idmkvsfUC2KZ9qFt7ezq-8GvalO7esUBbmNShqQwIygRHDmA5BfZiZQnxMVvCX8XdIR_XgjCk_CloWPsIygo=w2400',
@@ -3467,8 +3925,13 @@
 				description: 'I was actively involved in various extracurricular activities, where I made significant contributions as a photographer. I had the opportunity to capture key moments at university to several high-profile events, including official receptions for distinguished guests and orientations for incoming students. As the event photographer, I was responsible for capturing the essence of these important occasions. <br> <br> In addition to my work at school events, I also actively participated in volunteer programs, where I had the opportunity to meet and engage with individuals from underprivileged backgrounds. Through my photography, I aimed to raise awareness of their stories and challenges, helping to highlight the importance of social responsibility and compassion. <br> <br> If you are interested, you can explore more of my photographs capturing the essence of these volunteer programs and the stories of individuals facing difficult circumstances <u> <b> <a href="https://online.fliphtml5.com/jvhqy/cegy/" target="_blank">here</a></b></u>.',
 				image: 'https://lh3.googleusercontent.com/uNmS3eEhuNCy8YSNcq3CMwNtIdbyrIG90wvrufpXa1tF8RCKwE7hW8vIFi9LMw9EKvhV-4JgCpGYS2QP6T_im06IAx_7oZLQ6BElnBjnAQtLehNlkzikJz9CtPJrzzZhSzi36rAlbk0=w2400',
 				link: 'https://drive.google.com/file/d/1sj1moehAgI5OwqVnG5D1HMLp6oZiCWBo/view?usp=share_link'
+			},
+			'semiconductor-manufacturing-ic-design': {
+				title: 'Semiconductor Manufacturing & IC Design',
+				description: 'This certificate validates foundational and applied knowledge in semiconductor wafer fabrication, lithography processes, cleanroom standards, and integrated circuit (IC) layout design.',
+				image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+				link: 'https://drive.google.com/'
 			}
-			// You can add more certificates as needed
 		};
 
 		// Open modal when clicking on a certificate
@@ -3526,6 +3989,224 @@
 				certModal.style.display = 'none';
 				document.body.style.overflow = 'auto';
 			}
+		});
+
+		// Photography Fullscreen Logic
+		const toggleFullscreenBtn = document.getElementById('toggleFullscreenPhoto');
+		const photoIframeWrapper = document.getElementById('photoIframeWrapper');
+		if (toggleFullscreenBtn && photoIframeWrapper) {
+			toggleFullscreenBtn.addEventListener('click', function () {
+				if (!document.fullscreenElement) {
+					if (photoIframeWrapper.requestFullscreen) {
+						photoIframeWrapper.requestFullscreen().catch(function () {
+							window.open('https://online.fliphtml5.com/jvhqy/cegy/', '_blank');
+						});
+					} else if (photoIframeWrapper.webkitRequestFullscreen) {
+						photoIframeWrapper.webkitRequestFullscreen();
+					} else if (photoIframeWrapper.msRequestFullscreen) {
+						photoIframeWrapper.msRequestFullscreen();
+					} else {
+						window.open('https://online.fliphtml5.com/jvhqy/cegy/', '_blank');
+					}
+				} else {
+					if (document.exitFullscreen) {
+						document.exitFullscreen();
+					} else if (document.webkitExitFullscreen) {
+						document.webkitExitFullscreen();
+					}
+				}
+			});
+		}
+
+		// Awards / PDF Modal Logic
+		const awardModal = document.getElementById('awardModal');
+		const awardModalTitle = document.getElementById('award-modal-title');
+		const awardModalDescription = document.getElementById('award-modal-description');
+		const awardModalIframe = document.getElementById('award-modal-iframe');
+		const awardModalExternal = document.getElementById('award-modal-external');
+		const awardModalFullscreen = document.getElementById('award-modal-fullscreen');
+
+		function formatGoogleDriveEmbedUrl(url) {
+			if (!url) return '';
+			// Auto convert standard Google Drive view link to embeddable preview URL
+			if (url.includes('drive.google.com/file/d/')) {
+				return url.replace(/\/view(\?.*)?$/, '/preview').replace(/\/edit(\?.*)?$/, '/preview');
+			}
+			return url;
+		}
+
+		document.querySelectorAll('.open-pdf-modal, [data-open-pdf]').forEach(btn => {
+			btn.addEventListener('click', function (e) {
+				e.preventDefault();
+				const rawUrl = this.getAttribute('data-pdf') || this.getAttribute('href');
+				const title = this.getAttribute('data-title') || this.closest('.awards-card, .proposal-card')?.querySelector('h3')?.textContent || 'Presentation / Proposal';
+				const desc = this.getAttribute('data-desc') || this.closest('.awards-card, .proposal-card')?.querySelector('p')?.textContent || '';
+
+				const embedUrl = formatGoogleDriveEmbedUrl(rawUrl);
+
+				if (awardModal && embedUrl) {
+					if (awardModalTitle) awardModalTitle.textContent = title;
+					if (awardModalDescription) {
+						awardModalDescription.innerHTML = desc ? `<p style="opacity: 0.85; margin: 0; font-size: 0.9rem;">${desc}</p>` : '';
+					}
+					if (awardModalIframe) awardModalIframe.src = embedUrl;
+					if (awardModalExternal) {
+						awardModalExternal.href = rawUrl;
+					}
+					awardModal.style.display = 'block';
+					document.body.style.overflow = 'hidden';
+				}
+			});
+		});
+
+		if (awardModal) {
+			const awardClose = awardModal.querySelector('.close-modal');
+			if (awardClose) {
+				awardClose.addEventListener('click', function () {
+					awardModal.style.display = 'none';
+					if (awardModalIframe) awardModalIframe.src = '';
+					document.body.style.overflow = 'auto';
+				});
+			}
+
+			window.addEventListener('click', function (e) {
+				if (e.target === awardModal) {
+					awardModal.style.display = 'none';
+					if (awardModalIframe) awardModalIframe.src = '';
+					document.body.style.overflow = 'auto';
+				}
+			});
+
+			if (awardModalFullscreen) {
+				awardModalFullscreen.addEventListener('click', function () {
+					const container = awardModal.querySelector('.modal-pdf-container');
+					if (container) {
+						if (!document.fullscreenElement) {
+							if (container.requestFullscreen) {
+								container.requestFullscreen();
+							} else if (container.webkitRequestFullscreen) {
+								container.webkitRequestFullscreen();
+							}
+						} else {
+							if (document.exitFullscreen) {
+								document.exitFullscreen();
+							}
+						}
+					}
+				});
+			}
+		}
+
+		// Proposal / Award Details Modal Logic
+		const proposalDetailModal = document.getElementById('proposalDetailModal');
+		const proposalDetailModalTitle = document.getElementById('proposal-detail-modal-title');
+		const proposalDetailModalImages = document.getElementById('proposal-detail-modal-images');
+		const proposalDetailModalDescription = document.getElementById('proposal-detail-modal-description');
+		const proposalDetailModalLinks = document.getElementById('proposal-detail-modal-links');
+
+		const proposalDetails = {
+			'ntu-proposal-2025': {
+				title: '3rd Place - Department Proposal Competition',
+				images: [
+					'https://lh3.googleusercontent.com/pw/AP1GczNmMrEPI_zGx-MLoI9v_IiutuRQXU3s_xPhQThCrQ2C_h8AKQVFx-DFuwuIMIMYZoVQQ7bmCPq334nsJyhAryQb9PlLt7ZIrYHXhmdHa6pItjWTXhKP=w2400'
+				],
+				description: `
+					<p><strong>Topic:</strong> Application of Deep Learning Models for Multi-Omics–Based Drug Response Prediction in Non-Small Cell Lung Cancer (NSCLC)</p>
+					</br>
+					<p>Awarded <strong>3rd Place</strong> in the 2025 Department Proposal Competition for the 1st-Year Students Category at <strong>National Taiwan University (NTU)</strong>.</p>
+					</br>
+					<p>This project proposes an integrative deep learning architecture combining genomics, transcriptomics, and pharmacological datasets to predict drug sensitivity and resistance mechanisms in NSCLC patients, aiming to enhance precision oncology treatment strategies.</p>
+					</br>
+					<p style="padding-top: 16px; border-top: 1px solid var(--border-color); opacity: 0.8;"><strong>Note on documentation:</strong> I became aware of this award approximately one year after the competition had concluded. By that time, the department's certificate issuance period had ended, and a certificate could no longer be obtained. The official competition results page is therefore provided as the primary publicly verifiable record of this recognition.</p>
+				`,
+				pdfUrl: 'https://drive.google.com/file/d/1t9AMX9tqR4wSlpG0qjAknpcthF-HQNvZ/view?usp=sharing',
+				resultUrl: 'https://smartmhi.ntu.edu.tw/news/News/detail/%E3%80%90News%E3%80%91-Results-of-the-2025-Proposal-Competition'
+			}
+		};
+
+		// Open Proposal Detail Modal when clicking on the card
+		document.querySelectorAll('.awards-card, .proposal-card').forEach(card => {
+			card.addEventListener('click', function (e) {
+				// If clicked on action link, let the link handle its own action
+				if (e.target.closest('.open-pdf-modal') || e.target.closest('a')) {
+					return;
+				}
+
+				const awardId = this.getAttribute('data-award') || 'ntu-proposal-2025';
+				const details = proposalDetails[awardId] || {
+					title: this.querySelector('h3')?.textContent || 'Award / Proposal Details',
+					images: [this.querySelector('.awards-img-wrapper img, .proposal-img-wrapper img')?.src].filter(Boolean),
+					description: this.querySelector('p')?.outerHTML || '',
+					pdfUrl: this.querySelector('.open-pdf-modal')?.getAttribute('data-pdf') || '',
+					resultUrl: this.querySelector('a[href*="http"]')?.href || ''
+				};
+
+				if (proposalDetailModal && details) {
+					if (proposalDetailModalTitle) {
+						proposalDetailModalTitle.textContent = details.title;
+					}
+
+					// Render full images inside the modal
+					if (proposalDetailModalImages) {
+						proposalDetailModalImages.innerHTML = '';
+						if (details.images && details.images.length > 0) {
+							details.images.forEach(imgSrc => {
+								const img = document.createElement('img');
+								img.src = imgSrc;
+								img.alt = details.title;
+								img.style.width = '100%';
+								img.style.borderRadius = '8px';
+								img.style.border = '1px solid var(--border-color)';
+								img.style.boxShadow = '0 5px 20px rgba(0,0,0,0.3)';
+								proposalDetailModalImages.appendChild(img);
+							});
+						}
+					}
+
+					// Render description
+					if (proposalDetailModalDescription) {
+						proposalDetailModalDescription.innerHTML = details.description;
+					}
+
+					// Render action links
+					if (proposalDetailModalLinks) {
+						proposalDetailModalLinks.innerHTML = '';
+						if (details.pdfUrl) {
+							const pdfBtn = document.createElement('a');
+							pdfBtn.href = details.pdfUrl;
+							pdfBtn.className = 'button open-pdf-modal';
+							pdfBtn.setAttribute('data-pdf', details.pdfUrl);
+							pdfBtn.setAttribute('data-title', details.title);
+							pdfBtn.innerHTML = '<i class="fas fa-file-powerpoint"></i> View Proposal (PDF)';
+							pdfBtn.addEventListener('click', function (ev) {
+								ev.preventDefault();
+								proposalDetailModal.style.display = 'none';
+								const embedUrl = formatGoogleDriveEmbedUrl(details.pdfUrl);
+								if (awardModal && embedUrl) {
+									awardModalTitle.textContent = details.title;
+									awardModalIframe.src = embedUrl;
+									awardModalExternal.href = details.pdfUrl;
+									awardModal.style.display = 'block';
+								}
+							});
+							proposalDetailModalLinks.appendChild(pdfBtn);
+						}
+
+						if (details.resultUrl) {
+							const resBtn = document.createElement('a');
+							resBtn.href = details.resultUrl;
+							resBtn.target = '_blank';
+							resBtn.className = 'button';
+							resBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Result Link';
+							proposalDetailModalLinks.appendChild(resBtn);
+						}
+
+					}
+
+					proposalDetailModal.style.display = 'block';
+					document.body.style.overflow = 'hidden';
+				}
+			});
 		});
 	</script>
 
