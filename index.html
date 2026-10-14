@@ -2250,6 +2250,24 @@
 				
 
 				<div class="projects-grid animate delay-2">
+
+					<!-- DiaGnostix -->
+					<div class="project-card" data-project="diagnostix">
+						<div class="project-img">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczMLiqUMMRAccp0S1V4GxK5GAVyY_I4krJidukkBXdAg6_m_Gx_-ry0fhw-PI_Eux33yoqGlvAgNro5vB1vTqlw7yS_Bu445xfBjsO09fylxW_aDeXXv=w2400"
+								alt="DiaGnostix: Edge-AI Diabetes Risk Screening">
+						</div>
+						<div class="project-info">
+							<h3>DiaGnostix: Edge-AI Diabetes Risk Screening (In Progress)</h3>
+							<p>DiaGnostix is a low-cost non-invasive wearable prototype that screens for diabetes risk without a blood sample by using ESP32-S3.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="project-links">
+								<a href="https://github.com/kimnguyen2002/DiaGnostix"
+									target="_blank">View Code</a>
+							</div>
+						</div>
+					</div>
+
 					<!-- Surgical Video Intelligence -->
 					<div class="project-card" data-project="surgery">
 						<div class="project-img">
@@ -2258,14 +2276,12 @@
 						</div>
 						<div class="project-info">
 							<h3>Surgical Video Intelligence</h3>
-							<p>Browser-based analysis of robotic surgery videos using on-device computer vision, annotated surgical data, and explainable assistant responses.</p>
+							<p>A browser-based platform for analyzing robotic surgery videos using on-device computer vision, annotated surgical data, and explainable assistant responses.</p>
 							<p class="click-detail-note">* Click to read in detail</p>
 							<div class="project-links">
-								<a href="https://surgical-video-intelligence-beta.vercel.app/" target="_blank">View
-									App</a>
+								<a href="https://surgical-video-intelligence-beta.vercel.app/" target="_blank">View App</a>
 								<a href="https://github.com/kimnguyen2002/surgical-video-intelligence"
-									target="_blank">View
-									Code</a>
+									target="_blank">View Code</a>
 							</div>
 						</div>
 					</div>
@@ -2273,13 +2289,12 @@
 					<!-- Anemia -->
 					<div class="project-card" data-project="anemia">
 						<div class="project-img">
-							<img src="https://lh3.googleusercontent.com/pw/AP1GczOjksvb-G0a_kOf13Bf8v6EtrYlX7CmoJ8tgAfsrIHHlq0DEDRJpEeC2BG6xuEmV6IlWPDTkuECTZ-1jgL02tGQn8NRyaqGn7zJ0_LC-kZZb4FMAfQ_=w2400"
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczMjq5uRnr9fQ9gHdVmmN3I-4YyhUDT_d9mGJmjBL2LPBWLaTx5pLa5vg-jNytR74geTROOMHfGF0_tF5CtrJdxy2nl0TsQJG1QsKxOc00XH8oYNFgl0=w2400"
 								alt="Anemia Diagnostic Assistant">
 						</div>
 						<div class="project-info">
 							<h3>Anemia Diagnostic Assistant</h3>
-							<p>A high-precision predictive engine utilizing advanced Machine Learning to evaluate
-								hematological risks and streamline clinical diagnostics.</p>
+							<p>A browser-based platform for diagnosing anemia by analyzing blood test results and providing personalized treatment recommendations.</p>
 							<p class="click-detail-note">* Click to read in detail</p>
 							<div class="project-links">
 								<a href="https://anemia-diagnosis.streamlit.app/" target="_blank">View App</a>
@@ -2292,13 +2307,12 @@
 					<!-- X-ray -->
 					<div class="project-card" data-project="xray">
 						<div class="project-img">
-							<img src="https://lh3.googleusercontent.com/pw/AP1GczMnFxVlt5xk6Y6TZDPwgmu6u3iHnCo4idmkvsfUC2KZ9qFt7ezq-8GvalO7esUBbmNShqQwIygRHDmA5BfZiZQnxMVvCX8XdIR_XgjCk_CloWPsIygo=w2400"
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczO57ZEql2wrTxVi3XnJaC0TBglI2lNOTzaJYoqazxcwYTmIlOTiOKIycmaogGiNKVMt5xPNYDhdTNWPgFYZn41mSEs9Gfgy_kMeOD_sAiVBwo1X4tzt=w2400"
 								alt="Chest X-Ray Image Analysis">
 						</div>
 						<div class="project-info">
 							<h3>Chest X-Ray Image Analysis</h3>
-							<p>A Computer Vision platform leveraging Deep Learning (DenseNet121) to detect pulmonary
-								abnormalities and assist in medical imaging diagnostics.</p>
+							<p>A browser-based platform for analyzing chest X-ray images using Deep Learning (DenseNet121) to detect pulmonary abnormalities and assist in medical imaging diagnostics.</p>
 							<p class="click-detail-note">* Click to read in detail</p>
 							<div class="project-links">
 								<a href="https://chestxrayanalysis.streamlit.app/" target="_blank">View App</a>
@@ -3695,6 +3709,27 @@
 
 			// Project details
 			const projectDetails = {
+				'diagnostix': {
+					title: 'DiaGnostix: Edge-AI Diabetes Risk Screening',
+					description: `<p><strong>Overview</strong></p>
+						<p>DiaGnostix is a low-cost wearable research prototype that screens for diabetes risk without a blood sample. It combines a single-lead ECG, a fingertip pulse oximeter, a body-temperature sensor and a short health questionnaire. The screening decision is made entirely on the device: a 241-parameter neural network runs on an ESP32-S3 microcontroller, so no cloud service or phone is needed. The project is built to be useful in settings where laboratory testing is scarce, and it is explicit about what it cannot do: it flags who should take a glucose or HbA1c test, and it does not diagnose.</p>
+
+						<p><strong>Technical architecture</strong></p>
+						<p><strong>Sensing.</strong> AD8232 single-lead ECG, MAX30102 PPG for pulse and SpO₂, a 10 kΩ NTC thermistor for body temperature, and a BME280 for room conditions.</p>
+						<p><strong>Signal processing (C++ on the ESP32-S3).</strong> Pan–Tompkins QRS detection at 500 Hz; pulse arrival time from the ECG R peak to the PPG upstroke; cuffless blood pressure from a Poon–Zhang model with one-point cuff calibration; SpO₂ by ratio of ratios; heart-rate variability.</p>
+						<p><strong>On-device inference.</strong> A 13 → 16 → 1 MLP, trained in Python and exported as an int8 TensorFlow Lite model of 2,608 bytes, executed with TensorFlow Lite Micro. The firmware checks six golden test vectors at every boot to detect a model–firmware mismatch.</p>
+						<p><strong>Interface.</strong> The device serves its own web dashboard over Wi-Fi (or its own access point), with live waveforms, vitals, results history and CSV export. An LED flashes at 4 Hz when risk is at or above the threshold, and local safety alerts fire for low SpO₂ or fever.</p>
+						<p><strong>Footprint.</strong> 1.14 MB of flash (36% of the app partition) and 71 KB of static RAM on the N16R8 module.</p>
+
+						<p>This project was developed with <a href="https://www.linkedin.com/in/khemran/" target="_blank"">Emran Khan</a>.</p>`,
+					images: [
+						'https://lh3.googleusercontent.com/pw/AP1GczNsajk6_dn3t0eTJAaNT7WbgqE8LVAwdXyXtBAE-ihXMEX14x_EWDjqalRbOxjAkmshjKkouUyRL0xNVGoQWvxQ1Zyh00NciYySN2TFcTj1z8KqfDAP=w2400',
+						'https://lh3.googleusercontent.com/pw/AP1GczMLiqUMMRAccp0S1V4GxK5GAVyY_I4krJidukkBXdAg6_m_Gx_-ry0fhw-PI_Eux33yoqGlvAgNro5vB1vTqlw7yS_Bu445xfBjsO09fylxW_aDeXXv=w2400'
+					],
+					links: [
+						{ title: 'Source Code', url: 'https://github.com/kimnguyen2002/DiaGnostix' }
+					]
+				},
 				'surgery': {
 					title: 'Surgical Video Intelligence',
 					description: `<p><strong>Overview</strong></p>
