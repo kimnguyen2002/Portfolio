@@ -632,13 +632,16 @@
 			position: relative;
 			overflow: hidden;
 			border-radius: 8px;
-			transition: var(--transition);
+			/* Only animate what is needed; "all" also animates filters and shadows every frame */
+			transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+			/* Own compositor layer, keeps the rounded clip from repainting on hover */
+			transform: translateZ(0);
 			background-color: var(--secondary-color);
 			border: 1px solid var(--border-color);
 		}
 
+		/* No translate on hover: moving the box under the cursor makes it flicker at the edges */
 		.cert-item:hover {
-			transform: translateY(-5px);
 			box-shadow: var(--glow);
 			border-color: var(--accent-color);
 		}
@@ -647,7 +650,7 @@
 			width: 100%;
 			height: 250px;
 			object-fit: cover;
-			transition: var(--transition);
+			transition: transform 0.3s ease, filter 0.3s ease;
 			filter: saturate(0.7) brightness(0.9);
 		}
 
@@ -697,10 +700,10 @@
 
 		.category-tab.active,
 		.category-tab:hover {
-			background-color: rgba(93, 173, 226, 0.15);
-			border-color: var(--accent-color);
-			color: var(--accent-color);
-			box-shadow: var(--glow);
+			background-color: rgba(244, 196, 48, 0.15);
+			border-color: #f4c430;
+			color: #f4c430;
+			box-shadow: 0 0 20px rgba(244, 196, 48, 0.3);
 		}
 
 		/* Projects Section */
@@ -1385,6 +1388,19 @@
 			transform: translateY(-2px);
 		}
 
+		/* Yellow variant, used for the session page button */
+		.button.yellow {
+			color: #f4c430;
+			border-color: rgba(244, 196, 48, 0.5);
+		}
+
+		.button.yellow:hover {
+			background-color: rgba(244, 196, 48, 0.12);
+			border-color: #f4c430;
+			box-shadow: 0 0 20px rgba(244, 196, 48, 0.3);
+			color: #f4c430;
+		}
+
 		/* Special */
 		.badge-particle {
 			position: absolute;
@@ -1982,6 +1998,78 @@
 				height: 38px;
 			}
 		}
+
+		.about-carousel {
+			position: relative;
+			width: 100%;
+		}
+
+		.about-slide {
+			display: none;
+			position: relative;
+			margin: 0;
+		}
+
+		.about-slide.active {
+			display: block;
+		}
+
+		.about-slide figcaption {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			padding: 10px 14px;
+			border-radius: 0 0 8px 8px;
+			background-color: rgba(0, 0, 0, 0.35);
+			color: #fff;
+			font-family: 'JetBrains Mono', monospace;
+			font-size: 0.75rem;
+			letter-spacing: 0.5px;
+			text-align: center;
+		}
+
+		.about-carousel-controls {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			transform: translateY(-50%);
+			display: flex;
+			justify-content: space-between;
+			padding: 0 16px;
+			pointer-events: none;
+		}
+
+		.about-arrow {
+			pointer-events: auto;
+			background-color: rgba(128, 128, 128, 0.45);
+			border: none;
+			border-radius: 50%;
+			width: 46px;
+			height: 46px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			font-size: 1rem;
+			color: #fff;
+			opacity: 0.8;
+			/* Own compositor layer so hover doesn't repaint the surrounding page */
+			will-change: transform;
+			transition: opacity 0.3s ease, transform 0.3s ease;
+		}
+
+		.about-arrow:hover {
+			opacity: 1;
+			transform: scale(1.15);
+		}
+
+		@media screen and (orientation: portrait) {
+			.home-terminal {
+				display: none;
+			}
+		}
 	</style>
 	<!-- JetBrains Mono font -->
 	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -2151,8 +2239,23 @@
 						<a href="#speaking" class="button">View My Public Speaking</a>
 					</div>
 					<div class="about-image animate delay-1">
-						<img src="https://lh3.googleusercontent.com/pw/AP1GczMh_-IOOFBxy7uF7hrurhHS0RQhGrCcpdA4CVddGeZUrT3BVxvDeStdpryNZ0GH7YAmWC0l8O4kn-28LhqciyOQkyHj8aOozgezYmmb8BfCOrTcIMLt=w2400"
-							alt="Kim Nguyen" />
+						<div class="about-carousel">
+							<figure class="about-slide active">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczNfT7oe0sSe0rI0TAhoSxovGqTmk8Q-kJFF27P9Gk2oGZjCtRM04TCj5rBsH3A5qsUMhviNl0rDMMDNUiZRyVGSkiI536zYz3wVXdJQrnESGmiNI8DT=w2400" />
+								<figcaption>With Founder of FHIR（Fast Healthcare Interoperability Resources）</figcaption>
+							</figure>
+							<figure class="about-slide">
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczMh_-IOOFBxy7uF7hrurhHS0RQhGrCcpdA4CVddGeZUrT3BVxvDeStdpryNZ0GH7YAmWC0l8O4kn-28LhqciyOQkyHj8aOozgezYmmb8BfCOrTcIMLt=w2400" />
+							</figure>
+							<div class="about-carousel-controls">
+								<button type="button" class="about-arrow prev" aria-label="Previous photo">
+									<i class="fas fa-chevron-left"></i>
+								</button>
+								<button type="button" class="about-arrow next" aria-label="Next photo">
+									<i class="fas fa-chevron-right"></i>
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -2182,7 +2285,7 @@
 					</div>
 					<div class="category-links">
 						<a href="https://devfest-taipei.gdg.tw/2025/sessions/?id=1047852" target="_blank"
-							class="button small">
+							class="button small yellow">
 							<i class="fas fa-external-link-alt"></i> View My Session Page
 						</a>
 					</div>
@@ -4320,11 +4423,40 @@
 				setTimeout(typeNext, startDelay);
 			}
 
-			if (document.readyState === 'loading') {
-				document.addEventListener('DOMContentLoaded', function () { runTyping('home-terminal-body', homeLines, 800, true); });
-			} else {
+			const portraitQuery = window.matchMedia('(orientation: portrait)');
+			let terminalStarted = false;
+
+			function startTerminal() {
+				if (terminalStarted || portraitQuery.matches) return;
+				terminalStarted = true;
 				runTyping('home-terminal-body', homeLines, 800, true);
 			}
+
+			portraitQuery.addEventListener('change', startTerminal);
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', startTerminal);
+			} else {
+				startTerminal();
+			}
+		})();
+	</script>
+	<script>
+		(function () {
+			const aboutSlides = document.querySelectorAll('.about-slide');
+			const aboutPrev = document.querySelector('.about-arrow.prev');
+			const aboutNext = document.querySelector('.about-arrow.next');
+			let aboutIndex = 0;
+
+			function showAboutSlide(index) {
+				aboutIndex = (index + aboutSlides.length) % aboutSlides.length;
+				aboutSlides.forEach(function (slide, i) {
+					slide.classList.toggle('active', i === aboutIndex);
+				});
+			}
+
+			aboutPrev.addEventListener('click', function () { showAboutSlide(aboutIndex - 1); });
+			aboutNext.addEventListener('click', function () { showAboutSlide(aboutIndex + 1); });
 		})();
 	</script>
 	<!-- Public Speaking JS -->
