@@ -436,12 +436,23 @@
 
 		.home-buttons {
 			margin-top: 60px;
-			display: flex;
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 			gap: 12px;
-			flex-wrap: wrap;
-			justify-content: center;
+			width: 100%;
+			max-width: 420px;
+			margin-left: auto;
+			margin-right: auto;
 			position: relative;
 			z-index: 2;
+		}
+
+		.home-buttons .button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			min-width: 0;
 		}
 
 		.home-right {
@@ -554,7 +565,6 @@
 			}
 
 			.home-buttons {
-				flex-direction: column;
 				width: 100%;
 			}
 
@@ -704,6 +714,69 @@
 			border-color: #f4c430;
 			color: #f4c430;
 			box-shadow: 0 0 20px rgba(244, 196, 48, 0.3);
+		}
+
+		/* Writings */
+		.writings-list {
+			margin-top: 28px;
+			width: 100%;
+			max-width: none;
+		}
+
+		.writing-card {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(240px, 38%);
+			align-items: center;
+			gap: 28px;
+			padding: 30px;
+			background: var(--secondary-color);
+			border: 1px solid var(--border-color);
+			border-radius: 8px;
+		}
+
+		.writing-meta {
+			color: var(--accent-color);
+			font-size: 0.8rem;
+			margin-bottom: 8px;
+		}
+
+		.writing-card h3 {
+			font-size: 1.3rem;
+			line-height: 1.5;
+			margin-bottom: 6px;
+		}
+
+		.writing-subtitle {
+			font-size: 1rem;
+			line-height: 1.6;
+			opacity: 0.75;
+			margin-bottom: 12px;
+		}
+
+		.writing-link {
+			font-size: 0.85rem;
+			color: var(--accent-color);
+		}
+
+		.writing-thumbnail {
+			width: 100%;
+			height: auto;
+			aspect-ratio: 16 / 10;
+			object-fit: cover;
+			border-radius: 6px;
+		}
+
+		@media screen and (max-width: 640px) {
+			.writing-card {
+				grid-template-columns: minmax(0, 1fr);
+				gap: 14px;
+				padding: 16px;
+			}
+
+			.writing-thumbnail {
+				width: 100%;
+				height: auto;
+			}
 		}
 
 		/* Projects Section */
@@ -2088,6 +2161,7 @@
 		<a href="#speaking"><i class="fas fa-microphone"></i><span>Public Speaking</span></a>
 		<a href="#awards"><i class="fas fa-award"></i><span>Awards</span></a>
 		<a href="#work"><i class="fas fa-code"></i><span>Projects</span></a>
+		<a href="#writings"><i class="fas fa-pen-nib"></i><span>Writings</span></a>
 		<a href="#certificate"><i class="fas fa-certificate"></i><span>Certificates</span></a>
 		<a href="#photograph"><i class="fas fa-camera"></i><span>Photography</span></a>
 		<a href="#instagram"><i class="fab fa-instagram"></i><span>Instagram</span></a>
@@ -2131,9 +2205,10 @@
 					</div>
 				</div>
 				<div class="home-buttons animate delay-1">
-					<a href="#about" class="button">Get To Know Me</a>
+					<a href="#about" class="button">About Me</a>
 					<a href="#speaking" class="button">Public Speaking</a>
-					<a href="#work" class="button">View My Projects</a>
+					<a href="#awards" class="button">Awards</a>
+					<a href="#work" class="button">Projects</a>
 				</div>
 			</div>
 
@@ -2504,6 +2579,24 @@
 					</div>
 
 					<!-- Add more projects as needed -->
+				</div>
+			</div>
+		</section>
+
+		<!-- Writings -->
+		<section id="writings" class="section active">
+			<div class="container">
+				<h2 class="animate">Writings</h2>
+				<div class="writings-list animate delay-2">
+					<article class="writing-card">
+						<div class="writing-content">
+						<p class="writing-meta"><i class="fab fa-medium" aria-hidden="true"></i> Medium · AI Advances</p>
+						<h3>When AI Gets Smarter, Is Our Cybersecurity Keeping Up?</h3>
+						<p class="writing-subtitle">This article leads you from PHP vulnerabilities to Taiwan's banking sector, from European supermarket refrigeration systems to food security.</p>
+						<a class="writing-link" href="https://medium.com/ai-advances/when-ai-gets-smarter-is-our-cybersecurity-keeping-up-from-university-systems-to-food-security-ab0cb6371f89?sk=67332cd5390c0324cccbef4f6ba3adc0" target="_blank" rel="noopener noreferrer">Read on Medium <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
+					</div>
+						<img class="writing-thumbnail" src="https://lh3.googleusercontent.com/pw/AP1GczNq2vrqERBloPn82UdrrgDm8izTY4Ui1fu6SmLZispqFo1KrxvTiXnebtBKdsCKZROrIwKUwiB8wH7eqXPhI8GPkNQlIBeLPr2x6KzjGOYINCJayKtd=w2400" alt="AI and cybersecurity article thumbnail" width="640" height="400" loading="lazy">
+					</article>
 				</div>
 			</div>
 		</section>
