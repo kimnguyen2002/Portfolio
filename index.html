@@ -2314,6 +2314,30 @@
 				<h2 class="animate">Awards</h2>
 				<div class="awards-grid animate delay-2">
 
+					<!-- 1st Place – DevFest Cloud Buildathon 2026 -->
+					<div class="awards-card" data-award="devfest-cloud-2026" style="cursor: pointer;">
+						<div class="awards-img-wrapper">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczPdid-UHc4pMjZrtUxBOZVtdGnGtq_mU3nZDMm_H3qHFBW1u7Mj7LMeOGbewx107n6H__-UU6m1CNj_E-zSVR3EaydIkSljBwtVLRchtIZC0A_flTTO=w2400" alt="1st Place – DevFest Cloud Buildathon 2026">
+							<span class="awards-badge"><i class="fas fa-medal"></i> 1st Place Award</span>
+						</div>
+						<div class="awards-info">
+							<h3>1st Place – DevFest Cloud Buildathon 2026</h3>
+							<div class="awards-meta">
+								<span><i class="fas fa-calendar-alt"></i> October 2026</span>
+								<span><i class="fas fa-university"></i> GDG Cloud Hanoi</span>
+							</div>
+							<p>Recognized for developing <em>Charlie – Surgical Video Intelligence</em>, an AI-powered application exploring the use of artificial intelligence in surgical video analysis.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="awards-links">
+								<a href="https://drive.google.com/file/d/1WJlamz52xe9XvKv1kjAwpctOGA1FECmo/view?usp=sharing" class="open-pdf-modal"
+									data-pdf="https://drive.google.com/file/d/1WJlamz52xe9XvKv1kjAwpctOGA1FECmo/view?usp=sharing"
+									data-title="Charlie – Surgical Video Intelligence | DevFest Cloud Buildathon 2026"
+									data-desc="Project presentation: Charlie – Surgical Video Intelligence and its approach to AI-powered surgical video analysis."><i class="fas fa-file-powerpoint"></i> View Slides</a>
+								<a href="https://charlie-surgical-video-intelligence-931254813719.asia-southeast1.run.app" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> View Charlie</a>
+							</div>
+						</div>
+					</div>
+
 					<!-- 3rd Place - Department Proposal Competition -->
 					<div class="awards-card" data-award="ntu-proposal-2025" style="cursor: pointer;">
 						<div class="awards-img-wrapper">
@@ -2353,6 +2377,21 @@
 				
 
 				<div class="projects-grid animate delay-2">
+
+					<!-- Biomedical Signal Processing -->
+					<div class="project-card" data-project="biomedical-signal-processing">
+						<div class="project-img">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczOCHTYEFW2c1m0SBX-7gJzx4HNyWZMDe1SH8fouY7FWuMfS1LhEwHvsPQMR91uymTtB2vWHpyNBogwMhc978aV02BbhsTRssms1j70mVe_tXtpxw8if=w2400" alt="Biomedical Signal Processing book preview">
+						</div>
+						<div class="project-info">
+							<h3>Biomedical Signal Processing - Documentation</h3>
+							<p>An educational and technical documentation project exploring the mathematical foundations and practical applications of biomedical signal processing.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="project-links">
+								<a href="https://kimnguyen2002.github.io/biomedical-signal-processing/" target="_blank" rel="noopener noreferrer">Read the Book</a>
+							</div>
+						</div>
+					</div>
 
 					<!-- DiaGnostix -->
 					<div class="project-card" data-project="diagnostix">
@@ -3713,6 +3752,7 @@
 
 				// Start auto-sway after initial animation settles
 				setTimeout(autoSway, 3000);
+
 			}
 
 
@@ -3812,6 +3852,26 @@
 
 			// Project details
 			const projectDetails = {
+				'biomedical-signal-processing': {
+					title: 'Biomedical Signal Processing',
+					description: `<p><strong>Overview</strong></p>
+						<p><em>Biomedical Signal Processing: From Fundamentals to Advanced Methods, with Python</em> is an educational book I am developing alongside my master’s research in Smart Medicine and Health Informatics at National Taiwan University. Drawing on my transition from International Business into data science and health informatics, it makes the connection between an idea, its equation, and its implementation visible through step-by-step explanations.</p>
+
+						<p><strong>From foundations to physiological applications</strong></p>
+						<p>The book progresses from biomedical signals and mathematical foundations to linear time-invariant systems, convolution, Fourier analysis, sampling, spectral estimation, and filtering. ECG is the main running example, reflecting my thesis focus, with EEG and wavelet analysis extending the discussion to other signals and methods.</p>
+
+						<p><strong>Learning through equations and code</strong></p>
+						<p>Worked Jupyter notebooks combine explanations, Python code, saved outputs, and figures. Readers can follow the material online or run the notebooks locally with recordings from PhysioNet. The examples examine how processing choices affect waveform amplitude, shape, and timing, connecting each calculation to the physiological information it may preserve or change.</p>
+
+						<p><strong>Audience and reference material</strong></p>
+						<p>Written for students and researchers in biomedical engineering, health informatics, medicine, physiology, and data science, the book includes appendices covering Python, NumPy, pandas, biomedical datasets, mathematical notation, and LaTeX. It serves as both a learning resource and a record of my preparation for further research and PhD study.</p>`,
+					images: ['https://lh3.googleusercontent.com/pw/AP1GczOCHTYEFW2c1m0SBX-7gJzx4HNyWZMDe1SH8fouY7FWuMfS1LhEwHvsPQMR91uymTtB2vWHpyNBogwMhc978aV02BbhsTRssms1j70mVe_tXtpxw8if=w2400',
+						'https://lh3.googleusercontent.com/pw/AP1GczPcGEl-Z36ZkVu_IXmDqsVrSUb6jUZeIu2NiBJDfrxHzZT5ChXK_Ko-8dZQYJRA2thHujWMlkQyiRafGdFSPFUc4QlxXY75GT_vH6hVrx_LdjEr35m8=w2400'
+					],
+					links: [
+						{ title: 'Read the Book', url: 'https://kimnguyen2002.github.io/biomedical-signal-processing/' }
+					]
+				},
 				'diagnostix': {
 					title: 'DiaGnostix: Edge-AI Diabetes Risk Screening',
 					description: `<p><strong>Overview</strong></p>
@@ -4243,6 +4303,21 @@
 		const proposalDetailModalLinks = document.getElementById('proposal-detail-modal-links');
 
 		const proposalDetails = {
+			'devfest-cloud-2026': {
+				title: '1st Place – DevFest Cloud Buildathon 2026',
+				images: ['https://lh3.googleusercontent.com/pw/AP1GczPdid-UHc4pMjZrtUxBOZVtdGnGtq_mU3nZDMm_H3qHFBW1u7Mj7LMeOGbewx107n6H__-UU6m1CNj_E-zSVR3EaydIkSljBwtVLRchtIZC0A_flTTO=w2400',
+					'https://lh3.googleusercontent.com/pw/AP1GczMk10ClwjFzzdMcKhPLbZqdi55I2YiZQXTelOSX3PgiRo4zpsw_l7ubqMu6m3GHQGY8UQqR5QjJu3wVcm1skR-vgZkAAJaScylGWhK353j2APSwin2r=w2400', 
+					'https://lh3.googleusercontent.com/pw/AP1GczPPjlI_kwuOBXyHVyHbvq-03L4_tORE2cbtzjXqwwChFVrE-NbFNBWgvjqHq6Nqkk1p1F50MCO81mwCfX9GeXM1Noy-Ld50FmFW_RlDVWUpBY2VTpu4=w2400'
+				],
+				description: `<p><strong>About Charlie</strong></p>
+					<p>Charlie – Surgical Video Intelligence explores how artificial intelligence can help users examine surgical video and interpret visual information. The project brings together biomedical informatics and computer vision in an application for research and education.</p>
+					<p>The presentation introduces the project and its approach to AI-powered surgical video analysis.</p>`,
+				pdfUrl: 'https://drive.google.com/file/d/1WJlamz52xe9XvKv1kjAwpctOGA1FECmo/view?usp=sharing',
+				pdfLabel: 'View Slides',
+				appUrl: 'https://charlie-surgical-video-intelligence-931254813719.asia-southeast1.run.app',
+				pdfTitle: 'Charlie – Surgical Video Intelligence | DevFest Cloud Buildathon 2026',
+				pdfDescription: 'Project presentation: Charlie – Surgical Video Intelligence and its approach to AI-powered surgical video analysis.'
+			},
 			'ntu-proposal-2025': {
 				title: '3rd Place - Department Proposal Competition',
 				images: [
@@ -4315,19 +4390,30 @@
 							pdfBtn.className = 'button open-pdf-modal';
 							pdfBtn.setAttribute('data-pdf', details.pdfUrl);
 							pdfBtn.setAttribute('data-title', details.title);
-							pdfBtn.innerHTML = '<i class="fas fa-file-powerpoint"></i> View Proposal (PDF)';
+							pdfBtn.innerHTML = '<i class="fas fa-file-powerpoint"></i> ' + (details.pdfLabel || 'View Proposal (PDF)');
 							pdfBtn.addEventListener('click', function (ev) {
 								ev.preventDefault();
 								proposalDetailModal.style.display = 'none';
 								const embedUrl = formatGoogleDriveEmbedUrl(details.pdfUrl);
 								if (awardModal && embedUrl) {
-									awardModalTitle.textContent = details.title;
+									awardModalTitle.textContent = details.pdfTitle || details.title;
+									awardModalDescription.textContent = details.pdfDescription || '';
 									awardModalIframe.src = embedUrl;
 									awardModalExternal.href = details.pdfUrl;
 									awardModal.style.display = 'block';
 								}
 							});
 							proposalDetailModalLinks.appendChild(pdfBtn);
+						}
+
+						if (details.appUrl) {
+							const appBtn = document.createElement('a');
+							appBtn.href = details.appUrl;
+							appBtn.target = '_blank';
+							appBtn.rel = 'noopener noreferrer';
+							appBtn.className = 'button';
+							appBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Explore Charlie';
+							proposalDetailModalLinks.appendChild(appBtn);
 						}
 
 						if (details.resultUrl) {
