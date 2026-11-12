@@ -2073,18 +2073,22 @@
 		}
 
 		.about-carousel {
+			display: grid;
+			overflow: hidden;
+			border-radius: 8px;
 			position: relative;
 			width: 100%;
 		}
 
 		.about-slide {
-			display: none;
+			grid-area: 1 / 1;
+			visibility: hidden;
 			position: relative;
 			margin: 0;
 		}
 
 		.about-slide.active {
-			display: block;
+			visibility: visible;
 		}
 
 		.about-slide figcaption {
@@ -2101,6 +2105,22 @@
 			letter-spacing: 0.5px;
 			text-align: center;
 		}
+
+
+		.about-slide img { display: block; }
+		.about-playback { grid-area: 2 / 1; display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #050c16; position: relative; z-index: 2; }
+		.about-playback button { width: 36px; height: 36px; flex-shrink: 0; border: 0; border-radius: 4px; background: transparent; color: white; cursor: pointer; }
+		.about-playback button:hover { background: #20344b; }
+		.about-playback button:focus-visible { outline: 2px solid var(--accent-color); }
+		.about-progress { flex: 1; min-width: 0; width: 100%; height: 5px; border: 0; border-radius: 4px; overflow: hidden; background: #26374b; accent-color: var(--accent-color); }
+		.about-progress::-webkit-progress-bar { background: #26374b; }
+		.about-progress::-webkit-progress-value { background: var(--accent-color); }
+		.about-progress::-moz-progress-bar { background: var(--accent-color); }
+		.about-photo-dialog { margin: auto; max-width: 95vw; max-height: 95vh; padding: 44px 16px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: #050c16; color: white; }
+		.about-photo-dialog::backdrop { background: rgba(0,0,0,.85); }
+		.about-photo-dialog img { display: block; max-width: 85vw; max-height: 75vh; object-fit: contain; }
+		.about-photo-dialog button { position: absolute; right: 12px; top: 8px; background: transparent; color: white; border: 0; font-size: 24px; cursor: pointer; }
+		.about-photo-dialog p { max-width: 85vw; margin: 12px 0 0; font-size: .85rem; }
 
 		.about-carousel-controls {
 			position: absolute;
@@ -2317,10 +2337,11 @@
 						<div class="about-carousel">
 							<figure class="about-slide active">
 								<img src="https://lh3.googleusercontent.com/pw/AP1GczNfT7oe0sSe0rI0TAhoSxovGqTmk8Q-kJFF27P9Gk2oGZjCtRM04TCj5rBsH3A5qsUMhviNl0rDMMDNUiZRyVGSkiI536zYz3wVXdJQrnESGmiNI8DT=w2400" />
-								<figcaption>With Founder of FHIR（Fast Healthcare Interoperability Resources）</figcaption>
+								<figcaption>With Mr. Grahame Grieve - Founder of FHIR（Fast Healthcare Interoperability Resources）</figcaption>
 							</figure>
 							<figure class="about-slide">
-								<img src="https://lh3.googleusercontent.com/pw/AP1GczMh_-IOOFBxy7uF7hrurhHS0RQhGrCcpdA4CVddGeZUrT3BVxvDeStdpryNZ0GH7YAmWC0l8O4kn-28LhqciyOQkyHj8aOozgezYmmb8BfCOrTcIMLt=w2400" />
+								<img src="https://lh3.googleusercontent.com/pw/AP1GczMysS0bee5kYmvc5RntSS-MYZM443y_m5C0Hw1wQDrD5sEFizLCrAHWDWig0-z2BjC8lr6r0aLslHw2YcjGuGHUQs8qhDIHxkka1D6bD9mOWDXlRexy=w2400" />
+								<figcaption>With Mr. Chien-Chang Lee - Chief Information Officer, Ministry of Health and Welfare, Taiwan</figcaption>
 							</figure>
 							<div class="about-carousel-controls">
 								<button type="button" class="about-arrow prev" aria-label="Previous photo">
@@ -2329,6 +2350,11 @@
 								<button type="button" class="about-arrow next" aria-label="Next photo">
 									<i class="fas fa-chevron-right"></i>
 								</button>
+							</div>
+							<div class="about-playback">
+								<button type="button" class="about-pause" aria-label="Pause slideshow" aria-pressed="false"><i class="fas fa-pause" aria-hidden="true"></i></button>
+								<progress class="about-progress" max="5000" value="0" aria-label="Time until next photo"></progress>
+								<button type="button" class="about-expand" aria-label="Enlarge photo"><i class="fas fa-expand" aria-hidden="true"></i></button>
 							</div>
 						</div>
 					</div>
@@ -2463,7 +2489,7 @@
 							<p>An educational and technical documentation project exploring the mathematical foundations and practical applications of biomedical signal processing.</p>
 							<p class="click-detail-note">* Click to read in detail</p>
 							<div class="project-links">
-								<a href="https://kimnguyen2002.github.io/biomedical-signal-processing/" target="_blank" rel="noopener noreferrer">Read the Book</a>
+								<a href="https://kimnguyen2002.github.io/biomedical-signal-processing/" target="_blank" rel="noopener noreferrer">Read the Documentation</a>
 							</div>
 						</div>
 					</div>
@@ -2485,24 +2511,6 @@
 						</div>
 					</div>
 
-					<!-- Surgical Video Intelligence -->
-					<div class="project-card" data-project="surgery">
-						<div class="project-img">
-							<img src="https://lh3.googleusercontent.com/pw/AP1GczMvPJCD-4xjZD1nSn5wQppy0LMlrxwyB_bVCNkeqgq7o-iAqpG1MduHOpU9-NBjcTsxBbHC_zIOPIpXVdYMxnidGDqwxRF5jTeGu0ojKIXmFveemW2F=w2400"
-								alt="Surgical Video Intelligence">
-						</div>
-						<div class="project-info">
-							<h3>Surgical Video Intelligence</h3>
-							<p>A browser-based platform for analyzing robotic surgery videos using on-device computer vision, annotated surgical data, and explainable assistant responses.</p>
-							<p class="click-detail-note">* Click to read in detail</p>
-							<div class="project-links">
-								<a href="https://surgical-video-intelligence-beta.vercel.app/" target="_blank">View App</a>
-								<a href="https://github.com/kimnguyen2002/surgical-video-intelligence"
-									target="_blank">View Code</a>
-							</div>
-						</div>
-					</div>
-
 					<!-- Anemia -->
 					<div class="project-card" data-project="anemia">
 						<div class="project-img">
@@ -2517,6 +2525,37 @@
 								<a href="https://anemia-diagnosis.streamlit.app/" target="_blank">View App</a>
 								<a href="https://github.com/kimnguyen2002/Anemia-Prediction" target="_blank">View
 									Code</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Amyotrophic Lateral Sclerosis Prediction -->
+					<div class="project-card" data-project="als-prediction">
+						<div class="project-info">
+							<h3>Amyotrophic Lateral Sclerosis Prediction with Machine Learning</h3>
+							<p><strong>Final Project — AI in Genomics and Epigenomics</strong><br>National Taiwan University (NTU)</p>
+							<p>A DNA methylation classification project comparing seven machine learning models to distinguish ALS samples from controls, using stratified cross-validation and analysis of overfitting.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="project-links">
+								<a href="https://colab.research.google.com/drive/1vd2vrhwfRxkokSNKNGwSqMvUiabdESsl?usp=sharing" target="_blank" rel="noopener noreferrer">Open in Google Colab</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Surgical Video Intelligence -->
+					<div class="project-card" data-project="surgery">
+						<div class="project-img">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczMvPJCD-4xjZD1nSn5wQppy0LMlrxwyB_bVCNkeqgq7o-iAqpG1MduHOpU9-NBjcTsxBbHC_zIOPIpXVdYMxnidGDqwxRF5jTeGu0ojKIXmFveemW2F=w2400"
+								alt="Surgical Video Intelligence">
+						</div>
+						<div class="project-info">
+							<h3>Surgical Video Intelligence</h3>
+							<p>A browser-based platform for analyzing robotic surgery videos using on-device computer vision, annotated surgical data, and explainable assistant responses.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="project-links">
+								<a href="https://surgical-video-intelligence-beta.vercel.app/" target="_blank">View App</a>
+								<a href="https://github.com/kimnguyen2002/surgical-video-intelligence"
+									target="_blank">View Code</a>
 							</div>
 						</div>
 					</div>
@@ -2591,7 +2630,7 @@
 					<article class="writing-card">
 						<div class="writing-content">
 						<p class="writing-meta"><i class="fab fa-medium" aria-hidden="true"></i> Medium · AI Advances</p>
-						<h3>When AI Gets Smarter, Is Our Cybersecurity Keeping Up?</h3>
+						<h3>When AI Gets Smarter, Is Our Cybersecurity Keeping Up? From University Systems to Food Security</h3>
 						<p class="writing-subtitle">This article leads you from PHP vulnerabilities to Taiwan's banking sector, from European supermarket refrigeration systems to food security.</p>
 						<a class="writing-link" href="https://medium.com/ai-advances/when-ai-gets-smarter-is-our-cybersecurity-keeping-up-from-university-systems-to-food-security-ab0cb6371f89?sk=67332cd5390c0324cccbef4f6ba3adc0" target="_blank" rel="noopener noreferrer">Read on Medium <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
 					</div>
@@ -3945,6 +3984,24 @@
 
 			// Project details
 			const projectDetails = {
+				'als-prediction': {
+					title: 'Amyotrophic Lateral Sclerosis Prediction with Machine Learning',
+					description: `<p><strong>Overview</strong></p>
+						<p>Developed as a final assignment for AI in Genomics and Epigenomics at National Taiwan University, this notebook explores whether DNA methylation patterns can distinguish amyotrophic lateral sclerosis (ALS) samples from controls. The dataset contains 96 samples, evenly divided between ALS and control groups, with 887 CpG features.</p>
+
+						<p><strong>Exploratory analysis and preprocessing</strong></p>
+						<p>Principal component analysis visualizes the methylation data, while correlations with age, sex, and disease status explore potential sources of variation. Each classification pipeline applies median imputation, standardization, and ANOVA-based selection of the top 100 CpG features. These steps are fitted within each training fold to avoid leaking validation data into preprocessing and feature selection.</p>
+
+						<p><strong>Model comparison</strong></p>
+						<p>The project compares Logistic Regression, Random Forest, an RBF-kernel Support Vector Machine, Gradient Boosting, K-Nearest Neighbors, Ridge Classifier, and a multilayer perceptron. All seven models use the same shuffled, stratified five-fold cross-validation splits. Evaluation includes accuracy, ROC AUC, confusion matrices, and per-class precision, recall, and F1-score.</p>
+
+						<p><strong>Interpretation and limitations</strong></p>
+						<p>Training and cross-validation performance are compared to examine overfitting in a setting with far more features than samples. Logistic Regression coefficients and Random Forest feature importances highlight CpG sites for further investigation. The results describe an exploratory coursework analysis on a small dataset; independent validation would be needed to assess generalization beyond these samples.</p>`,
+					images: [],
+					links: [
+						{ title: 'Open in Google Colab', url: 'https://colab.research.google.com/drive/1vd2vrhwfRxkokSNKNGwSqMvUiabdESsl?usp=sharing' }
+					]
+				},
 				'biomedical-signal-processing': {
 					title: 'Biomedical Signal Processing',
 					description: `<p><strong>Overview</strong></p>
@@ -4622,20 +4679,69 @@
 	</script>
 	<script>
 		(function () {
-			const aboutSlides = document.querySelectorAll('.about-slide');
-			const aboutPrev = document.querySelector('.about-arrow.prev');
-			const aboutNext = document.querySelector('.about-arrow.next');
-			let aboutIndex = 0;
-
-			function showAboutSlide(index) {
-				aboutIndex = (index + aboutSlides.length) % aboutSlides.length;
-				aboutSlides.forEach(function (slide, i) {
-					slide.classList.toggle('active', i === aboutIndex);
-				});
+			const slides = [...document.querySelectorAll('.about-slide')];
+			const carousel = document.querySelector('.about-carousel');
+			if (!carousel || slides.length < 2) return;
+			const progress = carousel.querySelector('.about-progress');
+			const pause = carousel.querySelector('.about-pause');
+			let index = Math.max(0, slides.findIndex(slide => slide.classList.contains('active')));
+			let elapsed = 0, lastFrame = null, paused = false, transitioning = false;
+			const dialog = document.createElement('dialog');
+			dialog.className = 'about-photo-dialog';
+			dialog.setAttribute('aria-label', 'Enlarged About Me photo');
+			dialog.innerHTML = '<button type="button" aria-label="Close enlarged photo">×</button><img alt=""><p></p>';
+			document.body.appendChild(dialog);
+			dialog.querySelector('button').addEventListener('click', () => dialog.close());
+			dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+			dialog.addEventListener('close', () => { lastFrame = null; });
+			carousel.querySelector('.about-expand').addEventListener('click', () => {
+				const caption = slides[index].querySelector('figcaption')?.textContent || '';
+				dialog.querySelector('img').src = slides[index].querySelector('img').src;
+				dialog.querySelector('img').alt = caption;
+				dialog.querySelector('p').textContent = caption;
+				dialog.showModal();
+			});
+			pause.addEventListener('click', () => {
+				paused = !paused;
+				pause.setAttribute('aria-pressed', String(paused));
+				pause.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+				pause.innerHTML = paused ? '<i class="fas fa-play" aria-hidden="true"></i>' : '<i class="fas fa-pause" aria-hidden="true"></i>';
+				lastFrame = null;
+			});
+			async function changeSlide(direction) {
+				if (transitioning) return;
+				transitioning = true;
+				const outgoing = slides[index];
+				index = (index + direction + slides.length) % slides.length;
+				const incoming = slides[index];
+				outgoing.classList.remove('active');
+				incoming.classList.add('active');
+				elapsed = 0;
+				progress.value = 0;
+				try {
+					const options = { duration: 500, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)' };
+					await Promise.all([
+						outgoing.animate([{ transform: 'translateX(0)', visibility: 'visible' }, { transform: `translateX(${-direction * 100}%)`, visibility: 'visible' }], options).finished,
+						incoming.animate([{ transform: `translateX(${direction * 100}%)` }, { transform: 'translateX(0)' }], options).finished
+					]);
+				} finally {
+					transitioning = false;
+					lastFrame = null;
+				}
 			}
-
-			aboutPrev.addEventListener('click', function () { showAboutSlide(aboutIndex - 1); });
-			aboutNext.addEventListener('click', function () { showAboutSlide(aboutIndex + 1); });
+			carousel.querySelector('.prev')?.addEventListener('click', () => changeSlide(-1));
+			carousel.querySelector('.next')?.addEventListener('click', () => changeSlide(1));
+			function frame(now) {
+				if (!paused && !document.hidden && !dialog.open && !transitioning) {
+					if (lastFrame !== null) elapsed += now - lastFrame;
+					progress.value = Math.min(elapsed, 5000);
+					if (elapsed >= 5000) changeSlide(1);
+				}
+				lastFrame = now;
+				requestAnimationFrame(frame);
+			}
+			document.addEventListener('visibilitychange', () => { lastFrame = null; });
+			requestAnimationFrame(frame);
 		})();
 	</script>
 	<!-- Public Speaking JS -->
