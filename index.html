@@ -2228,6 +2228,117 @@
 			.modal-content { width: calc(100% - 24px); padding: 24px 18px; margin: 20px auto; }
 			.modal-pdf-container { height: 65svh; min-height: 240px; }
 		}
+		/* Mobile modals: compact, full-width, sticky header with a single close button
+		   (the macOS-style red/yellow/green dots are hidden on small screens). */
+		@media screen and (max-width: 768px), screen and (max-width: 1024px) and (max-height: 600px) {
+			.home-terminal .tb-bar,
+			.photo-slide-header .window-controls { display: none; }
+
+			.modal {
+				padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+				overscroll-behavior: contain;
+			}
+			.modal-content,
+			.modal-content.modal-pdf {
+				width: 100%;
+				max-width: none;
+				margin: 0 auto;
+				padding: 0;
+				border-radius: 10px;
+				max-height: calc(100vh - 20px);
+				max-height: calc(100dvh - 20px);
+				overflow-x: hidden;
+				overflow-y: auto;
+				overscroll-behavior: contain;
+				-webkit-overflow-scrolling: touch;
+			}
+			.modal-header {
+				position: sticky;
+				top: 0;
+				z-index: 10;
+				justify-content: flex-start;
+				min-height: 52px;
+				padding: 0;
+				background: #0d2a4a;
+			}
+			.modal-header h2 {
+				flex: 1;
+				min-width: 0;
+				padding: 12px 56px 12px 16px;
+				font-size: 0.75rem;
+				line-height: 1.45;
+				letter-spacing: 0.5px;
+				text-align: left;
+				overflow-wrap: anywhere;
+			}
+			/* Hide yellow/green dots; turn the red dot into a clear "x" close button on the right */
+			.tb-bar.modal-controls {
+				left: auto !important;
+				right: 6px;
+				gap: 0;
+				padding: 0 !important;
+			}
+			.tb-bar.modal-controls .tb-dot.y,
+			.tb-bar.modal-controls .tb-dot.g { display: none; }
+			.tb-bar.modal-controls .tb-dot.r {
+				display: grid;
+				place-items: center;
+				width: 40px;
+				height: 40px;
+				border-radius: 8px;
+				background: rgba(93, 173, 226, 0.1);
+				border: 1px solid var(--border-color);
+				color: var(--accent-color);
+				font-size: 1.6rem;
+				line-height: 1;
+				-webkit-tap-highlight-color: transparent;
+			}
+			.tb-bar.modal-controls .tb-dot.r::before { content: '\00d7'; }
+			.tb-bar.modal-controls .tb-dot.r:active { background: rgba(93, 173, 226, 0.25); }
+
+			.modal-body { padding: 16px; }
+			.modal-images { gap: 12px; margin-bottom: 16px; }
+			.modal-images img,
+			#cert-modal-image,
+			#proposal-detail-modal-img { max-width: 100%; height: auto; }
+			#modal-description,
+			#cert-modal-description,
+			#speaking-modal-description,
+			#proposal-detail-modal-description {
+				margin-top: 16px;
+				font-size: 0.9rem;
+				line-height: 1.7;
+				overflow-wrap: anywhere;
+			}
+			#modal-links,
+			#cert-modal-links,
+			#award-modal-links,
+			#proposal-detail-modal-links { margin-top: 18px !important; gap: 10px !important; }
+			#modal-links .button,
+			#modal-links a,
+			#cert-modal-links .button,
+			#award-modal-links .button,
+			#proposal-detail-modal-links .button,
+			#proposal-detail-modal-links a {
+				flex: 1 1 140px;
+				min-height: 44px;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				box-sizing: border-box;
+			}
+
+			.gallery-main-image { max-height: 60vh; max-height: 60svh; }
+			.gallery-nav { width: 36px; height: 36px; }
+			.gallery-nav.prev { left: 8px; }
+			.gallery-nav.next { right: 8px; }
+			.gallery-thumbnails { gap: 8px; margin-top: 10px; }
+			.gallery-thumbnails img,
+			.gallery-thumbnails .video-thumb { width: 64px; height: 48px; }
+
+			.modal-pdf-container { height: 60vh; height: 60svh; min-height: 280px; }
+		}
 		@media screen and (max-width: 360px) {
 			.badge { scale: 0.78; }
 			.home-left { padding-left: 16px; padding-right: 16px; }
@@ -3335,9 +3446,9 @@
 	<div id="projectModal" class="modal">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div class="tb-bar"
+				<div class="tb-bar modal-controls"
 					style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: transparent; border-bottom: none; padding: 0;">
-					<span class="tb-dot r close-modal"></span>
+					<span class="tb-dot r close-modal" role="button" aria-label="Close"></span>
 					<span class="tb-dot y"></span>
 					<span class="tb-dot g"></span>
 				</div>
@@ -3359,9 +3470,9 @@
 	<div id="certificateModal" class="modal">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div class="tb-bar"
+				<div class="tb-bar modal-controls"
 					style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: transparent; border-bottom: none; padding: 0;">
-					<span class="tb-dot r close-modal"></span>
+					<span class="tb-dot r close-modal" role="button" aria-label="Close"></span>
 					<span class="tb-dot y"></span>
 					<span class="tb-dot g"></span>
 				</div>
@@ -3385,9 +3496,9 @@
 	<div id="speakingModal" class="modal">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div class="tb-bar"
+				<div class="tb-bar modal-controls"
 					style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: transparent; border-bottom: none; padding: 0;">
-					<span class="tb-dot r close-modal"></span>
+					<span class="tb-dot r close-modal" role="button" aria-label="Close"></span>
 					<span class="tb-dot y"></span>
 					<span class="tb-dot g"></span>
 				</div>
@@ -3416,9 +3527,9 @@
 	<div id="proposalDetailModal" class="modal">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div class="tb-bar"
+				<div class="tb-bar modal-controls"
 					style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: transparent; border-bottom: none; padding: 0;">
-					<span class="tb-dot r close-modal"></span>
+					<span class="tb-dot r close-modal" role="button" aria-label="Close"></span>
 					<span class="tb-dot y"></span>
 					<span class="tb-dot g"></span>
 				</div>
@@ -3446,9 +3557,9 @@
 	<div id="awardModal" class="modal">
 		<div class="modal-content modal-pdf">
 			<div class="modal-header">
-				<div class="tb-bar"
+				<div class="tb-bar modal-controls"
 					style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); background: transparent; border-bottom: none; padding: 0;">
-					<span class="tb-dot r close-modal"></span>
+					<span class="tb-dot r close-modal" role="button" aria-label="Close"></span>
 					<span class="tb-dot y"></span>
 					<span class="tb-dot g"></span>
 				</div>
