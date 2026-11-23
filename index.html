@@ -797,6 +797,8 @@
 			border-radius: 8px;
 			overflow: hidden;
 			transition: var(--transition);
+			display: flex;
+			flex-direction: column;
 		}
 
 		.project-card:hover {
@@ -809,6 +811,7 @@
 			width: 100%;
 			height: 200px;
 			overflow: hidden;
+			position: relative;
 		}
 
 		.project-img img {
@@ -824,7 +827,14 @@
 
 		.project-info {
 			padding: 20px;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
 		}
+
+		/* Push the "click to read" note and the buttons to the bottom of every card */
+		.project-info .click-detail-note { margin-top: auto !important; padding-top: 8px; }
+		.project-info > br { display: none; }
 
 		.project-info h3 {
 			margin-bottom: 10px;
@@ -837,6 +847,7 @@
 
 		.project-links {
 			display: flex;
+			flex-wrap: wrap;
 			gap: 10px;
 		}
 
@@ -1310,6 +1321,69 @@
 		#modal-description p,
 		#cert-modal-description p {
 			margin-bottom: 15px;
+		}
+
+		/* Technical project write-ups: section labels, bullet lists, key-metric chips, results table */
+		#modal-description .md-h {
+			margin: 22px 0 8px;
+			color: var(--accent-color);
+			font-family: 'JetBrains Mono', monospace;
+			font-size: 0.8rem;
+			font-weight: 600;
+			letter-spacing: 1.2px;
+			text-transform: uppercase;
+		}
+		#modal-description .md-h:first-child { margin-top: 0; }
+		#modal-description ul {
+			margin: 0 0 15px;
+			padding-left: 1.25rem;
+		}
+		#modal-description li { margin-bottom: 6px; }
+		#modal-description li::marker { color: var(--accent-color); }
+		#modal-description .md-metrics {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin: 0 0 18px;
+		}
+		#modal-description .md-metrics span {
+			padding: 4px 10px;
+			border: 1px solid var(--border-color);
+			border-radius: 4px;
+			background: rgba(93, 173, 226, 0.08);
+			font-family: 'JetBrains Mono', monospace;
+			font-size: 0.75rem;
+			line-height: 1.5;
+			white-space: nowrap;
+		}
+		#modal-description .md-metrics b { color: var(--accent-color); font-weight: 600; }
+		#modal-description .md-metrics span.md-award { border-color: var(--accent-gold); background: rgba(255, 193, 7, 0.1); color: var(--accent-gold); }
+		#modal-description .md-metrics span.md-award b { color: var(--accent-gold); }
+		.project-info .project-credit { font-size: 0.82rem; opacity: 0.85; }
+		.project-info .project-credit a { color: var(--accent-color); text-decoration: underline; }
+		#modal-description .md-table-wrap { overflow-x: auto; margin: 0 0 15px; }
+		#modal-description table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 0.85rem;
+			line-height: 1.5;
+		}
+		#modal-description th,
+		#modal-description td {
+			padding: 6px 10px;
+			border-bottom: 1px solid var(--border-color);
+			text-align: left;
+			white-space: nowrap;
+		}
+		#modal-description th { color: var(--accent-color); font-weight: 600; }
+		#modal-description td.num,
+		#modal-description th.num { text-align: right; font-variant-numeric: tabular-nums; }
+		#modal-description tr.best td { color: #fff; font-weight: 600; }
+		@media (max-width: 768px) {
+			#modal-description .md-metrics span { white-space: normal; }
+			#modal-description table { font-size: 0.78rem; }
+			#modal-description th,
+			#modal-description td { padding: 5px 6px; white-space: normal; }
 		}
 
 		#modal-links,
@@ -2116,11 +2190,110 @@
 		.about-progress::-webkit-progress-bar { background: #26374b; }
 		.about-progress::-webkit-progress-value { background: var(--accent-color); }
 		.about-progress::-moz-progress-bar { background: var(--accent-color); }
-		.about-photo-dialog { margin: auto; max-width: 95vw; max-height: 95vh; padding: 44px 16px 16px; border: 1px solid var(--border-color); border-radius: 8px; background: #050c16; color: white; }
-		.about-photo-dialog::backdrop { background: rgba(0,0,0,.85); }
-		.about-photo-dialog img { display: block; max-width: 85vw; max-height: 75vh; object-fit: contain; }
-		.about-photo-dialog button { position: absolute; right: 12px; top: 8px; background: transparent; color: white; border: 0; font-size: 24px; cursor: pointer; }
-		.about-photo-dialog p { max-width: 85vw; margin: 12px 0 0; font-size: .85rem; }
+		/* About Me lightbox: full-viewport overlay, photo always centered, prev/next navigation */
+		.about-photo-dialog {
+			position: fixed;
+			inset: 0;
+			width: 100vw;
+			height: 100vh;
+			height: 100dvh;
+			max-width: none;
+			max-height: none;
+			margin: 0;
+			padding: 56px 88px 24px;
+			border: 0;
+			background: transparent;
+			color: #fff;
+			overflow: hidden;
+		}
+		.about-photo-dialog[open] { display: flex; align-items: center; justify-content: center; }
+		.about-photo-dialog::backdrop { background: rgba(2, 6, 12, 0.96); }
+		.about-photo-dialog figure {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 14px;
+			max-width: 100%;
+			max-height: 100%;
+			margin: 0 auto;
+		}
+		.about-photo-dialog img {
+			display: block;
+			max-width: 100%;
+			max-height: calc(100vh - 150px);
+			max-height: calc(100dvh - 150px);
+			width: auto;
+			height: auto;
+			margin: 0 auto;
+			object-fit: contain;
+			border-radius: 6px;
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+			user-select: none;
+			-webkit-user-drag: none;
+		}
+		.about-photo-dialog figcaption {
+			max-width: 70ch;
+			margin: 0 auto;
+			text-align: center;
+			font-family: 'JetBrains Mono', monospace;
+			font-size: 0.8rem;
+			letter-spacing: 0.4px;
+			line-height: 1.5;
+			opacity: 0.9;
+		}
+		.about-photo-dialog .apd-counter {
+			position: absolute;
+			top: 16px;
+			left: 50%;
+			transform: translateX(-50%);
+			font-family: 'JetBrains Mono', monospace;
+			font-size: 0.8rem;
+			letter-spacing: 1px;
+			opacity: 0.75;
+		}
+		.about-photo-dialog .apd-close,
+		.about-photo-dialog .apd-nav {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 0;
+			border-radius: 50%;
+			color: #fff;
+			cursor: pointer;
+			transition: background-color 0.2s ease, transform 0.2s ease;
+		}
+		.about-photo-dialog .apd-close {
+			top: 10px;
+			right: 14px;
+			width: 40px;
+			height: 40px;
+			background: transparent;
+			font-size: 28px;
+			line-height: 1;
+		}
+		.about-photo-dialog .apd-nav {
+			top: 50%;
+			width: 52px;
+			height: 52px;
+			margin-top: -26px;
+			background: rgba(128, 128, 128, 0.35);
+			font-size: 1.1rem;
+		}
+		.about-photo-dialog .apd-nav.prev { left: 20px; }
+		.about-photo-dialog .apd-nav.next { right: 20px; }
+		.about-photo-dialog .apd-close:hover { background: rgba(255, 255, 255, 0.12); }
+		.about-photo-dialog .apd-nav:hover { background: rgba(93, 173, 226, 0.45); transform: scale(1.08); }
+		.about-photo-dialog .apd-close:focus-visible,
+		.about-photo-dialog .apd-nav:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+		@media (max-width: 768px) {
+			.about-photo-dialog { padding: 56px 12px 20px; }
+			.about-photo-dialog img { max-height: calc(100vh - 170px); max-height: calc(100dvh - 170px); }
+			.about-photo-dialog .apd-nav { width: 40px; height: 40px; margin-top: -20px; background: rgba(0, 0, 0, 0.55); }
+			.about-photo-dialog .apd-nav.prev { left: 8px; }
+			.about-photo-dialog .apd-nav.next { right: 8px; }
+		}
 
 		.about-carousel-controls {
 			position: absolute;
@@ -2660,6 +2833,91 @@
 				
 
 				<div class="projects-grid animate delay-2">
+					<!-- Surgical Video Intelligence -->
+					<div class="project-card" data-project="surgery">
+						<div class="project-img">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczMvPJCD-4xjZD1nSn5wQppy0LMlrxwyB_bVCNkeqgq7o-iAqpG1MduHOpU9-NBjcTsxBbHC_zIOPIpXVdYMxnidGDqwxRF5jTeGu0ojKIXmFveemW2F=w2400"
+								alt="Surgical Video Intelligence">
+							<span class="awards-badge"><i class="fas fa-medal"></i> 1st Place · DevFest Cloud Buildathon 2026</span>
+						</div>
+						<div class="project-info">
+							<h3>Surgical Video Intelligence</h3>
+							<p>Lightweight on-device edition of the award-winning. YOLO11n and ConvNeXtV2 models on ONNX Runtime Web analyse robotic-surgery video in the browser at ~35 ms/frame, with no cloud server or LLM costs and no video leaving the device.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="project-links">
+								<a href="https://surgical-video-intelligence-beta.vercel.app/" target="_blank">View App</a>
+								<a href="https://github.com/kimnguyen2002/surgical-video-intelligence"
+									target="_blank">View Code</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- DiaGnostix -->
+					<div class="project-card" data-project="diagnostix">
+						<div class="project-img">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczMLiqUMMRAccp0S1V4GxK5GAVyY_I4krJidukkBXdAg6_m_Gx_-ry0fhw-PI_Eux33yoqGlvAgNro5vB1vTqlw7yS_Bu445xfBjsO09fylxW_aDeXXv=w2400"
+								alt="DiaGnostix: Edge-AI Diabetes Risk Screening">
+						</div>
+						<div class="project-info">
+							<h3>DiaGnostix: Edge-AI Diabetes Risk Screening (In Progress)</h3>
+							<p>An ESP32-S3 wearable that flags prediabetes and diabetes from a 33-second single-lead ECG, with no blood sample. Its 1.1 KB on-device model reaches AUROC 0.878 on 1,676 held-out patients and beats a 4.4 MB published model (0.844).</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="project-links">
+								<a href="https://github.com/kimnguyen2002/DiaGnostix"
+									target="_blank">View Code</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- X-ray -->
+					<div class="project-card" data-project="xray">
+						<div class="project-img">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczO57ZEql2wrTxVi3XnJaC0TBglI2lNOTzaJYoqazxcwYTmIlOTiOKIycmaogGiNKVMt5xPNYDhdTNWPgFYZn41mSEs9Gfgy_kMeOD_sAiVBwo1X4tzt=w2400"
+								alt="Chest X-Ray Image Analysis">
+						</div>
+						<div class="project-info">
+							<h3>Chest X-Ray Image Analysis</h3>
+							<p>A 14-finding chest X-ray classifier (DenseNet121) deployed on Streamlit. Mean AUROC 0.762 on 420 test images. Grad-CAM heatmaps for the top-4 findings show where the model looks, at ~85 ms/image on CPU. Hands-on lab for my <strong>DevFest Taipei 2025 workshop</strong>.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="project-links">
+								<a href="https://chestxrayanalysis.streamlit.app/" target="_blank">View App</a>
+								<a href="https://github.com/kimnguyen2002/Chest-X-Ray-Image-Analysis"
+									target="_blank">View Code</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Anemia -->
+					<div class="project-card" data-project="anemia">
+						<div class="project-img">
+							<img src="https://lh3.googleusercontent.com/pw/AP1GczMjq5uRnr9fQ9gHdVmmN3I-4YyhUDT_d9mGJmjBL2LPBWLaTx5pLa5vg-jNytR74geTROOMHfGF0_tF5CtrJdxy2nl0TsQJG1QsKxOc00XH8oYNFgl0=w2400"
+								alt="Anemia Diagnostic Assistant">
+						</div>
+						<div class="project-info">
+							<h3>Anemia Diagnostic Assistant</h3>
+							<p>CBC-based anemia decision support: 7 classifiers benchmarked on 1,000 patients (Logistic Regression 99.0% accuracy, AUROC 0.999), plus severity grading, MCV-based anemia typing and next-test recommendations.</p>
+							<p class="project-credit">Clinically reviewed by hematologist <a href="https://scholar.google.com.tw/citations?user=MwIr5fMAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Dr. Gem Wu</a>, Chang Gung Memorial Hospital.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="project-links">
+								<a href="https://anemia-diagnosis.streamlit.app/" target="_blank">View App</a>
+								<a href="https://github.com/kimnguyen2002/Anemia-Prediction" target="_blank">View
+									Code</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Amyotrophic Lateral Sclerosis Prediction -->
+					<div class="project-card" data-project="als-prediction">
+						<div class="project-info">
+							<h3>Amyotrophic Lateral Sclerosis Prediction with Machine Learning</h3>
+							<p><strong>Final Project — AI in Genomics and Epigenomics</strong><br>National Taiwan University (NTU)</p>
+							<p>Classifying ALS vs controls from 887 blood DNA-methylation CpGs (96 samples). Leakage-free pipelines for 7 models under stratified 5-fold CV give a best AUROC of 0.734 (k-NN), with overfitting quantified for every model.</p>
+							<p class="click-detail-note">* Click to read in detail</p>
+							<div class="project-links">
+								<a href="https://colab.research.google.com/drive/1vd2vrhwfRxkokSNKNGwSqMvUiabdESsl?usp=sharing" target="_blank" rel="noopener noreferrer">Open in Google Colab</a>
+							</div>
+						</div>
+					</div>
 
 					<!-- Biomedical Signal Processing -->
 					<div class="project-card" data-project="biomedical-signal-processing">
@@ -2676,90 +2934,6 @@
 						</div>
 					</div>
 
-					<!-- DiaGnostix -->
-					<div class="project-card" data-project="diagnostix">
-						<div class="project-img">
-							<img src="https://lh3.googleusercontent.com/pw/AP1GczMLiqUMMRAccp0S1V4GxK5GAVyY_I4krJidukkBXdAg6_m_Gx_-ry0fhw-PI_Eux33yoqGlvAgNro5vB1vTqlw7yS_Bu445xfBjsO09fylxW_aDeXXv=w2400"
-								alt="DiaGnostix: Edge-AI Diabetes Risk Screening">
-						</div>
-						<div class="project-info">
-							<h3>DiaGnostix: Edge-AI Diabetes Risk Screening (In Progress)</h3>
-							<p>DiaGnostix is a low-cost non-invasive wearable prototype that screens for diabetes risk without a blood sample by using ESP32-S3.</p>
-							<p class="click-detail-note">* Click to read in detail</p>
-							<div class="project-links">
-								<a href="https://github.com/kimnguyen2002/DiaGnostix"
-									target="_blank">View Code</a>
-							</div>
-						</div>
-					</div>
-
-					<!-- Anemia -->
-					<div class="project-card" data-project="anemia">
-						<div class="project-img">
-							<img src="https://lh3.googleusercontent.com/pw/AP1GczMjq5uRnr9fQ9gHdVmmN3I-4YyhUDT_d9mGJmjBL2LPBWLaTx5pLa5vg-jNytR74geTROOMHfGF0_tF5CtrJdxy2nl0TsQJG1QsKxOc00XH8oYNFgl0=w2400"
-								alt="Anemia Diagnostic Assistant">
-						</div>
-						<div class="project-info">
-							<h3>Anemia Diagnostic Assistant</h3>
-							<p>A browser-based platform for diagnosing anemia by analyzing blood test results and providing personalized treatment recommendations.</p>
-							<p class="click-detail-note">* Click to read in detail</p>
-							<div class="project-links">
-								<a href="https://anemia-diagnosis.streamlit.app/" target="_blank">View App</a>
-								<a href="https://github.com/kimnguyen2002/Anemia-Prediction" target="_blank">View
-									Code</a>
-							</div>
-						</div>
-					</div>
-
-					<!-- Amyotrophic Lateral Sclerosis Prediction -->
-					<div class="project-card" data-project="als-prediction">
-						<div class="project-info">
-							<h3>Amyotrophic Lateral Sclerosis Prediction with Machine Learning</h3>
-							<p><strong>Final Project — AI in Genomics and Epigenomics</strong><br>National Taiwan University (NTU)</p>
-							<p>A DNA methylation classification project comparing seven machine learning models to distinguish ALS samples from controls, using stratified cross-validation and analysis of overfitting.</p>
-							<p class="click-detail-note">* Click to read in detail</p>
-							<div class="project-links">
-								<a href="https://colab.research.google.com/drive/1vd2vrhwfRxkokSNKNGwSqMvUiabdESsl?usp=sharing" target="_blank" rel="noopener noreferrer">Open in Google Colab</a>
-							</div>
-						</div>
-					</div>
-
-					<!-- Surgical Video Intelligence -->
-					<div class="project-card" data-project="surgery">
-						<div class="project-img">
-							<img src="https://lh3.googleusercontent.com/pw/AP1GczMvPJCD-4xjZD1nSn5wQppy0LMlrxwyB_bVCNkeqgq7o-iAqpG1MduHOpU9-NBjcTsxBbHC_zIOPIpXVdYMxnidGDqwxRF5jTeGu0ojKIXmFveemW2F=w2400"
-								alt="Surgical Video Intelligence">
-						</div>
-						<div class="project-info">
-							<h3>Surgical Video Intelligence</h3>
-							<p>A browser-based platform for analyzing robotic surgery videos using on-device computer vision, annotated surgical data, and explainable assistant responses.</p>
-							<p class="click-detail-note">* Click to read in detail</p>
-							<div class="project-links">
-								<a href="https://surgical-video-intelligence-beta.vercel.app/" target="_blank">View App</a>
-								<a href="https://github.com/kimnguyen2002/surgical-video-intelligence"
-									target="_blank">View Code</a>
-							</div>
-						</div>
-					</div>
-
-					<!-- X-ray -->
-					<div class="project-card" data-project="xray">
-						<div class="project-img">
-							<img src="https://lh3.googleusercontent.com/pw/AP1GczO57ZEql2wrTxVi3XnJaC0TBglI2lNOTzaJYoqazxcwYTmIlOTiOKIycmaogGiNKVMt5xPNYDhdTNWPgFYZn41mSEs9Gfgy_kMeOD_sAiVBwo1X4tzt=w2400"
-								alt="Chest X-Ray Image Analysis">
-						</div>
-						<div class="project-info">
-							<h3>Chest X-Ray Image Analysis</h3>
-							<p>A browser-based platform for analyzing chest X-ray images using Deep Learning (DenseNet121) to detect pulmonary abnormalities and assist in medical imaging diagnostics.</p>
-							<p class="click-detail-note">* Click to read in detail</p>
-							<div class="project-links">
-								<a href="https://chestxrayanalysis.streamlit.app/" target="_blank">View App</a>
-								<a href="https://github.com/kimnguyen2002/Chest-X-Ray-Image-Analysis"
-									target="_blank">View Code</a>
-							</div>
-						</div>
-					</div>
-
 					<!-- Heart Risk -->
 					<div class="project-card" data-project="heart">
 						<div class="project-img">
@@ -2768,8 +2942,7 @@
 						</div>
 						<div class="project-info">
 							<h3>Heart Risk Prediction</h3>
-							<p>An interactive diagnostic dashboard providing real-time cardiovascular risk assessment
-								through feature engineering and predictive analytics.</p>
+							<p>Heart-disease risk prediction from 13 clinical variables. 5-fold CV: Logistic Regression 83.1% accuracy (AUROC 0.905), SVM 82.8% (AUROC 0.907), Random Forest 80.8% (AUROC 0.901).</p>
 							<p class="click-detail-note">* Click to read in detail</p>
 							<br>
 							<div class="project-links">
@@ -2788,8 +2961,7 @@
 						</div>
 						<div class="project-info">
 							<h3>Symptom Checker with Drug Info</h3>
-							<p>An intelligent symptom-to-disease mapping system integrated with pharmaceutical databases
-								to provide comprehensive healthcare insights.</p>
+							<p>Inspired by my mother, a pharmacist, and the many people who walk in for basic symptoms. A Decision Tree symptom checker (44k records, 20 symptoms) linked to a 293-drug reference table, at about 90% accuracy.</p>
 							<p class="click-detail-note">* Click to read in detail</p>
 							<div class="project-links">
 								<a href="https://symptomschecker.streamlit.app/" target="_blank">View App</a>
@@ -2798,6 +2970,8 @@
 							</div>
 						</div>
 					</div>
+
+					
 
 					<!-- Add more projects as needed -->
 				</div>
@@ -4207,17 +4381,43 @@
 			const projectDetails = {
 				'als-prediction': {
 					title: 'Amyotrophic Lateral Sclerosis Prediction with Machine Learning',
-					description: `<p><strong>Overview</strong></p>
-						<p>Developed as a final assignment for AI in Genomics and Epigenomics at National Taiwan University, this notebook explores whether DNA methylation patterns can distinguish amyotrophic lateral sclerosis (ALS) samples from controls. The dataset contains 96 samples, evenly divided between ALS and control groups, with 887 CpG features.</p>
+					description: `<div class="md-metrics">
+							<span>96 samples × <b>887 CpGs</b></span>
+							<span><b>7 models</b>, stratified 5-fold CV</span>
+							<span>Best CV AUROC <b>0.734 ± 0.080</b> (k-NN)</span>
+							<span>Leakage-free pipelines</span>
+						</div>
 
-						<p><strong>Exploratory analysis and preprocessing</strong></p>
-						<p>Principal component analysis visualizes the methylation data, while correlations with age, sex, and disease status explore potential sources of variation. Each classification pipeline applies median imputation, standardization, and ANOVA-based selection of the top 100 CpG features. These steps are fitted within each training fold to avoid leaking validation data into preprocessing and feature selection.</p>
+						<p class="md-h">Problem</p>
+						<p>Can blood DNA methylation separate amyotrophic lateral sclerosis (ALS) patients from healthy controls? This final project for <em>AI in Genomics and Epigenomics</em> (National Taiwan University) tests that question on a typical omics setting: far more features than samples, where the main engineering risk is reporting an overfit model as a discovery.</p>
 
-						<p><strong>Model comparison</strong></p>
-						<p>The project compares Logistic Regression, Random Forest, an RBF-kernel Support Vector Machine, Gradient Boosting, K-Nearest Neighbors, Ridge Classifier, and a multilayer perceptron. All seven models use the same shuffled, stratified five-fold cross-validation splits. Evaluation includes accuracy, ROC AUC, confusion matrices, and per-class precision, recall, and F1-score.</p>
+						<p class="md-h">Data &amp; exploratory analysis</p>
+						<p>96 samples (48 ALS, 48 controls) with beta values for 887 CpG sites, plus age and sex. PCA shows that PC1 (12.0% of variance) correlates with disease status (r = 0.28, p = 0.0065) but not with age or sex, which suggests a real, if weak, disease signal rather than a demographic confounder.</p>
 
-						<p><strong>Interpretation and limitations</strong></p>
-						<p>Training and cross-validation performance are compared to examine overfitting in a setting with far more features than samples. Logistic Regression coefficients and Random Forest feature importances highlight CpG sites for further investigation. The results describe an exploratory coursework analysis on a small dataset; independent validation would be needed to assess generalization beyond these samples.</p>`,
+						<p class="md-h">Pipeline</p>
+						<ul>
+							<li>Median imputation → standardisation → ANOVA F-test selection of the top 100 CpGs → classifier, wrapped in a scikit-learn <code>Pipeline</code> so every step is fitted inside the training fold only (no feature-selection leakage).</li>
+							<li>Seven classifiers on identical shuffled, stratified 5-fold splits: Logistic Regression, Random Forest, RBF-SVM, Gradient Boosting, k-NN, Ridge Classifier and an MLP.</li>
+							<li>Evaluation: accuracy, ROC AUC, confusion matrices, per-class precision/recall/F1, and the gap between training and cross-validated accuracy as an explicit overfitting measure.</li>
+						</ul>
+
+						<p class="md-h">Results (5-fold cross-validation)</p>
+						<div class="md-table-wrap"><table>
+							<thead><tr><th>Model</th><th class="num">CV accuracy</th><th class="num">CV AUROC</th><th class="num">Train acc.</th><th class="num">Overfit gap</th></tr></thead>
+							<tbody>
+								<tr class="best"><td>k-NN</td><td class="num">0.709 ± 0.076</td><td class="num">0.734 ± 0.080</td><td class="num">0.885</td><td class="num">0.18</td></tr>
+								<tr><td>Random Forest</td><td class="num">0.688 ± 0.083</td><td class="num">0.719 ± 0.085</td><td class="num">1.000</td><td class="num">0.31</td></tr>
+								<tr><td>Logistic Regression</td><td class="num">0.656 ± 0.071</td><td class="num">0.709 ± 0.053</td><td class="num">0.990</td><td class="num">0.33</td></tr>
+								<tr><td>MLP</td><td class="num">0.646 ± 0.070</td><td class="num">0.717 ± 0.073</td><td class="num">1.000</td><td class="num">0.35</td></tr>
+								<tr><td>RBF-SVM</td><td class="num">0.636 ± 0.059</td><td class="num">0.710 ± 0.124</td><td class="num">0.958</td><td class="num">0.32</td></tr>
+								<tr><td>Gradient Boosting</td><td class="num">0.626 ± 0.079</td><td class="num">0.597 ± 0.119</td><td class="num">1.000</td><td class="num">0.37</td></tr>
+								<tr><td>Ridge Classifier</td><td class="num">0.531 ± 0.058</td><td class="num">0.578 ± 0.091</td><td class="num">0.979</td><td class="num">0.45</td></tr>
+							</tbody>
+						</table></div>
+						<p>Five of the seven models reach 98–100% training accuracy yet only 53–69% under cross-validation. Training metrics would have badly overstated performance. k-NN generalises best and overfits least. Random Forest importances and Logistic Regression coefficients rank candidate CpG sites (top: chr17:66798540, chr10:98044392), exported for follow-up.</p>
+
+						<p class="md-h">Limitations</p>
+						<p>A cross-validated AUROC around 0.73 on 96 samples from a single site is an exploratory signal, not a diagnostic test. Confirming any of these CpGs as biomarkers would require a larger cohort and an independent validation set.</p>`,
 					images: [],
 					links: [
 						{ title: 'Open in Google Colab', url: 'https://colab.research.google.com/drive/1vd2vrhwfRxkokSNKNGwSqMvUiabdESsl?usp=sharing' }
@@ -4245,17 +4445,51 @@
 				},
 				'diagnostix': {
 					title: 'DiaGnostix: Edge-AI Diabetes Risk Screening',
-					description: `<p><strong>Overview</strong></p>
-						<p>DiaGnostix is a low-cost wearable research prototype that screens for diabetes risk without a blood sample. It combines a single-lead ECG, a fingertip pulse oximeter, a body-temperature sensor and a short health questionnaire. The screening decision is made entirely on the device: a 241-parameter neural network runs on an ESP32-S3 microcontroller, so no cloud service or phone is needed. The project is built to be useful in settings where laboratory testing is scarce, and it is explicit about what it cannot do: it flags who should take a glucose or HbA1c test, and it does not diagnose.</p>
+					description: `<div class="md-metrics">
+							<span>Held-out AUROC <b>0.878</b> (95% CI 0.853–0.903)</span>
+							<span>Sensitivity <b>82.3%</b> · NPV <b>97.8%</b></span>
+							<span>External AUROC <b>0.757</b></span>
+							<span>On-device model <b>1.1 KB</b></span>
+						</div>
 
-						<p><strong>Technical architecture</strong></p>
-						<p><strong>Sensing.</strong> AD8232 single-lead ECG, MAX30102 PPG for pulse and SpO₂, a 10 kΩ NTC thermistor for body temperature, and a BME280 for room conditions.</p>
-						<p><strong>Signal processing (C++ on the ESP32-S3).</strong> Pan–Tompkins QRS detection at 500 Hz; pulse arrival time from the ECG R peak to the PPG upstroke; cuffless blood pressure from a Poon–Zhang model with one-point cuff calibration; SpO₂ by ratio of ratios; heart-rate variability.</p>
-						<p><strong>On-device inference.</strong> A 13 → 16 → 1 MLP, trained in Python and exported as an int8 TensorFlow Lite model of 2,608 bytes, executed with TensorFlow Lite Micro. The firmware checks six golden test vectors at every boot to detect a model–firmware mismatch.</p>
-						<p><strong>Interface.</strong> The device serves its own web dashboard over Wi-Fi (or its own access point), with live waveforms, vitals, results history and CSV export. An LED flashes at 4 Hz when risk is at or above the threshold, and local safety alerts fire for low SpO₂ or fever.</p>
-						<p><strong>Footprint.</strong> 1.14 MB of flash (36% of the app partition) and 71 KB of static RAM on the N16R8 module.</p>
+						<p class="md-h">Problem</p>
+						<p>Nearly half of adults with diabetes (44.7%, about 240 million people; IDF Diabetes Atlas 2021) are undiagnosed, and prediabetes is usually asymptomatic and rarely tested for. Confirming either needs a blood test. DiaGnostix is a low-cost wearable that uses a 33-second single-lead ECG plus age, sex and BMI to decide who should go on to a fasting-glucose or HbA1c test. It is a non-invasive pre-test, not a diagnosis. Published ECG models for this task, such as DiaCardia (a ≈4.4 MB ensemble of 3,791 trees), need PC software and features a microcontroller cannot compute. The engineering goal was to match or beat them inside an ESP32-S3.</p>
 
-						<p>This project was developed with <a href="https://www.linkedin.com/in/khemran/" target="_blank"">Emran Khan</a>.</p>`,
+						<p class="md-h">Data &amp; validation design</p>
+						<ul>
+							<li>16,766 clinical 12-lead ECGs (10 s, 500 Hz; lead I used) from 16,339 adults at a Tokyo clinic (Koga et al., <em>Cardiovascular Diabetology</em> 2025; CC BY 4.0). 8.6% have prediabetes or diabetes (FPG ≥ 110 mg/dL, HbA1c ≥ 6.0%, or on treatment).</li>
+							<li>Published participant-disjoint split: 15,090 ECGs for development (10-fold CV grouped by participant, with Optuna tuning on a separate grouped split) and 1,676 for a test set used once.</li>
+							<li>External validation on 2,456 ECGs from a different hospital and ECG machine, never used for any modelling decision.</li>
+							<li>Before feature extraction, every ECG passes through a simulation of the device's analog front end: AD8232 0.5–40 Hz filters, gain 1,100, 3 mV ADC noise, 0–3.1 V clipping and 1 mV quantisation. The model therefore learns from signals like the ones the hardware will actually produce.</li>
+						</ul>
+
+						<p class="md-h">Model</p>
+						<ul>
+							<li>35 inputs: 32 lead-I ECG features (28 DiaCardia-equivalent features plus PR interval, QT-peak, QTc and T/R ratio), extracted by an R-peak detector with slope-based T-wave rejection, plus age, sex and BMI.</li>
+							<li>Platt-calibrated logistic regression (36 coefficients) exported to plain C: 1.1 KB, 35 multiply-accumulates and 280 B of inference RAM. It matches the Python reference to 3.3 × 10⁻¹⁶, with identical risk tiers on 100% of test records.</li>
+							<li>Two operating points set on out-of-fold predictions: a Youden-optimal high-risk tier and a 90%-sensitivity elevated tier.</li>
+						</ul>
+
+						<p class="md-h">Results (internal test, n = 1,676)</p>
+						<ul>
+							<li>AUROC 0.878 (95% CI 0.853–0.903); AUPRC 0.426 at 8.8% prevalence.</li>
+							<li>High-risk tier: sensitivity 82.3%, specificity 76.3%, NPV 97.8%. Elevated tier: sensitivity 91.8%, NPV 98.8%.</li>
+							<li>Beats the published DiaCardia lead-I model (AUROC 0.844, DeLong p = 0.004) and an age/sex/BMI-only model (0.852, p = 0.0001). Adding the ECG improves reclassification (NRI +0.278, IDI +0.053).</li>
+							<li>Calibrated (ECE 0.011, Brier 0.062), with positive net benefit at every referral threshold from 1% to 40% on decision-curve analysis.</li>
+							<li>External cohort (ECG-only model, because age, sex and BMI were unavailable): AUROC 0.757 (0.732–0.782).</li>
+							<li>Heart rate through the simulated device chain: MAE 0.43 bpm against independently measured pulse. AUROC holds at 0.877 under 20 mV ADC noise.</li>
+						</ul>
+
+						<p class="md-h">Hardware &amp; firmware</p>
+						<p>ESP32-S3 (N16R8) with an AD8232 single-lead ECG, a MAX30102 PPG for pulse and SpO₂, an NTC body-temperature sensor and a BME280. The C++ firmware runs Pan–Tompkins QRS detection for live heart rate, pulse arrival time with Poon–Zhang cuffless blood pressure, ratio-of-ratios SpO₂ and HRV. It also serves its own Wi-Fi dashboard with live waveforms, a results history and CSV export. A session is a 3-second warm-up plus three 10-second windows. In simulated test–retest, taking the median of the three windows reduces within-person spread by 33–36%. The full firmware uses 1.23 MB of flash (39% of the app partition) and 76 KB of static RAM. A boot self-test runs a recorded ECG window through the extractor and model to catch firmware/model mismatches.</p>
+
+						<p class="md-h">Iteration</p>
+						<p>Version 1 used a 13-input questionnaire-and-vitals MLP (241 parameters, int8 TensorFlow Lite Micro, 2.6 KB) trained on the DiaBD dataset (5,257 records), with a held-out AUROC of 0.776. Moving to ECG-derived features on a larger clinical cohort raised held-out AUROC to 0.878 while shrinking the model to 1.1 KB.</p>
+
+						<p class="md-h">Limitations</p>
+						<p>Discrimination is lower in adults aged 60 or older (AUROC 0.780) and on the external cohort. The on-body measurements (heart rate, SpO₂, blood pressure) have not yet been validated against reference devices in people. Reporting follows TRIPOD+AI.</p>
+
+						<p>Developed with <a href="https://www.linkedin.com/in/khemran/" target="_blank" rel="noopener noreferrer">Emran Khan</a>.</p>`,
 					images: [
 						'https://lh3.googleusercontent.com/pw/AP1GczNsajk6_dn3t0eTJAaNT7WbgqE8LVAwdXyXtBAE-ihXMEX14x_EWDjqalRbOxjAkmshjKkouUyRL0xNVGoQWvxQ1Zyh00NciYySN2TFcTj1z8KqfDAP=w2400',
 						'https://lh3.googleusercontent.com/pw/AP1GczMLiqUMMRAccp0S1V4GxK5GAVyY_I4krJidukkBXdAg6_m_Gx_-ry0fhw-PI_Eux33yoqGlvAgNro5vB1vTqlw7yS_Bu445xfBjsO09fylxW_aDeXXv=w2400'
@@ -4266,21 +4500,38 @@
 				},
 				'surgery': {
 					title: 'Surgical Video Intelligence',
-					description: `<p><strong>Overview</strong></p>
-						<p>Surgical Video Intelligence is a browser-based research and education platform for exploring robotic-assisted surgery videos. It combines local computer vision, structured surgical annotations, information retrieval, and an optional language model assistant in one interactive workflow. The application is designed to help users inspect what appears in a surgical frame, compare model predictions with recorded annotations, and ask questions about the procedure without treating generated text as clinical advice.</p>
+					description: `<div class="md-metrics">
+							<span class="md-award"><b>1st Place</b> · DevFest Cloud Buildathon 2026</span>
+							<span><b>~35 ms</b>/frame in the browser (~22 fps)</span>
+							<span>Step recognition <b>84.4%</b> acc. on 20 unseen cases</span>
+							<span><b>0</b> servers · no LLM cost · video stays on-device</span>
+						</div>
 
-						<p><strong>Technical architecture</strong></p>
-						<p>The vision pipeline runs directly on the user's machine through ONNX Runtime Web. Three models are executed in a Web Worker so video playback stays responsive: a YOLO11n-based detector localizes surgical instruments, while ConvNeXtV2-based classifiers estimate instrument presence and surgical task categories. The interface distinguishes recorded dataset facts from model predictions, including confidence scores and visual overlays. A domain guard can refuse out-of-domain frames instead of producing confident predictions for unrelated images.</p>
+						<p class="md-h">Problem</p>
+						<p>Robotic surgery produces far more video than anyone can review: the SurgVU dataset alone holds about 840 hours of da Vinci training video. The labels that exist are logs of which instruments were installed and which task was performed, not a reading of what is visible in each frame. Charlie, the original build that won 1st Place at the DevFest Cloud Buildathon 2026, sent every frame to a multimodal LLM at first. That needed at least 2 seconds per frame and hit API rate limits within minutes, so it could not follow a 60 fps procedure.</p>
 
-						<p>For explainability, the platform includes a CAM-based activation heatmap. It uses the classifier's final feature representation and head weights to show which image regions contributed to a prediction, without requiring a backward pass or a server-side explanation service. Inference is kept local, with the latest frame prioritized so latency does not grow while the video is playing.</p>
+						<p class="md-h">This portfolio edition</p>
+						<p>I slimmed Charlie down to a lightweight version that runs entirely on the user's device. The cloud server and Gemini integration of the original are removed, because their running costs were not worth maintaining for a portfolio. The surgical video library is also trimmed down substantially to keep the site light. What remains is the part that carries the engineering value: real-time computer vision in the browser, with no backend.</p>
 
-						<p><strong>Three answer paths</strong></p>
-						<p>The assistant follows a source-aware order. The grounded path answers factual questions from structured annotations such as installed instruments, task intervals, detector output, and the timeline. The extractive path retrieves and quotes relevant passages from an indexed surgical knowledge base. The generative path is optional and uses a Gemini API key supplied by the visitor; it is intended for explanation and synthesis, while factual claims remain anchored to the first two paths. Each response is labelled as recorded, quoted, or generated so users can see where it came from.</p>
+						<p class="md-h">On-device vision models</p>
+						<ul>
+							<li><strong>Surgical step recognition:</strong> ConvNeXtV2-Atto (3.4M parameters, 176 px input) over the 8 SurgVU task classes, trained on annotated task intervals with a case-level split. 84.4% accuracy and 77.6% balanced accuracy on 20 unseen cases.</li>
+							<li><strong>Instrument presence:</strong> ConvNeXtV2-Atto (224 px), 14-class multi-label. Validation mAP 0.97 on two held-out clips, in which 8 of the 14 classes occur.</li>
+							<li><strong>Instrument localisation:</strong> YOLO11n (2.6M parameters) at 448 px, reduced from 640 for speed, with NMS in the worker (confidence 0.25, IoU 0.45).</li>
+							<li>All three models are exported to ONNX (maximum deviation from PyTorch ≤ 4.8 × 10⁻⁶) and run with ONNX Runtime Web in a Web Worker (WebGPU first, multi-threaded WASM fallback). The detector runs on every frame and the classifiers on every 12th frame. Only the newest frame is processed, so latency does not build up during playback.</li>
+						</ul>
 
-						<p><strong>Dataset and research foundation</strong></p>
-						<p>The project is built around the <em>Surgical Visual Understanding (SurgVU) Dataset</em>, introduced in <a href="https://arxiv.org/abs/2501.09209" target="_blank">Zia et al. (2025)</a>. SurgVU contains robotic surgical training videos recorded with the da Vinci system, together with instrument-presence labels and expert-annotated surgical tasks. The paper describes approximately 840 hours of video at 60 frames per second, around 18 million labelled frames, 155 training sessions, and eight task categories. In this portfolio project, selected excerpts and annotations are packaged for an accessible browser demonstration rather than redistributing the full dataset.</p>
+						<p class="md-h">Results</p>
+						<ul>
+							<li>~35 ms per frame end to end (~22 fps) with 4-thread WASM, measured on the original build, against ≥ 2,000 ms per frame for the LLM-per-frame prototype. That is more than 50× faster.</li>
+							<li>No video leaves the device, and the app is a static site with no server to run or pay for.</li>
+						</ul>
 
-						<p>The work connects to broader surgical data science research, including surgical tool detection, task recognition, workflow analysis, skill assessment, and video-language modelling. It is research and educational software, not a medical device, and it has not been clinically validated for diagnosis, treatment, or patient-care decisions.</p>`,
+						<p class="md-h">Stack</p>
+						<p>React, TypeScript, Vite, Tailwind CSS and ONNX Runtime Web, deployed as a static site on Vercel. The original Charlie build used Express, the Google Gemini API and Google Cloud Run. Team project (2 members).</p>
+
+						<p class="md-h">Dataset &amp; scope</p>
+						<p>Built on the <em>Surgical Visual Understanding (SurgVU)</em> dataset (<a href="https://arxiv.org/abs/2501.09209" target="_blank" rel="noopener noreferrer">Zia et al., arXiv:2501.09209</a>): da Vinci training videos with instrument-presence labels and expert-annotated surgical tasks (≈840 h, ≈18M labelled frames, 155 sessions, 8 task categories). Selected excerpts and annotations are packaged for the browser demo instead of redistributing the dataset. This is research and education software, not a medical device, and it has not been clinically validated.</p>`,
 					images: [
 						'https://lh3.googleusercontent.com/pw/AP1GczOCMx5kRJlLnnggWKpjqsgdTI78kFb4L73pfL66Xc05WsArrVjJpj8VFOiVyHhoofUWS716j7vydNWjLYi1mdfRuZC_E364daGz7V8tj2I-JV_83qzJ=w2400',
 						'https://lh3.googleusercontent.com/pw/AP1GczMvPJCD-4xjZD1nSn5wQppy0LMlrxwyB_bVCNkeqgq7o-iAqpG1MduHOpU9-NBjcTsxBbHC_zIOPIpXVdYMxnidGDqwxRF5jTeGu0ojKIXmFveemW2F=w2400'
@@ -4292,9 +4543,39 @@
 				},
 				'anemia': {
 					title: 'Anemia Diagnostic Assistant',
-					description: `<p>This project introduces a Clinical Decision Support System (CDSS) designed to automate the assessment of hematological parameters for anemia risk prediction. By deploying optimized Machine Learning models (such as XGBoost/Random Forest), it transforms raw laboratory data into precise diagnostic insights, enabling healthcare providers to identify early-stage risk factors with quantified accuracy.</p>
-						<p>The system is architected based on the clinical methodology defined by <u> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11699093/" target="_blank">Mojumdar et al. (2025)</a></u>, ensuring that the underlying data science is aligned with international medical standards. It serves as a bridge between complex bioinformatics pipelines and front-line clinical application.</p>
-						<p>This initiative represents a strategic collaboration between technical engineering and clinical practice: featuring expert medical validation from <u> <a href="https://scholar.google.com.tw/citations?user=MwIr5fMAAAAJ&hl=en" target="_blank">Dr. Gem Wu</a></u> (Chang Gung Memorial Hospital) and sophisticated model refinement by my <a href="https://github.com/NgocDuy3112" target="_blank">data science partner</a>.</p>`,
+					description: `<div class="md-metrics">
+							<span><b>1,000</b> patients · 8 CBC features</span>
+							<span><b>7 classifiers</b> benchmarked</span>
+							<span>Logistic Regression <b>99.0%</b> acc. · AUROC <b>0.999</b></span>
+							<span>Hematologist-validated logic</span>
+						</div>
+
+						<p class="md-h">Problem</p>
+						<p>A complete blood count (CBC) is cheap and routine, but turning its numbers into a next step takes clinical interpretation that front-line staff and patients often lack. Is it anemia? How severe is it? What kind is it, and which test comes next? This decision-support app takes eight CBC values and returns an anemia probability together with a severity grade, a morphological type and the follow-up tests a clinician would order.</p>
+
+						<p class="md-h">Data &amp; modelling</p>
+						<ul>
+							<li>AnaDetect dataset (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11699093/" target="_blank" rel="noopener noreferrer">Mojumdar et al., 2025</a>): 1,000 patients from Aalok Healthcare, Dhaka, 64.1% of them anemic. Features: hemoglobin (Hb), RBC, PCV, MCV, MCH, MCHC, age and sex.</li>
+							<li>Stratified 80/20 split (800/200), with SMOTE applied to the training set only. Feature relevance was cross-checked with ANOVA F-test, mutual information, Random Forest importance and RFECV.</li>
+							<li>Seven classifiers benchmarked: Logistic Regression, Random Forest, Gradient Boosting, Decision Tree, SVM, k-NN and an MLP. The best model is refit inside an imbalanced-learn SMOTE pipeline and served with joblib.</li>
+						</ul>
+
+						<p class="md-h">Results (200 held-out patients)</p>
+						<ul>
+							<li>Random Forest, Gradient Boosting and Decision Tree: 100% accuracy. Logistic Regression: 99.0% accuracy, AUROC 0.999, 100% specificity. MLP and SVM: 91.0%. k-NN: 87.0%.</li>
+							<li>Sanity check on the perfect scores: a one-split decision tree on hemoglobin alone (Hb ≤ 11.95 g/dL) also reaches 100%. The dataset's label is therefore a single Hb cut-off, so the classifier adds little beyond Hb. The clinically useful part is the interpretation layer below.</li>
+						</ul>
+
+						<p class="md-h">Clinical interpretation layer</p>
+						<ul>
+							<li>Morphological typing from MCV: microcytic (&lt; 80 fL; iron deficiency, thalassemia), normocytic (80–100 fL; chronic disease, blood loss, kidney disease) or macrocytic (&gt; 100 fL; B12/folate deficiency, liver disease).</li>
+							<li>Severity grading from Hb (mild, moderate or severe) using sex-specific reference ranges.</li>
+							<li>Next-test recommendations by type, such as iron studies and hemoglobin electrophoresis for microcytic anemia, or serum B12 and folate for macrocytic anemia.</li>
+							<li>Physiological range checks on every input before inference. The Streamlit interface includes a probability gauge, a radar chart against normal ranges and interactive EDA.</li>
+						</ul>
+
+						<p class="md-h">Collaboration</p>
+						<p>Clinical logic reviewed by hematologist <a href="https://scholar.google.com.tw/citations?user=MwIr5fMAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Dr. Gem Wu</a> (Chang Gung Memorial Hospital); model development with my <a href="https://github.com/NgocDuy3112" target="_blank" rel="noopener noreferrer">data science partner</a>.</p>`,
 					images: [
 						'https://lh3.googleusercontent.com/pw/AP1GczOjksvb-G0a_kOf13Bf8v6EtrYlX7CmoJ8tgAfsrIHHlq0DEDRJpEeC2BG6xuEmV6IlWPDTkuECTZ-1jgL02tGQn8NRyaqGn7zJ0_LC-kZZb4FMAfQ_=w2400',
 						'https://lh3.googleusercontent.com/pw/AP1GczMjq5uRnr9fQ9gHdVmmN3I-4YyhUDT_d9mGJmjBL2LPBWLaTx5pLa5vg-jNytR74geTROOMHfGF0_tF5CtrJdxy2nl0TsQJG1QsKxOc00XH8oYNFgl0=w2400'
@@ -4306,8 +4587,46 @@
 				},
 				'xray': {
 					title: 'Chest X-Ray Image Analysis',
-					description: `<p>A Computer Vision diagnostic tool engineered to assist radiologists in identifying pulmonary pathologies with high precision. This platform leverages the <b><u>DenseNet121</u></b> deep convolutional neural network architecture, pre-trained on large-scale medical datasets to perform multi-label classification on chest radiographs.</p>
-						<p>The application facilitates real-time inference, providing diagnostic heatmaps and probability scores for various medical conditions. By integrating sophisticated medical imaging processing with a high-performance web dashboard, it streamlines the screening of potential abnormalities in clinical workflows.</p>`,
+					description: `<div class="md-metrics">
+							<span><b>14</b> findings, multi-label</span>
+							<span>DenseNet121 · <b>7.05M</b> params</span>
+							<span>Mean AUROC <b>0.762</b> (420 test images)</span>
+							<span><b>~85 ms</b>/image on CPU</span>
+						</div>
+
+						<p class="md-h">Problem</p>
+						<p>Chest X-rays are read in very high volume, and many findings are subtle or co-occur. A model that ranks likely findings and shows where it is looking can help prioritise review. It is also a concrete way to teach how CNNs reason about medical images, which is what this project became the lab for at <strong>DevFest Taipei 2025</strong>.</p>
+
+						<p class="md-h">Data &amp; model</p>
+						<ul>
+							<li>NIH ChestX-ray14 subset: 1,000 training, 200 validation and 420 test images at 320×320, with test patients disjoint from training patients. Each image can carry any of 14 findings.</li>
+							<li>Severe class imbalance: positive rates in training range from 17.5% (Infiltration) down to 0.2% (Hernia). This is handled with class-weighted binary cross-entropy, where each class's positive term is weighted by its negative frequency so both terms contribute equally.</li>
+							<li>DenseNet121 backbone → global average pooling → 14 sigmoid outputs (7.05M parameters), using pretrained weights from DeepLearning.AI's <em>AI for Medical Diagnosis</em> course.</li>
+						</ul>
+
+						<p class="md-h">Results (420 test images)</p>
+						<div class="md-table-wrap"><table>
+							<thead><tr><th>Finding</th><th class="num">AUROC</th><th>Finding</th><th class="num">AUROC</th></tr></thead>
+							<tbody>
+								<tr><td>Cardiomegaly</td><td class="num">0.897</td><td>Effusion</td><td class="num">0.763</td></tr>
+								<tr><td>Edema</td><td class="num">0.857</td><td>Consolidation</td><td class="num">0.751</td></tr>
+								<tr><td>Mass</td><td class="num">0.819</td><td>Fibrosis</td><td class="num">0.726</td></tr>
+								<tr><td>Pneumothorax</td><td class="num">0.804</td><td>Pleural thickening</td><td class="num">0.715</td></tr>
+								<tr><td>Emphysema</td><td class="num">0.795</td><td>Pneumonia</td><td class="num">0.682</td></tr>
+								<tr><td>Atelectasis</td><td class="num">0.786</td><td>Nodule</td><td class="num">0.655</td></tr>
+								<tr><td>Hernia</td><td class="num">0.771</td><td>Infiltration</td><td class="num">0.650</td></tr>
+								<tr class="best"><td>Mean</td><td class="num">0.762</td><td></td><td></td></tr>
+							</tbody>
+						</table></div>
+						<p>The model is strongest on large, structural findings (cardiomegaly, edema, mass) and weakest on small or diffuse ones (nodule, infiltration), which is consistent with a 320 px input and a small training subset.</p>
+
+						<p class="md-h">Application</p>
+						<ul>
+							<li>Streamlit app flow: upload → input validation (rejects non-grayscale images or aspect ratios outside 0.7–1.5) → preprocessing → the top-3 findings with colour-coded probabilities, plus a table of all 14.</li>
+							<li>Grad-CAM (TensorFlow <code>GradientTape</code>) heatmaps for the top-4 predicted findings, so users can check whether the model is looking at anatomy or at artefacts.</li>
+							<li>The model is cached across sessions with <code>st.cache_resource</code>. Inference takes about 80–90 ms per image on CPU.</li>
+							<li>Used as the hands-on lab for my <strong>DevFest Taipei 2025 session</strong>, <em>Hands-on AI for Smart Medical Imaging</em> (49 participants): Colab setup, DenseNet121, Grad-CAM and live testing on this app.</li>
+						</ul>`,
 					images: [
 						'https://lh3.googleusercontent.com/pw/AP1GczMnFxVlt5xk6Y6TZDPwgmu6u3iHnCo4idmkvsfUC2KZ9qFt7ezq-8GvalO7esUBbmNShqQwIygRHDmA5BfZiZQnxMVvCX8XdIR_XgjCk_CloWPsIygo=w2400',
 						'https://lh3.googleusercontent.com/pw/AP1GczMV9bbE7wXN5UKj2Ve_NhVG_LrcApL8e9JuX5tznZgtVOFubmUP1vcZqhr2xrQO3iguagnPZ7WHTiuzgkVqBABekPqRPxBKC5PHUkSNl0Mso_94ywE4=w2400'
@@ -4319,8 +4638,34 @@
 				},
 				'heart': {
 					title: 'Heart Risk Prediction',
-					description: `<p>An advanced cardiovascular analytics platform designed to assess patient heart health using multi-variate health metrics. Built with a robust machine learning pipeline and a Streamlit-powered inference engine, the system categorizes risk profiles through feature-rich analysis of blood pressure, cholesterol levels, and BMI.</p>
-						<p>The project serves as a preventive healthcare tool, transforming static health records into interactive risk assessments. It aims to empower both individuals and clinicians with data-driven insights, promoting early detection strategies and evidence-based preventive measures in modern cardiology.</p>`,
+					description: `<div class="md-metrics">
+							<span>13 clinical variables</span>
+							<span><b>3 models</b>, stratified 5-fold CV</span>
+							<span>Logistic Regression <b>83.1%</b> acc. · AUROC <b>0.905</b></span>
+						</div>
+
+						<p class="md-h">Problem</p>
+						<p>Cardiovascular disease is often caught late, and the clinical variables that signal it are already collected in routine check-ups. The goal is a simple, explainable screening tool that turns 13 such variables into a low- or high-risk result, so patients and clinicians can decide who needs a closer cardiology work-up.</p>
+
+						<p class="md-h">Data &amp; features</p>
+						<p>UCI Heart Disease data (302 unique patients) with 13 inputs: age, sex, chest-pain type, resting blood pressure, cholesterol, fasting blood sugar, resting ECG, maximum heart rate, exercise-induced angina, ST depression, ST slope, number of major vessels on fluoroscopy, and thalassemia.</p>
+
+						<p class="md-h">Model &amp; app</p>
+						<ul>
+							<li>Features standardised with a StandardScaler; Logistic Regression, Random Forest and SVM compared, and the best model and scaler serialised with joblib.</li>
+							<li>Streamlit app: a form for the 13 inputs that returns a low- or high-risk result.</li>
+						</ul>
+
+						<p class="md-h">Results (stratified 5-fold CV)</p>
+						<div class="md-table-wrap"><table>
+							<thead><tr><th>Model</th><th class="num">Accuracy</th><th class="num">AUROC</th></tr></thead>
+							<tbody>
+								<tr class="best"><td>Logistic Regression</td><td class="num">83.1%</td><td class="num">0.905</td></tr>
+								<tr><td>SVM</td><td class="num">82.8%</td><td class="num">0.907</td></tr>
+								<tr><td>Random Forest</td><td class="num">80.8%</td><td class="num">0.901</td></tr>
+							</tbody>
+						</table></div>
+						<p>All three models perform within about 2 points of each other, so the interpretable Logistic Regression is the natural choice for a clinician-facing tool.</p>`,
 					images: [
 						'https://lh3.googleusercontent.com/pw/AP1GczPpyFWJhVNAwJ_N3PvJBhpWtRQ3HkPNTjH6bImFfGj6v1W-ipYZ26hqVT2f8s-reyGwdmvZHC5Jra0SYd6hcz6t-kuEKQUTmljzvnUFmx4vGOw6JiOG=w2400'
 					],
@@ -4331,8 +4676,28 @@
 				},
 				'symptom': {
 					title: 'Symptom Checker with Drug Information',
-					description: `<p>An intelligent Symptomatic Classification system engineered to bridge the gap between patient symptoms and pharmaceutical knowledge. By utilizing weighted symptom mapping and comprehensive health knowledge graphs, the application provides high-probability condition assessments and cross-references them with authoritative drug databases.</p>
-						<p>The architecture focus on patient empowerment through data transparency, offering detailed insights into potential treatments and pharmaceutical logic. It is designed as a preliminary diagnostic layer, helping users navigate health concerns with greater clarity while emphasizing the importance of informed clinical consultation.</p>`,
+					description: `<div class="md-metrics">
+							<span><b>44,453</b> records · 20 symptoms</span>
+							<span>Accuracy <b>~90%</b> · macro-F1 <b>0.65</b></span>
+							<span><b>293</b>-drug reference table</span>
+						</div>
+
+						<p class="md-h">Problem</p>
+						<p>This project was inspired by my mother, who is a pharmacist. Growing up, I watched people come into her pharmacy for the same basic symptoms (a runny nose, a cough, a sore throat) and ask what to take. Many of them were unsure what they actually had or what the medicine was for. I wanted to build a simple tool that helps people make sense of common symptoms first, and then see the related medicines with their side effects, so that they are better prepared for a conversation with a pharmacist or doctor.</p>
+						<p>The app maps self-reported symptoms to a likely common respiratory or allergic condition (allergies, cold/flu or COVID-19), then shows precautions and related medicines: indications, side effects, drug class, Rx/OTC status, pregnancy category and alcohol interactions.</p>
+
+						<p class="md-h">Data &amp; model</p>
+						<ul>
+							<li>44,453 records with 20 binary symptoms. The four original labels (flu, allergy, COVID-19, cold) are merged into three condition groups so they match the drug table's indications.</li>
+							<li>A Decision Tree classifier is trained on an 80/20 split. Predictions are joined to a 293-drug side-effects dataset and a precautions table, all served through a Streamlit sidebar of symptom checkboxes.</li>
+						</ul>
+
+						<p class="md-h">Results &amp; what they show</p>
+						<ul>
+							<li>Overall accuracy is about 90%, but macro-F1 is only 0.65. F1 is 0.97 for allergies and 0.91 for cold/flu, yet about 0.05 for COVID-19.</li>
+							<li>COVID-19 makes up just 4.6% of records and shares most symptoms with flu, so the tree rarely predicts it. Accuracy alone hides this failure.</li>
+							<li>Next steps: class-weighted training or a calibrated probabilistic model, reporting per-class recall, and showing probabilities instead of a single label.</li>
+						</ul>`,
 					images: [
 						'https://lh3.googleusercontent.com/pw/AP1GczM16e_4IArohsV0KL6vUvDFab-rbaF6mCduFryDIm9ujVMW2elgKkOVEcWxHZsa5CBROokY-Jr5gRFdLHsMpJmmO9LdGo2CCPrAPivCtRw46oybP0Kl=w2400'
 					],
@@ -4345,7 +4710,8 @@
 
 			// Open modal on project card click
 			projectCards.forEach(card => {
-				card.addEventListener('click', function () {
+				card.addEventListener('click', function (e) {
+					if (e.target.closest('.project-credit a')) return; // inline credit links open normally
 					const projectId = this.getAttribute('data-project');
 					const details = projectDetails[projectId];
 
@@ -4908,19 +5274,63 @@
 			const pause = carousel.querySelector('.about-pause');
 			let index = Math.max(0, slides.findIndex(slide => slide.classList.contains('active')));
 			let elapsed = 0, lastFrame = null, paused = false, transitioning = false;
+			// Lightbox: centered enlarged photo with prev/next, keyboard (←/→/Esc) and swipe navigation
 			const dialog = document.createElement('dialog');
 			dialog.className = 'about-photo-dialog';
 			dialog.setAttribute('aria-label', 'Enlarged About Me photo');
-			dialog.innerHTML = '<button type="button" aria-label="Close enlarged photo">×</button><img alt=""><p></p>';
+			dialog.innerHTML =
+				'<span class="apd-counter" aria-live="polite"></span>' +
+				'<button type="button" class="apd-close" aria-label="Close enlarged photo">&times;</button>' +
+				'<button type="button" class="apd-nav prev" aria-label="Previous photo"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>' +
+				'<figure><img alt="" draggable="false"><figcaption></figcaption></figure>' +
+				'<button type="button" class="apd-nav next" aria-label="Next photo"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>';
 			document.body.appendChild(dialog);
-			dialog.querySelector('button').addEventListener('click', () => dialog.close());
-			dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
-			dialog.addEventListener('close', () => { lastFrame = null; });
+			const dlgImg = dialog.querySelector('img');
+			const dlgCaption = dialog.querySelector('figcaption');
+			const dlgCounter = dialog.querySelector('.apd-counter');
+			// Jump the background carousel to slide i without animation (it is paused while the lightbox is open)
+			function setSlide(i) {
+				if (i === index) return;
+				slides[index].classList.remove('active');
+				index = i;
+				slides[index].classList.add('active');
+				elapsed = 0;
+				progress.value = 0;
+			}
+			function renderLightbox(direction) {
+				const caption = slides[index].querySelector('figcaption')?.textContent.trim() || '';
+				dlgImg.src = slides[index].querySelector('img').src;
+				dlgImg.alt = caption;
+				dlgCaption.textContent = caption;
+				dlgCounter.textContent = `${index + 1} / ${slides.length}`;
+				if (direction && dlgImg.animate) {
+					dlgImg.animate([{ opacity: 0, transform: `translateX(${direction * 24}px)` }, { opacity: 1, transform: 'translateX(0)' }], { duration: 250, easing: 'ease-out' });
+				}
+			}
+			function stepLightbox(direction) {
+				setSlide((index + direction + slides.length) % slides.length);
+				renderLightbox(direction);
+			}
+			dialog.querySelector('.apd-close').addEventListener('click', () => dialog.close());
+			dialog.querySelector('.apd-nav.prev').addEventListener('click', () => stepLightbox(-1));
+			dialog.querySelector('.apd-nav.next').addEventListener('click', () => stepLightbox(1));
+			dialog.addEventListener('click', e => { if (e.target === dialog || e.target.tagName === 'FIGURE') dialog.close(); });
+			dialog.addEventListener('keydown', e => {
+				if (e.key === 'ArrowLeft') { e.preventDefault(); stepLightbox(-1); }
+				else if (e.key === 'ArrowRight') { e.preventDefault(); stepLightbox(1); }
+			});
+			let touchX = null;
+			dialog.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+			dialog.addEventListener('touchend', e => {
+				if (touchX === null) return;
+				const dx = e.changedTouches[0].clientX - touchX;
+				touchX = null;
+				if (Math.abs(dx) > 50) stepLightbox(dx < 0 ? 1 : -1);
+			});
+			dialog.addEventListener('close', () => { lastFrame = null; document.body.style.overflow = ''; });
 			carousel.querySelector('.about-expand').addEventListener('click', () => {
-				const caption = slides[index].querySelector('figcaption')?.textContent || '';
-				dialog.querySelector('img').src = slides[index].querySelector('img').src;
-				dialog.querySelector('img').alt = caption;
-				dialog.querySelector('p').textContent = caption;
+				renderLightbox(0);
+				document.body.style.overflow = 'hidden';
 				dialog.showModal();
 			});
 			pause.addEventListener('click', () => {
